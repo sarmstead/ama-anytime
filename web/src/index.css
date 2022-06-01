@@ -1,13 +1,13 @@
-/**
- * START --- SETUP TAILWINDCSS EDIT
- *
- * `yarn rw setup ui tailwindcss` placed these imports here
- * to inject Tailwind's styles into your CSS.
- * For more information, see: https://tailwindcss.com/docs/installation#include-tailwind-in-your-css
- */
+@import url('https://fonts.googleapis.com/css2?family=BioRhyme:wght@700;800&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700&display=swap');
+
+@font-face {
+  font-family: 'mouse_memoir';
+  src: url('./fonts/mousememoirs-regular-webfont.woff2') format('woff2'),
+    url('./fonts/mousememoirs-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-/**
- * END --- SETUP TAILWINDCSS EDIT
- */

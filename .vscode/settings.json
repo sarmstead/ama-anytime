@@ -3,5 +3,9 @@
     "activityBar.background": "#f29f00",
     "titleBar.activeBackground": "#e4491d",
     "titleBar.activeForeground": "#F5FCFD"
-  }
+  },
+  "cSpell.words": [
+    "redwoodjs",
+    "ulca"
+  ]
 }
