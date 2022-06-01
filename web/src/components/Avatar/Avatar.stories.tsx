@@ -8,4 +8,4 @@ Primary.args = {
   src: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
 }
 
-export default { title: 'Avatar', component: Avatar }
+export default { title: 'Components/Avatar', component: Avatar }
