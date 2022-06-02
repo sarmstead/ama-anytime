@@ -13,7 +13,29 @@
 @import 'tailwindcss/utilities';
 
 @layer base {
+  body {
+    @apply bg-bg;
+  }
+
   svg {
     fill: currentColor;
+  }
+}
+
+@layer components {
+  .large-body {
+    @apply text-lg leading-7 pt-0 mt-0;
+  }
+
+  .selected-action {
+    @apply text-punch font-slab text-xl flex gap-1 items-center
+  }
+
+  button.small {
+    @apply text-xs py-1 px-4 font-extrabold
+  }
+
+  button.large {
+    @apply text-base px-6 py-1 font-bold
   }
 }
