@@ -4,9 +4,7 @@ describe('Date Helpers', () => {
   // Reference: https://codewithhugo.com/mocking-the-current-date-in-jest-tests/
   jest
     .spyOn(global.Date, 'now')
-    .mockImplementationOnce(() =>
-      new Date('2022-06-02T13:18:02.631Z').valueOf()
-    )
+    .mockImplementation(() => new Date('2022-06-02T13:18:02.631Z').valueOf())
   it('Shows minutes ago', () => {
     const date = '2022-06-02T13:21:02.631Z'
     expect(formatRelativeDate(date)).toEqual('3m')
