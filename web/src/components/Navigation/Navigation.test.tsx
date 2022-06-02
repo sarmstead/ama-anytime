@@ -11,6 +11,6 @@ describe('Navigation', () => {
 
   it('displays the notification count', () => {
     render(<Navigation notifications={6} />)
-    expect(screen.getByTestId('notificationCount')).toHaveTextContent(6)
+    expect(screen.getByTestId('notificationCount')).toHaveTextContent('6')
   })
 })
