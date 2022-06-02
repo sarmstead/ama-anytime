@@ -295,6 +295,7 @@ const Navigation = ({
                   />
                   <text
                     id="3"
+                    data-testid="notificationCount"
                     fill="#D35530"
                     xmlSpace="preserve"
                     style={{ whiteSpace: 'pre' }}

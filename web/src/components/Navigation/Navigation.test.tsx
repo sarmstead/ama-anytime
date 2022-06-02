@@ -9,8 +9,8 @@ describe('Navigation', () => {
     }).not.toThrow()
   })
 
-  // TODO: Finish writing test
-  it.skip('displays the notification count', () => {
+  it('displays the notification count', () => {
     render(<Navigation notifications={6} />)
+    expect(screen.getByTestId('notificationCount')).toHaveTextContent(6)
   })
 })
