@@ -1,6 +1,6 @@
-import { Button } from './Button'
+import { Button, IButton } from './Button'
 
-const Template = (args) => <Button {...args} />
+const Template = (args: IButton) => <Button {...args} />
 
 export const LargeButton = Template.bind({})
 LargeButton.args = {
@@ -13,4 +13,44 @@ SmallButton.args = {
   size: 'small',
 }
 
-export default { title: 'Components/Button', component: Button }
+export default {
+  title: 'Components/Button',
+  component: Button,
+  argTypes: {
+    label: {
+      name: 'label',
+      type: { name: 'string', required: true },
+      description: 'button text',
+      control: {
+        type: 'text',
+      },
+      table: {
+        type: { summary: 'string' },
+      },
+    },
+    className: {
+      name: 'className',
+      type: { name: 'string', required: false },
+      description: 'CSS class names',
+      defaultValue: '',
+      control: {
+        type: 'text',
+      },
+      table: {
+        type: { summary: 'string', defaultValue: { summary: '' } },
+      },
+    },
+    handleClick: {
+      action: 'clicked',
+    },
+    size: {
+      name: 'size',
+      options: ['large', 'small'],
+      description: 'button size',
+      control: {
+        type: 'select',
+        options: ['large', 'small'],
+      },
+    },
+  },
+}
