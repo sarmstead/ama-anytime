@@ -1,3 +1,4 @@
+import { Link, routes } from '@redwoodjs/router'
 import { Avatar } from '../Avatar'
 import { Button } from '../Button'
 
@@ -16,10 +17,20 @@ const MightLikeUser = ({
 }: IMightLikeUser): JSX.Element => {
   return (
     <div className="flex gap-3">
-      <Avatar src={avatar} alt={name} width={72} height={72} />
+      <Link
+        to={routes.profile({ username: username })}
+        className="might-like-user__link"
+      >
+        <Avatar src={avatar} alt={name} width={72} height={72} />
+      </Link>
       <div className="text-sm">
-        <div className="font-bold">{name}</div>
-        <div className="mb-1">{username}</div>
+        <Link
+          to={routes.profile({ username: username })}
+          className="might-like-user__link"
+        >
+          <div className="font-bold name">{name}</div>
+          <div className="mb-1 username">@{username}</div>
+        </Link>
         <Button handleClick={handleClick} label="Follow" size="small" />
       </div>
     </div>

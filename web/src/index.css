@@ -38,4 +38,11 @@
   button.large {
     @apply text-base px-6 py-1 font-bold
   }
+
+  .might-like-user__link:hover .name {
+    @apply text-punch
+  }
+  .might-like-user__link:hover .username {
+    @apply underline
+  }
 }

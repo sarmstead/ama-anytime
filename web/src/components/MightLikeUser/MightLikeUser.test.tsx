@@ -18,7 +18,9 @@ describe('MightLikeUser', () => {
 
   it('displays the username', () => {
     render(<MightLikeUser {...MightLikeUserData} />)
-    expect(screen.getByText(MightLikeUserData.username)).toBeInTheDocument()
+    expect(
+      screen.getByText(`@${MightLikeUserData.username}`)
+    ).toBeInTheDocument()
   })
 
   it('handles the click', async () => {
