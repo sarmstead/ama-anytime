@@ -2,6 +2,10 @@ module.exports = {
   content: ['src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        bg: "url('./images/bg.jpg')",
+        profileAside: "url('./images/bg-profile.svg')",
+      },
       colors: {
         punch: '#D35530',
         ulcaGold: '#FAB829',
