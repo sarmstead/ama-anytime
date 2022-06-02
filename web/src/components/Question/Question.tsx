@@ -6,7 +6,7 @@ export interface IQuestion {
   answer: string
   askAgain: number
   askedByName: string
-  askedByScreenName: string
+  askedByUsername: string
   askedDate: Date
   avatar: string
   bookmark: boolean
@@ -28,7 +28,7 @@ const Question = ({
   answer,
   askAgain,
   askedByName,
-  askedByScreenName,
+  askedByUsername,
   askedDate,
   avatar,
   bookmark,
@@ -53,10 +53,10 @@ const Question = ({
           Question #{questionOrder}
         </div>
       )}
-      <Avatar src={avatar} alt={askedByScreenName} height={68} width={68} />
+      <Avatar src={avatar} alt={askedByUsername} height={68} width={68} />
       <div className="flex-1">
         <div>
-          <strong className="text-lg">{askedByName}</strong> {askedByScreenName}{' '}
+          <strong className="text-lg">{askedByName}</strong> @{askedByUsername}{' '}
           • {formatRelativeDate(askedDate)}
         </div>
         <div className="font-condensed  text-[2.5rem] pt-o pb-2">

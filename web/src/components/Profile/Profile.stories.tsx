@@ -7,7 +7,7 @@ Default.args = {
   avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
   firstName: 'Amy',
   lastName: 'Dutton',
-  screenname: '@selfteachme',
+  username: 'selfteachme',
 }
 
 export default {
@@ -53,8 +53,8 @@ export default {
         defaultValue: { summary: 'null' },
       },
     },
-    screenname: {
-      name: 'screenname',
+    username: {
+      name: 'username',
       type: { name: 'string', required: true },
       description: "user's screen name",
       defaultValue: 'null',

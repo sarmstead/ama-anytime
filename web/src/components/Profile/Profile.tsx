@@ -5,14 +5,14 @@ export interface IProfile {
   avatar: string
   firstName: string
   lastName: string
-  screenname: string
+  username: string
 }
 
 const Profile = ({
   avatar,
   firstName,
   lastName,
-  screenname,
+  username,
 }: IProfile): JSX.Element => {
   return (
     <div className="flex gap-3 bg-profileAside px-5 pb-3 bg-no-repeat bg-cover">
@@ -32,7 +32,7 @@ const Profile = ({
         <div className="text-ulcaGold">
           {firstName} {lastName}
         </div>
-        <div className="text-white">{screenname}</div>
+        <div className="text-white">@{username}</div>
       </a>
       <div className="self-center my-auto text-white pt-5 hover:text-ulcaGold">
         <button>

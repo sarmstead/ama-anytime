@@ -14,7 +14,7 @@ const Routes = () => {
   return (
     <Router>
       <Set wrap={[AppLayout]}>
-        <Route path="/profile" page={ProfilePage} name="profile" />
+        <Route path="/profile/{username}" page={ProfilePage} name="profile" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>
