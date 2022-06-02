@@ -13,5 +13,6 @@
     "lilysmith",
     "redwoodjs",
     "ulca"
-  ]
+  ],
+  "eslint.format.enable": true
 }

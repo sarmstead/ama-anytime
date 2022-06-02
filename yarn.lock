@@ -5366,7 +5366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/user-event@npm:14.2.0":
+"@testing-library/user-event@npm:14.2.0, @testing-library/user-event@npm:^14.2.0":
   version: 14.2.0
   resolution: "@testing-library/user-event@npm:14.2.0"
   peerDependencies:
@@ -23831,6 +23831,7 @@ __metadata:
     "@redwoodjs/forms": 1.5.1
     "@redwoodjs/router": 1.5.1
     "@redwoodjs/web": 1.5.1
+    "@testing-library/user-event": ^14.2.0
     autoprefixer: ^10.4.7
     date-fns: ^2.28.0
     postcss: ^8.4.14

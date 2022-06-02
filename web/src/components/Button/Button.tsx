@@ -14,6 +14,7 @@ const Button = ({
   return (
     <button
       className={`rounded-3xl bg-transparent hover:bg-black text-black hover:text-white border-2 border-black font-slab uppercase ${className} ${size}`}
+      data-testid="button"
       onClick={handleClick}
     >
       {label}
