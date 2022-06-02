@@ -1,6 +1,6 @@
 import { Avatar } from '../Avatar'
 
-interface IAvatarList {
+export interface IAvatarList {
   avatars: {
     src: string
     alt: string
