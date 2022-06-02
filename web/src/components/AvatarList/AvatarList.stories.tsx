@@ -1,8 +1,27 @@
-import { AvatarList } from './AvatarList'
+import { AvatarList, IAvatarList } from './AvatarList'
 import { avatars as data } from './AvatarList.mocks'
 
-export const generated = () => {
-  return <AvatarList avatars={data} />
+const Template = (args: IAvatarList): JSX.Element => <AvatarList {...args} />
+
+export const Primary = Template.bind({})
+Primary.args = {
+  avatars: data,
 }
 
-export default { title: 'Components/AvatarList' }
+export default {
+  title: 'Components/Avatar List',
+  component: AvatarList,
+  argTypes: {
+    avatars: {
+      name: 'avatars',
+      type: { name: 'object', required: true },
+      description: 'array of avatars',
+      control: {
+        type: 'object',
+      },
+      table: {
+        type: { summary: 'avatars: { src: string, alt: string }[]' },
+      },
+    },
+  },
+}
