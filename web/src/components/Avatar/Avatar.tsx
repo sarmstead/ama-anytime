@@ -1,5 +1,6 @@
-interface IAvatar {
+export interface IAvatar {
   alt: string
+  className?: string
   height?: number
   src: string
   width?: number
@@ -7,6 +8,7 @@ interface IAvatar {
 
 const Avatar = ({
   alt,
+  className = '',
   height = 32,
   src,
   width = 32,
@@ -14,7 +16,7 @@ const Avatar = ({
   return (
     <div>
       <img
-        className="rounded-full"
+        className={`rounded-full ${className}`}
         src={src}
         alt={alt}
         height={height}
