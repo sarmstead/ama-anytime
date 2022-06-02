@@ -10,6 +10,7 @@ module.exports = {
         punch: '#D35530',
         ulcaGold: '#FAB829',
         blanc: '#DBD4C3',
+        onyx: '#393837',
       },
     },
     fontFamily: {
