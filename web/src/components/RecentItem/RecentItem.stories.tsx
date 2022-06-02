@@ -1,7 +1,9 @@
-import { RecentItem } from './RecentItem'
+import { RecentItem, IRecentItem } from './RecentItem'
+import { RecentItem as RecentItemData } from './RecentItem.mocks'
 
-export const generated = () => {
-  return <RecentItem />
-}
+const Template = (args: IRecentItem) => <RecentItem {...args} />
 
-export default { title: 'Components/RecentItem' }
+export const Default = Template.bind({})
+Default.args = { ...RecentItemData }
+
+export default { title: 'Components/Recent Item', component: RecentItem }
