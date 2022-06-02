@@ -11,7 +11,7 @@ import { Pin } from './Pin'
 import { Reuse } from './Reuse'
 import { Share } from './Share'
 
-interface IIcon {
+export interface IIcon {
   name:
     | 'bookmark'
     | 'bookmarkFilled'

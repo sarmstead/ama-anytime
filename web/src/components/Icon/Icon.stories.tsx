@@ -1,6 +1,6 @@
-import { Icon } from './Icon'
+import { Icon, IIcon } from './Icon'
 
-const Template = (args) => <Icon {...args} />
+const Template = (args: IIcon) => <Icon {...args} />
 
 export const Comment = Template.bind({})
 Comment.args = {
@@ -42,4 +42,74 @@ Share.args = {
   name: 'Share',
 }
 
-export default { title: 'Components/Icon', component: Icon }
+const iconOptions = [
+  'bookmark',
+  'bookmarkFilled',
+  'dots',
+  'comment',
+  'commentFilled',
+  'heart',
+  'heartFilled',
+  'link',
+  'map',
+  'pin',
+  'reuse',
+  'share',
+]
+
+export default {
+  title: 'Components/Icon',
+  component: Icon,
+  argTypes: {
+    name: {
+      name: 'name',
+      description: 'name of the icon',
+      control: {
+        type: 'select',
+        options: iconOptions,
+      },
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'null' },
+      },
+    },
+    className: {
+      name: 'className',
+      type: { name: 'string', required: true },
+      defaultValue: '',
+      description: 'CSS class names',
+      control: {
+        type: 'text',
+      },
+      table: {
+        type: { summary: 'string', defaultValue: { summary: '' } },
+      },
+    },
+    height: {
+      name: 'height',
+      type: { name: 'number', required: false },
+      description: 'avatar height in pixels',
+      defaultValue: 24,
+      control: {
+        type: 'number',
+      },
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: 24 },
+      },
+    },
+    width: {
+      name: 'width',
+      type: { name: 'number', required: false },
+      description: 'avatar width in pixels',
+      defaultValue: 24,
+      control: {
+        type: 'number',
+      },
+      table: {
+        type: { summary: 'number' },
+        defaultValue: { summary: 24 },
+      },
+    },
+  },
+}
