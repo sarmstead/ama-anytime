@@ -1,7 +1,7 @@
 import { Avatar } from '../Avatar'
 import { Icon } from '../Icon'
 
-interface IProfile {
+export interface IProfile {
   avatar: string
   firstName: string
   lastName: string
