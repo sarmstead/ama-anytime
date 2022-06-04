@@ -1,3 +1,4 @@
+import { Arrow } from './Arrow'
 import { Bell } from './Bell'
 import { Bookmark } from './Bookmark'
 import { BookmarkFilled } from './BookmarkFilled'
@@ -14,6 +15,7 @@ import { Share } from './Share'
 
 export interface IIcon {
   name:
+    | 'arrow'
     | 'bell'
     | 'bookmark'
     | 'bookmarkFilled'
@@ -34,6 +36,8 @@ export interface IIcon {
 
 const Icon = ({ name, className = '', width, height }: IIcon): JSX.Element => {
   switch (name.toLowerCase()) {
+    case 'arrow':
+      return <Arrow className={className} width={width} height={height} />
     case 'bell':
       return <Bell className={className} width={width} height={height} />
     case 'bookmark':

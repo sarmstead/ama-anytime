@@ -1,3 +1,5 @@
+import { secondsToMilliseconds } from 'date-fns'
+
 export const FormatKeywords = (text: string): string => {
   // reference: https://stackoverflow.com/questions/38148361/javascript-find-hashtags-in-text-and-return-with-link
 
@@ -18,20 +20,22 @@ interface IFormattedLink {
 }
 
 export const FormatLinks = (link: string): IFormattedLink => {
-  const httpPattern = /(https?:\/\/)/
-  const wwwPattern = /www./g
+  const httpPattern = /(https?:\/\/)/g
+  const wwwPattern = /(www.)/g
 
   const splitLink = link
-    .replaceAll(' ', '')
-    .split(httpPattern)
+    .replaceAll(' ', '') // remove spaces
+    .split(httpPattern) // look for http or https
     .join('$')
-    .split(wwwPattern)
+    .split(wwwPattern) // look for www
     .join('$')
     .split('$')
 
+  // remove empty array items
   const cleanLink = splitLink.filter((n) => n)
 
-  if (cleanLink.length < 2) {
+  // if the array is less than 2 slots, needs http added
+  if (!cleanLink.some((e) => httpPattern.test(e))) {
     return {
       short: cleanLink.slice(-1)[0],
       long: `https://${cleanLink.join('')}`,
@@ -39,8 +43,8 @@ export const FormatLinks = (link: string): IFormattedLink => {
   }
 
   return {
-    short: cleanLink.slice(-1)[0],
-    long: cleanLink.join(''),
+    short: cleanLink.slice(-1)[0], // return the domain part of the url
+    long: cleanLink.join(''), // return the full string
   }
 }
 

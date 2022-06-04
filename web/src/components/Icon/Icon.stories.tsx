@@ -2,6 +2,11 @@ import { Icon, IIcon } from './Icon'
 
 const Template = (args: IIcon) => <Icon {...args} />
 
+export const Arrow = Template.bind({})
+Arrow.args = {
+  name: 'Arrow',
+}
+
 export const Bell = Template.bind({})
 Bell.args = {
   name: 'Bell',
@@ -58,6 +63,7 @@ Share.args = {
 }
 
 const iconOptions = [
+  'arrow',
   'bell',
   'bookmark',
   'bookmarkFilled',

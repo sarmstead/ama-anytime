@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer className="border-t-2 border-black">
       <nav className="footer-nav py-5 text-center font-semibold w-full">
-        <ul className="flex justify-center">
+        <ul className="flex justify-center flex-wrap">
           <li>
             <Link to={routes.about()}>About</Link>
           </li>

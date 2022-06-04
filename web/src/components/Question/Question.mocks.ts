@@ -1,7 +1,10 @@
+// TODO: Show that the question has been updated
+// Once the question has been answered, shouldn't be able to update it
+// Style threaded questions
+
 export const PinnedQuestion = {
   questionId: '1',
-  answer:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  answer: 'This is the answer',
   askAgain: 3,
   askedByName: 'Lily Smith',
   askedByUsername: 'lilysmith',
@@ -11,33 +14,31 @@ export const PinnedQuestion = {
   favorite: 100,
   followUp: 25,
   pinned: true,
-  question: 'How did you and James meet?',
+  question: 'Whats the question?',
 }
 
 export const QuestionOrder = {
   questionId: '2',
-  answer:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  answer: 'This is the answer',
   askAgain: 3,
   askedByName: 'Lily Smith',
   askedByUsername: 'lilysmith',
-  askedDate: '2022-05-31',
+  askedDate: '2022-05-12T20:17:46.384Z',
   avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
   bookmark: true,
   favorite: 100,
   followUp: 25,
-  question: 'How did you and James meet?',
+  question: 'Whats the question?',
   questionOrder: 2,
 }
 
 export const QuestionNoActions = {
   questionId: '3',
-  answer:
-    'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  answer: 'This is the answer',
   askedByName: 'Lily Smith',
   askedByUsername: 'lilysmith',
-  askedDate: '2022-05-31',
+  askedDate: '2022-05-12T20:17:46.384Z',
   avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
-  question: 'How did you and James meet?',
+  question: 'Whats the question?',
   showActions: false,
 }

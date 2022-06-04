@@ -1,1 +1,1 @@
-export { PageHeading, IPageHeading } from './PageHeading'
+export { PageHeading } from './PageHeading'

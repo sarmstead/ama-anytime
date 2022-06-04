@@ -1,19 +1,18 @@
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+import { PageHeading } from 'src/components/PageHeading'
+import { Question } from 'src/components/Question'
+import { QuestionOrder as data } from 'src/components/Question/Question.mocks'
 
-const QuestionPage = () => {
+interface IQuestionPage {
+  id: string
+}
+
+const QuestionPage = ({ id }: IQuestionPage) => {
   return (
     <>
       <MetaTags title="Question" description="Question page" />
-
-      <h1>QuestionPage</h1>
-      <p>
-        Find me in <code>./web/src/pages/QuestionPage/QuestionPage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>question</code>, link to me with `
-        <Link to={routes.question()}>Question</Link>`
-      </p>
+      <PageHeading isBackShowing={true} title="Thread" />
+      <Question {...data} questionId={id} questionOrder={0} />
     </>
   )
 }

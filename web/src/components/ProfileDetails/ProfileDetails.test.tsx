@@ -46,33 +46,7 @@ describe('ProfileDetails', () => {
     )
   })
 
-  it.skip("doesn't show the location when blank", () => {})
-
-  it('shows the url', () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
-    expect(screen.getByTestId('link')).toHaveTextContent(
-      ProfileDetailsData.link
-    )
-  })
-
-  it.skip("doesn't show the url when blank", () => {})
-
-  it('shows the following count', () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
-    expect(screen.getByTestId('followingCount')).toHaveTextContent(
-      '60 Following'
-    )
-  })
-
-  it.skip("doesn't show the follower count when zero", () => {})
-  it('shows the followed by count', () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
-    expect(screen.getByTestId('followedByCount')).toHaveTextContent(
-      '1,321 Followers'
-    )
-  })
-
-  it.skip("doesn't show the followers count when zero", () => {
+  it("doesn't show the location when blank", () => {
     render(
       <ProfileDetails
         avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
@@ -81,7 +55,64 @@ describe('ProfileDetails', () => {
         username="selfteachme"
       />
     )
-    expect(screen.getByTestId('followedByCount')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('location')).toHaveTextContent('')
+  })
+
+  it('shows the url', () => {
+    render(<ProfileDetails {...ProfileDetailsData} />)
+    expect(screen.getByTestId('link')).toHaveTextContent(
+      ProfileDetailsData.link
+    )
+  })
+
+  it("doesn't show the url when blank", () => {
+    render(
+      <ProfileDetails
+        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+        firstName="Amy"
+        lastName="Dutton"
+        username="selfteachme"
+      />
+    )
+    expect(screen.queryByTestId('link')).not.toBeInTheDocument()
+  })
+
+  it('shows the following count', () => {
+    render(<ProfileDetails {...ProfileDetailsData} />)
+    expect(screen.getByTestId('followingCount')).toHaveTextContent(
+      '60 Following'
+    )
+  })
+
+  it("doesn't show the follower count when zero", () => {
+    render(
+      <ProfileDetails
+        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+        firstName="Amy"
+        lastName="Dutton"
+        username="selfteachme"
+      />
+    )
+    expect(screen.getByTestId('followingCount')).toHaveTextContent('')
+  })
+
+  it('shows the followed by count', () => {
+    render(<ProfileDetails {...ProfileDetailsData} />)
+    expect(screen.getByTestId('followedByCount')).toHaveTextContent(
+      '1,321 Followers'
+    )
+  })
+
+  it("doesn't show the followers count when zero", () => {
+    render(
+      <ProfileDetails
+        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+        firstName="Amy"
+        lastName="Dutton"
+        username="selfteachme"
+      />
+    )
+    expect(screen.getByTestId('followedByCount')).toHaveTextContent('')
   })
 
   it('shows a follower summary', () => {
@@ -100,6 +131,6 @@ describe('ProfileDetails', () => {
         username="selfteachme"
       />
     )
-    expect(screen.getByTestId('followedBySummary')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('followedBySummary')).not.toBeInTheDocument()
   })
 })

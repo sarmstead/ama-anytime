@@ -1,4 +1,5 @@
-import { Icon, IIcon } from '../Icon'
+import { Icon } from '../Icon'
+import { IIcon } from '../Icon/Icon'
 
 export interface IIconButton {
   handleClick?: () => void

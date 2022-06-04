@@ -36,7 +36,7 @@ describe('Format Links', () => {
   it('Formats url with www', () => {
     const url = 'www.selfteach.me'
     expect(FormatLinks(url).short).toBe('selfteach.me')
-    expect(FormatLinks(url).long).toBe('http://www.selfteach.me')
+    expect(FormatLinks(url).long).toBe('https://www.selfteach.me')
   })
 
   it('Formats url with www and http', () => {

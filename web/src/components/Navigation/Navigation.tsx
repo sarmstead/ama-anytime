@@ -11,9 +11,8 @@ const Navigation = ({
 }: INavigation): JSX.Element => {
   // TODO: CREATE A DIFFERENT NAV FOR PEOPLE NOT LOGGED IN
   return (
-    <div className={className}>
+    <div className={`flex justify-end -mr-4 ${className}`}>
       <svg
-        className="mx-auto relative"
         width="374"
         height="722"
         viewBox="0 0 374 722"
@@ -32,7 +31,7 @@ const Navigation = ({
                 <path
                   id="outside"
                   d="M348.023 75.504L348.023 75.5068L348.023 75.504ZM370.401 98.125L370.414 98.0723L370.424 98.0192C373.212 83.8729 362.025 70.721 347.629 72.9123L347.615 72.9144L20.4876 124.469L20.4605 124.473L20.4335 124.478C8.3882 126.635 0.518908 139.528 4.78358 151.177L46.2771 280.639L46.2907 280.681L46.3057 280.723C49.1413 288.636 56.9135 294.408 65.5044 294.408H307.752C317.106 294.408 324.919 287.83 327.036 278.548C327.037 278.543 327.038 278.539 327.039 278.534L370.401 98.125Z"
-                  fill="#D9D9D9"
+                  fill="none"
                   stroke="#7D7E34"
                   strokeWidth="5.24878"
                 />

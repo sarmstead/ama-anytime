@@ -49,7 +49,7 @@ const ProfileDetails = ({
       {/* TODO: Default Cover */}
       {cover && (
         <img
-          className="w-full object-cover object-center max-h-[295px]"
+          className="w-full object-cover object-center h-[295px]"
           src={cover}
           alt={coverDescription && coverDescription}
           data-testid="cover"

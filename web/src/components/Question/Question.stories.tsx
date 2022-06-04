@@ -16,6 +16,7 @@ QuestionOrder.args = { ...QuestionOrderData }
 export const QuestionNoActions = Template.bind({})
 QuestionNoActions.args = { ...QuestionNoActionsData }
 
+// TODO: Update arg types
 export default {
   title: 'Components/Question',
   component: Question,

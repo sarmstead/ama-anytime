@@ -11,7 +11,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <div className="grid grid-cols-12">
       {/* NAVIGATION */}
-      <div className="col-span-3">
+      <div className="col-span-3 z-50 relative">
         <div className="min-h-screen relative border-r-2 border-black">
           <Navigation notifications={3} />
           <div className="absolute left-0 bottom-0 w-full">
@@ -26,7 +26,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="col-span-6">
+      <main className="col-span-6 relative">
         <div className="h-screen overflow-y-auto w-full">
           {children}
           <Footer />
