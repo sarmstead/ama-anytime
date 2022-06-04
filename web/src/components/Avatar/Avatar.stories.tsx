@@ -8,6 +8,11 @@ Primary.args = {
   src: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
 }
 
+export const NoImage = Template.bind({})
+NoImage.args = {
+  alt: 'Amy Dutton',
+}
+
 export default {
   title: 'Components/Avatar',
   component: Avatar,
@@ -27,15 +32,15 @@ export default {
     },
     src: {
       name: 'src',
-      type: { name: 'string', required: true },
+      type: { name: 'string', required: false },
       description: 'image source path',
-      defaultValue: 'null',
+      defaultValue: '',
       control: {
         type: 'text',
       },
       table: {
         type: { summary: 'string' },
-        defaultValue: { summary: 'null' },
+        defaultValue: { summary: '' },
       },
     },
     className: {

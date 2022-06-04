@@ -1,3 +1,4 @@
+import { Link, routes } from '@redwoodjs/router'
 import { Avatar } from '../Avatar'
 import { Icon } from '../Icon'
 
@@ -15,7 +16,7 @@ const Profile = ({
   username,
 }: IProfile): JSX.Element => {
   return (
-    <div className="flex gap-3 bg-profileAside px-5 pb-3 bg-no-repeat bg-cover">
+    <div className="flex gap-3 bg-profileAside px-5 pb-3 bg-no-repeat bg-cover max-w-2xl">
       <a href="/profile">
         <Avatar
           src={avatar}
@@ -25,15 +26,15 @@ const Profile = ({
           className="border-punch border-4"
         />
       </a>
-      <a
-        href="/profile"
+      <Link
+        to={routes.me()}
         className="flex-1 self-end mt-auto text-3xl font-condensed leading-none pt-5"
       >
         <div className="text-ulcaGold">
           {firstName} {lastName}
         </div>
         <div className="text-white">@{username}</div>
-      </a>
+      </Link>
       <div className="self-center my-auto text-white pt-5 hover:text-ulcaGold">
         <button>
           <Icon name="dots" />

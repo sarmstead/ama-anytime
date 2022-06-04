@@ -1,13 +1,21 @@
-interface ITabs {
+export interface ITabs {
   selected: string
+  switchTab: (newTab: string) => void
   tabs: {
-    id: number
+    id: string
     name: string
-    link: string
   }[]
 }
 
-const Tabs = ({ selected = null, tabs }: ITabs): JSX.Element => {
+const Tabs = ({ selected = null, switchTab, tabs }: ITabs): JSX.Element => {
+  const handleClick = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    newTab: string
+  ) => {
+    e.preventDefault()
+    switchTab(newTab)
+  }
+
   return (
     <ul className="flex justify-between text-2xl m-0 p-0 list-none">
       {tabs &&
@@ -15,13 +23,13 @@ const Tabs = ({ selected = null, tabs }: ITabs): JSX.Element => {
           <li
             key={tab.id}
             className={`font-condensed text-3xl pb-2 hover:text-punch ${
-              selected === tab.name
+              selected === tab.id
                 ? `text-punch border-b-4 border-punch`
                 : `text-black`
             }`}
             data-testid={`tab-${tab.id}`}
           >
-            <a href={tab.link}>{tab.name}</a>
+            <button onClick={(e) => handleClick(e, tab.id)}>{tab.name}</button>
           </li>
         ))}
     </ul>

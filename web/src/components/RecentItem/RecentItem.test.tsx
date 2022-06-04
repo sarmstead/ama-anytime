@@ -1,3 +1,4 @@
+import { routes } from '@redwoodjs/router'
 import { render, screen } from '@redwoodjs/testing/web'
 
 import { RecentItem } from './RecentItem'
@@ -13,6 +14,14 @@ describe('RecentItem', () => {
   it('displays the question', () => {
     render(<RecentItem {...RecentItemData} />)
     expect(screen.getByText(RecentItemData.question)).toBeInTheDocument()
+  })
+
+  it('links to the individual question', () => {
+    render(<RecentItem {...RecentItemData} />)
+    expect(screen.getByText('How did you and James meet?')).toHaveAttribute(
+      'href',
+      routes.question({ id: RecentItemData.questionId })
+    )
   })
 
   it('displays the  name of the person that asked the question', () => {

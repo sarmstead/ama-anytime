@@ -1,5 +1,7 @@
+import { Footer } from 'src/components/Footer/Footer'
 import { Navigation } from 'src/components/Navigation'
 import { Profile } from 'src/components/Profile'
+import { SearchInput } from 'src/components/SearchInput'
 
 type AppLayoutProps = {
   children?: React.ReactNode
@@ -7,7 +9,7 @@ type AppLayoutProps = {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   return (
-    <div className="grid grid-cols-12 gap-5">
+    <div className="grid grid-cols-12">
       {/* NAVIGATION */}
       <div className="col-span-3">
         <div className="min-h-screen relative border-r-2 border-black">
@@ -25,14 +27,19 @@ const AppLayout = ({ children }: AppLayoutProps) => {
 
       {/* MAIN CONTENT */}
       <main className="col-span-6">
-        <div className="h-screen overflow-y-auto w-full">{children}</div>
+        <div className="h-screen overflow-y-auto w-full">
+          {children}
+          <Footer />
+        </div>
       </main>
 
       {/* ASIDE */}
       <aside className="col-span-3">
         <div className="h-screen pl-8 py-4 overflow-y-auto border-l-2 border-black">
           {/* SEARCH */}
-          <div className="mb-9">Search</div>
+          <div className="mb-9">
+            <SearchInput />
+          </div>
 
           {/* YOU MIGHT LIKE */}
           <div className="mb-24 flex flex-col gap-7">
@@ -55,4 +62,4 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   )
 }
 
-export default AppLayout
+export { AppLayout }

@@ -1,4 +1,4 @@
-import AppLayout from './AppLayout'
+import { AppLayout } from './AppLayout'
 
 export const generated = () => {
   return <AppLayout />

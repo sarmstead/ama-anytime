@@ -49,5 +49,8 @@ export default {
         defaultValue: { summary: 'null' },
       },
     },
+    handleClick: {
+      action: 'clicked',
+    },
   },
 }

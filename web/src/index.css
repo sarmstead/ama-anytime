@@ -27,12 +27,99 @@
     @apply font-condensed text-2xl text-onyx
   }
 
+  #logo #A,
+  #logo #A_2,
+  #logo #M {
+    @apply fill-ulcaGold
+  }
+
+  #logo:hover #A,
+  #logo:hover #A_2,
+  #logo:hover #M {
+    @apply fill-punch
+  }
+
+  #logo #inside {
+    @apply fill-greenSheen
+  }
+
+  #logo:hover #inside {
+    @apply fill-ulcaGold
+  }
+
+  /* home - feed */
+  #nav__home .nav__bg {
+    @apply fill-punch
+  }
+
+  #nav__home:hover .nav__bg {
+    @apply fill-black
+  }
+
+  #nav__home .nav__color {
+    @apply fill-ulcaGold
+  }
+
+  #nav__home:hover .nav__color {
+    @apply fill-black
+  }
+
+  #nav__home:hover text {
+    @apply fill-white
+  }
+
+  /* notifications */
+  #nav__notifications .nav__color {
+    @apply fill-pesto
+  }
+
+  #nav__notifications:hover .nav__color {
+    @apply fill-black
+  }
+
+  /* bookmarks */
+  #nav__bookmarks .nav__color {
+    @apply fill-punch
+  }
+
+  #nav__bookmarks:hover .nav__color {
+    @apply fill-black
+  }
+
+  /* profile */
+  #nav__profile .nav__color {
+    @apply fill-fiord
+  }
+
+  #nav__profile:hover .nav__color {
+    @apply fill-black
+  }
+
+
+  .body-copy a {
+    @apply text-punch font-bold hover:underline
+  }
+
   .large-body {
     @apply text-lg leading-7 pt-0 mt-0;
   }
 
   .selected-action {
     @apply text-punch font-slab text-xl flex gap-1 items-center
+  }
+
+  footer nav a {
+    @apply hover:underline hover:text-punch
+  }
+
+  .footer-nav li::after {
+    content: '•';
+    @apply mx-2
+  }
+
+  .footer-nav li:last-child::after {
+    content: '';
+    @apply mx-0;
   }
 
   button.small {

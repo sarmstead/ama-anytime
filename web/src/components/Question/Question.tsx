@@ -1,3 +1,4 @@
+import { Link, routes } from '@redwoodjs/router'
 import { formatRelativeDate } from 'src/utils/DateHelpers'
 import { Avatar } from '../Avatar'
 import { Icon } from '../Icon'
@@ -20,6 +21,7 @@ export interface IQuestion {
   onFavoriteClick?: () => void
   onShareClick?: () => void
   question: string
+  questionId: string
   questionOrder?: number
   showActions?: boolean
 }
@@ -37,6 +39,7 @@ const Question = ({
   followUp,
   pinned = false,
   question,
+  questionId,
   questionOrder = null,
   showActions = true,
 }) => {
@@ -60,7 +63,12 @@ const Question = ({
           • {formatRelativeDate(askedDate)}
         </div>
         <div className="font-condensed  text-[2.5rem] pt-o pb-2">
-          {question}
+          <Link
+            to={routes.question({ id: questionId })}
+            className="hover:text-punch"
+          >
+            {question}
+          </Link>
         </div>
         <div className="large-body mb-8">{answer}</div>
         {showActions && (

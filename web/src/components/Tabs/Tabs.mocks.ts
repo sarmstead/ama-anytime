@@ -1,17 +1,14 @@
 export const tabs = [
   {
-    id: 1,
+    id: 'answered',
     name: 'Answered Questions',
-    link: '#answered',
   },
   {
-    id: 2,
+    id: 'unanswered',
     name: 'Unanswered Questions',
-    link: '#unanswered',
   },
   {
-    id: 3,
+    id: 'questions',
     name: "Questions They've Asked",
-    link: '#questions',
   },
 ]

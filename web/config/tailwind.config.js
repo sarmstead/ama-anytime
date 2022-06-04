@@ -5,12 +5,16 @@ module.exports = {
       backgroundImage: {
         bg: "url('./images/bg.jpg')",
         profileAside: "url('./images/bg-profile.svg')",
+        search: "url('./images/bg-search.svg')",
       },
       colors: {
-        punch: '#D35530',
-        ulcaGold: '#FAB829',
-        blanc: '#DBD4C3',
-        onyx: '#393837',
+        punch: '#D35530', // red orange
+        ulcaGold: '#FAB829', // gold
+        blanc: '#DBD4C3', // beige
+        onyx: '#393837', // dark gray
+        pesto: '#7d7e34', // green
+        fiord: '#3a5269', // dark blue
+        greenSheen: '#6ea4a0', // light blue
       },
     },
     fontFamily: {

@@ -2,9 +2,19 @@ import { Icon, IIcon } from './Icon'
 
 const Template = (args: IIcon) => <Icon {...args} />
 
+export const Bell = Template.bind({})
+Bell.args = {
+  name: 'Bell',
+}
+
 export const Comment = Template.bind({})
 Comment.args = {
   name: 'Comment',
+}
+
+export const CommentFilled = Template.bind({})
+CommentFilled.args = {
+  name: 'CommentFilled',
 }
 
 export const Dots = Template.bind({})
@@ -15,6 +25,11 @@ Dots.args = {
 export const Heart = Template.bind({})
 Heart.args = {
   name: 'Heart',
+}
+
+export const HeartFilled = Template.bind({})
+HeartFilled.args = {
+  name: 'HeartFilled',
 }
 
 export const Link = Template.bind({})
@@ -43,11 +58,12 @@ Share.args = {
 }
 
 const iconOptions = [
+  'bell',
   'bookmark',
   'bookmarkFilled',
-  'dots',
   'comment',
   'commentFilled',
+  'dots',
   'heart',
   'heartFilled',
   'link',
