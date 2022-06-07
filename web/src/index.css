@@ -12,6 +12,12 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@layer utilities {
+  .content {
+    content: '';
+  }
+}
+
 @layer base {
   body {
     @apply bg-bg;
@@ -118,8 +124,7 @@
   }
 
   .footer-nav li:last-child::after {
-    content: '';
-    @apply mx-0;
+    @apply mx-0 content;
   }
 
   button.small {
@@ -146,8 +151,7 @@
   }
 
   .inset-border::after {
-    @apply block border-2 border-black absolute left-1 right-1 bottom-1 top-1
-    content: '';
+    @apply block border-2 border-black absolute left-1 right-1 bottom-1 top-1 content
   }
 
 
@@ -161,9 +165,8 @@
   }
 
   .tooltip-tag::before {
-    @apply h-4 w-4 z-10 absolute rotate-45 block
-    content: '';
     background: currentColor;
+    @apply h-4 w-4 z-10 absolute rotate-45 block content
   }
 
   .tooltip-tag.center::before {
