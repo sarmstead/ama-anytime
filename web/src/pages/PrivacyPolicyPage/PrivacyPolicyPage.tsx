@@ -5,7 +5,6 @@ const PrivacyPolicyPage = () => {
   return (
     <>
       <MetaTags title="Privacy Policy" description="Privacy Policy page" />
-      <PageHeading title="Privacy Policy" isActionsShowing={false} />
       <p>Privacy Policy</p>
     </>
   )

@@ -21,6 +21,8 @@ describe('users', () => {
   })
 
   scenario('creates a user', async () => {
+    // const date = '2022-06-07 08:26:44.214'
+
     const result = await createUser({
       input: {
         username: 'String5304540',
@@ -28,6 +30,8 @@ describe('users', () => {
         fullName: 'String',
         hashedPassword: 'String',
         salt: 'String',
+        // clearNotifications: date,
+        // joinedDate: date,
       },
     })
 
@@ -36,6 +40,8 @@ describe('users', () => {
     expect(result.fullName).toEqual('String')
     expect(result.hashedPassword).toEqual('String')
     expect(result.salt).toEqual('String')
+    // expect(result.clearNotifications).toEqual(date)
+    // expect(result.joinedDate).toEqual(date)
   })
 
   scenario('updates a user', async (scenario: StandardScenario) => {

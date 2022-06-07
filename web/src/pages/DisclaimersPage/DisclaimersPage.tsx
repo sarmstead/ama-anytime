@@ -5,7 +5,6 @@ const DisclaimersPage = () => {
   return (
     <>
       <MetaTags title="Disclaimers" description="Disclaimers page" />
-      <PageHeading title="Disclaimers" isActionsShowing={false} />
       <p>Disclaimers</p>
     </>
   )

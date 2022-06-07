@@ -12,13 +12,10 @@ const Footer = () => {
       <nav className="footer-nav py-5 text-center font-semibold w-full">
         <ul className="flex justify-center flex-wrap">
           <li>
-            <Link to={routes.about()}>About</Link>
-          </li>
-          <li>
             <Link to={routes.waitingList()}>Waiting List</Link>
           </li>
           <li>
-            <Link to={routes.contact()}>Contact</Link>
+            <a href="mailto:amy@amaanytime.com">Contact</a>
           </li>
           <li>
             <Link to={routes.privacyPolicy()}>Privacy Policy</Link>

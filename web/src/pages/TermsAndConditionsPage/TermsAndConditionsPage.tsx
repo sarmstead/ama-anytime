@@ -8,7 +8,6 @@ const TermsAndConditionsPage = () => {
         title="TermsAndConditions"
         description="TermsAndConditions page"
       />
-      <PageHeading title="Terms and Conditions" isActionsShowing={false} />
       <p>Terms and Conditions</p>
     </>
   )
