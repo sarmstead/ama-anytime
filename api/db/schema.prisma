@@ -8,8 +8,6 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
 model User {
   id                  Int       @id @default(autoincrement())
   username            String    @unique
@@ -18,12 +16,12 @@ model User {
   hashedPassword      String
   salt                String
   joinedDate          DateTime  @default(now())
-  bio                 String
-  location            String
-  website             String
-  cover               String
-  avatar              String
-  lastLogin           DateTime  @updatedAt
+  bio                 String?
+  location            String?
+  website             String?
+  cover               String?
+  avatar              String?
+  lastLogin           DateTime? @updatedAt
   clearNotifications  DateTime  @default(now())
   resetToken          String?
   resetTokenExpiresAt DateTime?

@@ -50,11 +50,11 @@ export const handler = async (event, context) => {
 
     errors: {
       usernameOrPasswordMissing: 'Both username and password are required',
-      usernameNotFound: 'Username ${username} not found',
+      usernameNotFound: 'Username or password are not valid',
       // For security reasons you may want to make this the same as the
       // usernameNotFound error so that a malicious user can't use the error
       // to narrow down if it's the username or password that's incorrect
-      incorrectPassword: 'Incorrect password for ${username}',
+      incorrectPassword: 'Username or password are not valid',
     },
 
     // How long a user will remain logged in, in seconds
@@ -106,12 +106,12 @@ export const handler = async (event, context) => {
         data: {
           username: username,
           email: userAttributes.email,
-          bio: userAttributes.bio,
-          location: userAttributes.location,
-          website: userAttributes.website,
+          // bio: userAttributes.bio,
+          // location: userAttributes.location,
+          // website: userAttributes.website,
           fullName: userAttributes.fullName,
-          cover: userAttributes.cover,
-          avatar: userAttributes.avatar,
+          // cover: userAttributes.cover,
+          // avatar: userAttributes.avatar,
           hashedPassword: hashedPassword,
           salt: salt,
         },

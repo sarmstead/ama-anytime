@@ -18,6 +18,7 @@
     "redwoodjs",
     "saas",
     "selfteach",
+    "Signup",
     "ulca"
   ],
   "eslint.format.enable": true
