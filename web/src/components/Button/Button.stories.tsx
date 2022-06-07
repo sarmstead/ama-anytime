@@ -13,6 +13,18 @@ SmallButton.args = {
   size: 'small',
 }
 
+export const Solid = Template.bind({})
+Solid.args = {
+  label: 'follow',
+  style: 'solid',
+}
+
+export const NoBackground = Template.bind({})
+NoBackground.args = {
+  label: 'follow',
+  style: 'none',
+}
+
 export default {
   title: 'Components/Button',
   component: Button,

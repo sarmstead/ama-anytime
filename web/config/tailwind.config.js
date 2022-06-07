@@ -15,6 +15,7 @@ module.exports = {
         pesto: '#7d7e34', // green
         fiord: '#3a5269', // dark blue
         greenSheen: '#6ea4a0', // light blue
+        veridianGreen: '#00979d', // bright teal
       },
     },
     fontFamily: {
