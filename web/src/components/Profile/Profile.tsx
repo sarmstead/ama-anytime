@@ -1,5 +1,8 @@
-import { Link, routes } from '@redwoodjs/router'
+import { useAuth } from '@redwoodjs/auth'
+import { Link, navigate, routes } from '@redwoodjs/router'
+import { useRef, useState } from 'react'
 import { Avatar } from '../Avatar'
+import { DropdownMenu } from '../DropdownMenu'
 import { Icon } from '../Icon'
 
 export interface IProfile {
@@ -15,6 +18,14 @@ const Profile = ({
   lastName,
   username,
 }: IProfile): JSX.Element => {
+  const [isDropdownShowing, setIsDropdownShowing] = useState<boolean>(false)
+  const triggerRef = useRef()
+  const { logOut } = useAuth()
+
+  const toggleDropdown = (): void => {
+    setIsDropdownShowing((prevValue) => !prevValue)
+  }
+
   return (
     <div className="flex gap-3 bg-profileAside px-5 pb-3 bg-no-repeat bg-cover max-w-2xl">
       <a href="/profile">
@@ -35,8 +46,28 @@ const Profile = ({
         </div>
         <div className="text-white">@{username}</div>
       </Link>
-      <div className="self-center my-auto text-white pt-5 hover:text-ulcaGold">
-        <button>
+      <div className="self-center my-auto text-white pt-5 hover:text-ulcaGold relative">
+        {isDropdownShowing && (
+          <DropdownMenu
+            isShowing={true}
+            onClickOutside={() => toggleDropdown()}
+            options={[
+              {
+                label: 'Settings',
+                icon: { name: 'settings' },
+                action: () => navigate(routes.settings()),
+              },
+              { label: 'Logout', icon: { name: 'logout' }, action: logOut },
+            ]}
+            className="bottom right absolute -right-2 bottom-9"
+            triggerRef={triggerRef}
+          />
+        )}
+        <button
+          onClick={() => toggleDropdown()}
+          className={`${isDropdownShowing && `text-punch`}`}
+          ref={triggerRef}
+        >
           <Icon name="dots" />
         </button>
       </div>

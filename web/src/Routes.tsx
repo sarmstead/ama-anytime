@@ -34,11 +34,10 @@ const Routes = () => {
         <Route path="/disclaimers" page={DisclaimersPage} name="disclaimers" />
       </Set>
 
-      <Private unauthenticated="login">
-        <Route path="/" page={FeedPage} name="home" />
-      </Private>
+      {/* <Private unauthenticated="login"></Private> */}
 
       <Set wrap={[AppLayout]}>
+        <Route path="/" page={FeedPage} name="home" />
         <Route path="/bookmarks" page={BookmarksPage} name="bookmarks" />
         <Route path="/notifications" page={NotificationsPage} name="notifications" />
         <Route path="/question/{id}" page={QuestionPage} name="question" />

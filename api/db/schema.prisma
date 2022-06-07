@@ -9,20 +9,102 @@ generator client {
 }
 
 model User {
-  id                  Int       @id @default(autoincrement())
-  username            String    @unique
-  email               String    @unique
+  id                  Int        @id @default(autoincrement())
+  username            String     @unique
+  email               String     @unique
   fullName            String
   hashedPassword      String
   salt                String
-  joinedDate          DateTime  @default(now())
+  joinedDate          DateTime   @default(now())
   bio                 String?
   location            String?
   website             String?
   cover               String?
   avatar              String?
-  lastLogin           DateTime? @updatedAt
-  clearNotifications  DateTime  @default(now())
+  lastLogin           DateTime?  @updatedAt
+  clearNotifications  DateTime?  @default(now())
   resetToken          String?
   resetTokenExpiresAt DateTime?
+  invitations         Int?       @default(0)
+  questionsAsked      Question[] @relation("QuestionAskedBy")
+  questionsAnswered   Question[] @relation("QuestionAnsweredBy")
+  bookmarks           Bookmark[]
+  likes               Like[]
+  askAgains           AskAgain[]
+  votes               Vote[]
+  recruits            Recruit[]
+}
+
+model Question {
+  id               Int        @id @default(autoincrement())
+  question         String
+  answer           String?
+  order            Int?
+  pinned           Boolean    @default(false)
+  askedBy          User       @relation("QuestionAskedBy", fields: [askedById], references: [id])
+  askedById        Int
+  answeredBy       User       @relation("QuestionAnsweredBy", fields: [answeredById], references: [id])
+  answeredById     Int
+  askedOn          DateTime?  @default(now())
+  updatedOn        DateTime?  @updatedAt
+  parentQuestionId Int?       @unique
+  parentQuestion   Question?  @relation("ThreadedQuestions", fields: [parentQuestionId], references: [id])
+  questions        Question[] @relation("ThreadedQuestions")
+  bookmarks        Bookmark[]
+  likes            Like[]
+  askAgains        AskAgain[]
+  votes            Vote[]
+}
+
+model Recruit {
+  id     Int    @id @default(autoincrement())
+  userId Int
+  user   User   @relation(fields: [userId], references: [id])
+  email  String
+}
+
+model Bookmark {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id])
+
+  @@unique([userId, questionId])
+}
+
+model Like {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int
+
+  @@unique([userId, questionId])
+}
+
+model AskAgain {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  question   Question @relation(fields: [questionId], references: [id])
+  questionId Int
+
+  @@unique([userId, questionId])
+}
+
+model Vote {
+  id         Int           @id @default(autoincrement())
+  user       User          @relation(fields: [userId], references: [id])
+  userId     Int
+  direction  VoteDirection
+  question   Question      @relation(fields: [questionId], references: [id])
+  questionId Int
+
+  @@unique([userId, questionId])
+}
+
+enum VoteDirection {
+  UP
+  DOWN
 }

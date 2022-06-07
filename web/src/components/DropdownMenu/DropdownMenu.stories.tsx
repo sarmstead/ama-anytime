@@ -1,6 +1,21 @@
 import { DropdownMenu, IDropdownMenu } from './DropdownMenu'
 import { DropdownMenuOptions } from './DropdownMenu.mocks'
 
+export const generated = () => {
+  return (
+    <DropdownMenu
+      isShowing={true}
+      options={[
+        { label: 'Follow', icon: { name: 'follow' } },
+        { label: 'Mute', icon: { name: 'mute' } },
+        { label: 'Unfollow', icon: { name: 'unfollow' } },
+      ]}
+      className="top left"
+      onClickOutside={() => {}}
+    />
+  )
+}
+
 const Template = (args: IDropdownMenu) => <DropdownMenu {...args} />
 
 export const LeftTop = Template.bind({})
@@ -44,5 +59,4 @@ RightBottom.args = {
   isShowing: true,
   options: DropdownMenuOptions,
 }
-
 export default { title: 'Components/DropdownMenu' }

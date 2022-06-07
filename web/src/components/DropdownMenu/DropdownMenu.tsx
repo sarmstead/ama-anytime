@@ -1,3 +1,4 @@
+import { useEffect, useRef, RefObject } from 'react'
 import { Icon, IIcon } from '../Icon/Icon'
 
 export interface IDropdownMenu {
@@ -8,13 +9,42 @@ export interface IDropdownMenu {
     label: string
     action?: () => void
   }[]
+  triggerRef?: RefObject<HTMLButtonElement>
+  onClickOutside: () => void
 }
 
-const DropdownMenu = ({ className, isShowing, options }: IDropdownMenu) => {
+const DropdownMenu = ({
+  className,
+  isShowing,
+  onClickOutside,
+  triggerRef,
+  options,
+}: IDropdownMenu) => {
+  const dropdownRef = useRef(null)
+
+  // REFERENCE: https://blog.logrocket.com/detect-click-outside-react-component-how-to/
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        triggerRef &&
+        !triggerRef.current.contains(event.target)
+      ) {
+        onClickOutside && onClickOutside()
+      }
+    }
+    document.addEventListener('click', handleClickOutside, true)
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true)
+    }
+  }, [onClickOutside, triggerRef])
+
   if (isShowing)
     return (
       <div
         className={`tooltip-tag bg-ulcaGold text-ulcaGold inline-block ${className}`}
+        ref={dropdownRef}
       >
         <ul>
           {options &&

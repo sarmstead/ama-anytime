@@ -36,7 +36,7 @@ export const schema = gql`
     cover: String
     avatar: String
     lastLogin: DateTime
-    clearNotifications: DateTime!
+    clearNotifications: DateTime
     resetToken: String
     resetTokenExpiresAt: DateTime
   }
