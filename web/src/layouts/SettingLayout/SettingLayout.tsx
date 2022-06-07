@@ -1,14 +1,14 @@
 import { useAuth } from '@redwoodjs/auth'
-import { Footer } from 'src/components/Footer/Footer'
+import { Footer } from 'src/components/Footer'
 import { Navigation } from 'src/components/Navigation'
 import { Profile } from 'src/components/Profile'
-import { SearchInput } from 'src/components/SearchInput'
+import { SettingsSubnav } from 'src/components/SettingsSubnav'
 
-type AppLayoutProps = {
+type SettingLayoutProps = {
   children?: React.ReactNode
 }
 
-const AppLayout = ({ children }: AppLayoutProps) => {
+const SettingLayout = ({ children }: SettingLayoutProps) => {
   const { isAuthenticated, currentUser } = useAuth()
 
   return (
@@ -35,6 +35,12 @@ const AppLayout = ({ children }: AppLayoutProps) => {
         </div>
       </div>
 
+      <aside className="col-span-3 relative">
+        <div className="h-screen overflow-y-auto w-full border-r-2 border-black pt-24">
+          <SettingsSubnav />
+        </div>
+      </aside>
+
       {/* MAIN CONTENT */}
       <main className="col-span-6 relative">
         <div className="h-screen overflow-y-auto w-full">
@@ -42,34 +48,8 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           <Footer />
         </div>
       </main>
-
-      {/* ASIDE */}
-      <aside className="col-span-3">
-        <div className="h-screen pl-8 py-4 overflow-y-auto border-l-2 border-black">
-          {/* SEARCH */}
-          <div className="mb-9">
-            <SearchInput />
-          </div>
-
-          {/* YOU MIGHT LIKE */}
-          <div className="mb-24 flex flex-col gap-7">
-            <h3 className="aside-heading">You might like</h3>
-            <div>
-              <button className="text-button">Show More</button>
-            </div>
-          </div>
-
-          {/* RECENTLY */}
-          <div className="mb-24 flex flex-col gap-7">
-            <h3 className="aside-heading">Recently</h3>
-            <div>
-              <button className="text-button">Show More</button>
-            </div>
-          </div>
-        </div>
-      </aside>
     </div>
   )
 }
 
-export { AppLayout }
+export { SettingLayout }

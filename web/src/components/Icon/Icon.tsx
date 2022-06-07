@@ -5,6 +5,10 @@ import { Bookmark } from './Bookmark'
 import { BookmarkFilled } from './BookmarkFilled'
 import { Close } from './Close'
 import { Dots } from './Dots'
+import { ChevronDown } from './ChevronDown'
+import { ChevronLeft } from './ChevronLeft'
+import { ChevronRight } from './ChevronRight'
+import { ChevronUp } from './ChevronUp'
 import { Comment } from './Comment'
 import { CommentFilled } from './CommentFilled'
 import { Flag } from './Flag'
@@ -33,6 +37,10 @@ export interface IIcon {
     | 'block'
     | 'bookmark'
     | 'bookmarkFilled'
+    | 'chevronDown'
+    | 'chevronLeft'
+    | 'chevronRight'
+    | 'chevronUp'
     | 'close'
     | 'dots'
     | 'comment'
@@ -74,6 +82,16 @@ const Icon = ({ name, className = '', width, height }: IIcon): JSX.Element => {
       return (
         <BookmarkFilled className={className} width={width} height={height} />
       )
+    case 'chevrondown':
+      return <ChevronDown className={className} width={width} height={height} />
+    case 'chevronleft':
+      return <ChevronLeft className={className} width={width} height={height} />
+    case 'chevronright':
+      return (
+        <ChevronRight className={className} width={width} height={height} />
+      )
+    case 'chevronup':
+      return <ChevronUp className={className} width={width} height={height} />
     case 'close':
       return <Close className={className} width={width} height={height} />
     case 'comment':

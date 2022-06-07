@@ -1,5 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import { getYear } from 'date-fns'
+import { useAuth } from '@redwoodjs/auth'
 
 export const GetYear = () => {
   const date = new Date(Date.now())
@@ -7,13 +8,21 @@ export const GetYear = () => {
 }
 
 const Footer = () => {
+  const { isAuthenticated } = useAuth()
   return (
     <footer className="border-t-2 border-black">
       <nav className="footer-nav py-5 text-center font-semibold w-full">
         <ul className="flex justify-center flex-wrap">
-          <li>
-            <Link to={routes.waitingList()}>Waiting List</Link>
-          </li>
+          {/* TODO: Write tests for showing invites or waiting list */}
+          {isAuthenticated ? (
+            <li>
+              <Link to={routes.invites()}>Invites</Link>
+            </li>
+          ) : (
+            <li>
+              <Link to={routes.waitingList()}>Waiting List</Link>
+            </li>
+          )}
           <li>
             <a href="mailto:amy@amaanytime.com">Contact</a>
           </li>

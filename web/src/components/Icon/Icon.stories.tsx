@@ -17,6 +17,36 @@ Block.args = {
   name: 'Block',
 }
 
+export const Bookmark = Template.bind({})
+Bookmark.args = {
+  name: 'Bookmark',
+}
+
+export const BookmarkFilled = Template.bind({})
+BookmarkFilled.args = {
+  name: 'BookmarkFilled',
+}
+
+export const ChevronDown = Template.bind({})
+ChevronDown.args = {
+  name: 'ChevronDown',
+}
+
+export const ChevronLeft = Template.bind({})
+ChevronLeft.args = {
+  name: 'ChevronLeft',
+}
+
+export const ChevronRight = Template.bind({})
+ChevronRight.args = {
+  name: 'ChevronRight',
+}
+
+export const ChevronUp = Template.bind({})
+ChevronUp.args = {
+  name: 'ChevronUp',
+}
+
 export const Close = Template.bind({})
 Close.args = {
   name: 'Close',
@@ -107,14 +137,14 @@ Show.args = {
   name: 'Show',
 }
 
-export const Unmute = Template.bind({})
-Unmute.args = {
-  name: 'Unmute',
-}
-
 export const Unfollow = Template.bind({})
 Unfollow.args = {
   name: 'Unfollow',
+}
+
+export const Unmute = Template.bind({})
+Unmute.args = {
+  name: 'Unmute',
 }
 
 export const VoteDown = Template.bind({})
@@ -133,6 +163,10 @@ const iconOptions = [
   'block',
   'bookmark',
   'bookmarkFilled',
+  'chevronDown',
+  'chevronLeft',
+  'chevronRight',
+  'chevronUp',
   'close',
   'comment',
   'commentFilled',

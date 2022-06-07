@@ -188,4 +188,29 @@
   .tooltip-tag.right::before {
     @apply right-3
   }
+
+  /* settings subnav */
+  .settings-subnav {
+    @apply font-slab uppercase text-base font-extrabold
+  }
+
+  .settings-subnav li {
+    @apply mb-3
+  }
+
+  .settings-subnav .icon {
+    @apply hidden
+  }
+
+  .settings-subnav li a.selected .icon {
+    @apply block
+  }
+
+  .settings-subnav a {
+    @apply text-black hover:text-punch min-h-[3rem] flex leading-[3rem] pl-20 pr-2 justify-between items-center
+  }
+
+  .settings-subnav li a.selected {
+    @apply bg-ulcaGold hover:text-black
+  }
 }

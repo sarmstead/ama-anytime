@@ -11,6 +11,7 @@ import { Private, Router, Route, Set } from '@redwoodjs/router'
 import { AppLayout } from './layouts/AppLayout'
 import { ContentLayout } from './layouts/ContentLayout'
 import { LegalLayout } from './layouts/LegalLayout'
+import { SettingLayout } from './layouts/SettingLayout'
 
 const Routes = () => {
   return (
@@ -18,14 +19,12 @@ const Routes = () => {
       <Route path="/signup" page={SignupPage} name="signup" />
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
-      <Route path="/settings" page={SettingsPage} name="settings" />
-      <Route path="/invites" page={InvitesPage} name="invites" />
       <Route path="/login" page={LoginPage} name="login" />
 
       <Set wrap={[ContentLayout]}>
         <Route path="/waiting-list" page={WaitingListPage} name="waitingList" />
-        <Route path="/about" page={AboutPage} name="about" />
-        <Route path="/contact" page={ContactPage} name="contact" />
+        {/* <Route path="/about" page={AboutPage} name="about" /> */}
+        {/* <Route path="/contact" page={ContactPage} name="contact" /> */}
       </Set>
 
       <Set wrap={[LegalLayout]}>
@@ -34,15 +33,25 @@ const Routes = () => {
         <Route path="/disclaimers" page={DisclaimersPage} name="disclaimers" />
       </Set>
 
-      {/* <Private unauthenticated="login"></Private> */}
+      <Set wrap={[SettingLayout]}>
+        <Private unauthenticated="login">
+          <Route path="/settings" page={SettingsPage} name="settings" />
+          <Route path="/invites" page={InvitesPage} name="invites" />
+          <Route path="/notification-settings" page={NotificationSettingsPage} name="notificationSettings" />
+          <Route path="/privacy-safety" page={PrivacySafetyPage} name="privacySafety" />
+          <Route path="/profile-settings" page={ProfileSettingsPage} name="profileSettings" />
+        </Private>
+      </Set>
 
       <Set wrap={[AppLayout]}>
         <Route path="/" page={FeedPage} name="home" />
-        <Route path="/bookmarks" page={BookmarksPage} name="bookmarks" />
-        <Route path="/notifications" page={NotificationsPage} name="notifications" />
-        <Route path="/question/{id}" page={QuestionPage} name="question" />
-        <Route path="/profile" page={ProfilePage} name="me" />
         <Route path="/profile/{username}" page={ProfilePage} name="profile" />
+        <Route path="/question/{id}" page={QuestionPage} name="question" />
+        <Private unauthenticated="login">
+          <Route path="/profile" page={ProfilePage} name="me" />
+          <Route path="/bookmarks" page={BookmarksPage} name="bookmarks" />
+          <Route path="/notifications" page={NotificationsPage} name="notifications" />
+        </Private>
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

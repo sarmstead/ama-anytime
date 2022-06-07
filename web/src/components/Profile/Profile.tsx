@@ -63,6 +63,7 @@ const Profile = ({
             triggerRef={triggerRef}
           />
         )}
+        {/* TODO: Write tests for trigger dropdown menu & clicking outside */}
         <button
           onClick={() => toggleDropdown()}
           className={`${isDropdownShowing && `text-punch`}`}
