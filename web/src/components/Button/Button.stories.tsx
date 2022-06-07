@@ -25,6 +25,28 @@ NoBackground.args = {
   style: 'none',
 }
 
+export const IconLeft = Template.bind({})
+IconLeft.args = {
+  label: 'follow',
+  style: 'none',
+  icon: { name: 'bell' },
+  iconSide: 'left',
+}
+
+export const IconRight = Template.bind({})
+IconRight.args = {
+  label: 'follow',
+  style: 'none',
+  icon: { name: 'bell' },
+  iconSide: 'right',
+}
+
+export const underline = Template.bind({})
+underline.args = {
+  label: 'follow',
+  style: 'underline',
+}
+
 export default {
   title: 'Components/Button',
   component: Button,

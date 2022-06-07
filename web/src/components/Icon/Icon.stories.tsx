@@ -12,6 +12,11 @@ Bell.args = {
   name: 'Bell',
 }
 
+export const Close = Template.bind({})
+Close.args = {
+  name: 'Close',
+}
+
 export const Comment = Template.bind({})
 Comment.args = {
   name: 'Comment',
@@ -67,6 +72,7 @@ const iconOptions = [
   'bell',
   'bookmark',
   'bookmarkFilled',
+  'close',
   'comment',
   'commentFilled',
   'dots',

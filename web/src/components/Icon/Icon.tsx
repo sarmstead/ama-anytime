@@ -2,6 +2,7 @@ import { Arrow } from './Arrow'
 import { Bell } from './Bell'
 import { Bookmark } from './Bookmark'
 import { BookmarkFilled } from './BookmarkFilled'
+import { Close } from './Close'
 import { Dots } from './Dots'
 import { Comment } from './Comment'
 import { CommentFilled } from './CommentFilled'
@@ -19,6 +20,7 @@ export interface IIcon {
     | 'bell'
     | 'bookmark'
     | 'bookmarkFilled'
+    | 'close'
     | 'dots'
     | 'comment'
     | 'commentFilled'
@@ -46,6 +48,8 @@ const Icon = ({ name, className = '', width, height }: IIcon): JSX.Element => {
       return (
         <BookmarkFilled className={className} width={width} height={height} />
       )
+    case 'close':
+      return <Close className={className} width={width} height={height} />
     case 'comment':
       return <Comment className={className} width={width} height={height} />
     case 'commentfilled':

@@ -140,4 +140,20 @@
   .might-like-user__link:hover .username {
     @apply underline
   }
+
+  .inset-border {
+    @apply relative;
+  }
+
+  .inset-border::after {
+    content: '';
+    display: block;
+    border: 1px solid black;
+    position: absolute;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    top: 4px;
+
+  }
 }

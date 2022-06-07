@@ -38,4 +38,9 @@ describe('Button', () => {
     render(<Button label="follow" size="small" />)
     expect(screen.getByTestId('button')).toHaveClass('small')
   })
+
+  it('displays the icon', () => {
+    render(<Button label="follow" icon={{ name: 'bell' }} />)
+    expect(screen.getByTestId('icon')).toBeInTheDocument()
+  })
 })
