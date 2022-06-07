@@ -8,7 +8,7 @@ services:
 - name: ama-anytime-web
   type: web
   env: static
-  buildCommand: yarn rw deploy render web
+  buildCommand: yarn && yarn rw deploy render web
   staticPublishPath: ./web/dist
   envVars:
   - key: NODE_VERSION
