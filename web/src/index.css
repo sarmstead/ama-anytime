@@ -146,14 +146,43 @@
   }
 
   .inset-border::after {
+    @apply block border-2 border-black absolute left-1 right-1 bottom-1 top-1
     content: '';
-    display: block;
-    border: 1px solid black;
-    position: absolute;
-    left: 4px;
-    right: 4px;
-    bottom: 4px;
-    top: 4px;
+  }
 
+
+  /* TOOL TIP TAG */
+  .tooltip-tag {
+    @apply z-20 relative
+  }
+
+  .tooltip-tag button {
+    @apply relative z-40
+  }
+
+  .tooltip-tag::before {
+    @apply h-4 w-4 z-10 absolute rotate-45 block
+    content: '';
+    background: currentColor;
+  }
+
+  .tooltip-tag.center::before {
+    @apply left-1/2 -translate-x-1/2 rotate-45
+  }
+
+  .tooltip-tag.left::before {
+    @apply left-3
+  }
+
+  .tooltip-tag.top::before {
+    @apply -top-2
+  }
+
+  .tooltip-tag.bottom::before {
+    @apply -bottom-2
+  }
+
+  .tooltip-tag.right::before {
+    @apply right-3
   }
 }

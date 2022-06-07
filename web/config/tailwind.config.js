@@ -16,6 +16,7 @@ module.exports = {
         fiord: '#3a5269', // dark blue
         greenSheen: '#6ea4a0', // light blue
         veridianGreen: '#00979d', // bright teal
+        heatWave: '#ff7b00', // orange
       },
     },
     fontFamily: {

@@ -12,6 +12,11 @@ Bell.args = {
   name: 'Bell',
 }
 
+export const Block = Template.bind({})
+Block.args = {
+  name: 'Block',
+}
+
 export const Close = Template.bind({})
 Close.args = {
   name: 'Close',
@@ -32,6 +37,16 @@ Dots.args = {
   name: 'Dots',
 }
 
+export const Flag = Template.bind({})
+Flag.args = {
+  name: 'Flag',
+}
+
+export const Follow = Template.bind({})
+Follow.args = {
+  name: 'Follow',
+}
+
 export const Heart = Template.bind({})
 Heart.args = {
   name: 'Heart',
@@ -42,14 +57,29 @@ HeartFilled.args = {
   name: 'HeartFilled',
 }
 
+export const Hide = Template.bind({})
+Hide.args = {
+  name: 'Hide',
+}
+
 export const Link = Template.bind({})
 Link.args = {
   name: 'Link',
 }
 
+export const Logout = Template.bind({})
+Logout.args = {
+  name: 'Logout',
+}
+
 export const Map = Template.bind({})
 Map.args = {
   name: 'Map',
+}
+
+export const Mute = Template.bind({})
+Mute.args = {
+  name: 'Mute',
 }
 
 export const Pin = Template.bind({})
@@ -62,27 +92,69 @@ Reuse.args = {
   name: 'Reuse',
 }
 
+export const Settings = Template.bind({})
+Settings.args = {
+  name: 'Settings',
+}
+
 export const Share = Template.bind({})
 Share.args = {
   name: 'Share',
 }
 
+export const Show = Template.bind({})
+Show.args = {
+  name: 'Show',
+}
+
+export const Unmute = Template.bind({})
+Unmute.args = {
+  name: 'Unmute',
+}
+
+export const Unfollow = Template.bind({})
+Unfollow.args = {
+  name: 'Unfollow',
+}
+
+export const VoteDown = Template.bind({})
+VoteDown.args = {
+  name: 'VoteDown',
+}
+
+export const VoteUp = Template.bind({})
+VoteUp.args = {
+  name: 'VoteUp',
+}
+
 const iconOptions = [
   'arrow',
   'bell',
+  'block',
   'bookmark',
   'bookmarkFilled',
   'close',
   'comment',
   'commentFilled',
   'dots',
+  'flag',
+  'follow',
   'heart',
   'heartFilled',
+  'hide',
   'link',
+  'logout',
   'map',
+  'mute',
   'pin',
   'reuse',
+  'settings',
   'share',
+  'show',
+  'voteDown',
+  'voteUp',
+  'unfollow',
+  'unmute',
 ]
 
 export default {

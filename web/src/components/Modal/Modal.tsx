@@ -7,6 +7,7 @@ export interface IModal {
 }
 
 const Modal = ({ children, closeModal, isShowing }: IModal): JSX.Element => {
+  // TODO: Add some animation / transitions
   if (isShowing) {
     return (
       <div className="bg-black opacity-80 w-screen h-screen fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center">

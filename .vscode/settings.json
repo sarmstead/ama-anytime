@@ -20,7 +20,9 @@
     "selfteach",
     "Signup",
     "ulca",
-    "veridian"
+    "veridian",
+    "votedown",
+    "voteup"
   ],
   "eslint.format.enable": true
 }
