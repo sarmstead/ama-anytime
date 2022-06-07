@@ -24,13 +24,13 @@ describe('Navigation', () => {
     render(<Navigation />)
     expect(screen.getByTestId('logoLink')).toHaveAttribute(
       'href',
-      routes.feed()
+      routes.home()
     )
   })
 
   it('links the home nav item to the feed page', () => {
     render(<Navigation />)
-    expect(screen.getByTestId('home')).toHaveAttribute('href', routes.feed())
+    expect(screen.getByTestId('home')).toHaveAttribute('href', routes.home())
   })
 
   it('links to the notifications page', () => {
