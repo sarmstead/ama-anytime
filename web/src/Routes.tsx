@@ -16,6 +16,8 @@ import { SettingLayout } from './layouts/SettingLayout'
 const Routes = () => {
   return (
     <Router>
+      <Route path="/followers" page={FollowersPage} name="followers" />
+      <Route path="/following" page={FollowingPage} name="following" />
       <Route path="/signup" page={SignupPage} name="signup" />
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />

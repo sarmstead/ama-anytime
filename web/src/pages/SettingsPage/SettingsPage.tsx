@@ -32,7 +32,7 @@ const SettingsPage = () => {
     <>
       <MetaTags title="Settings" description="Settings page" />
 
-      <h1 className="page-title">My Account</h1>
+      <h1 className="page-title settings-page-top">My Account</h1>
 
       <Form onSubmit={onSubmit}>
         <div className="field">

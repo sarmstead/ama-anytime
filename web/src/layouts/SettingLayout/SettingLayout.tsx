@@ -44,7 +44,7 @@ const SettingLayout = ({ children }: SettingLayoutProps) => {
       {/* MAIN CONTENT */}
       <main className="col-span-6 relative">
         <div className="h-screen overflow-y-auto w-full grid grid-cols-6">
-          <div className="col-span-5 pl-14 pt-24">{children}</div>
+          <div className="col-span-5 pl-14">{children}</div>
           <div className="col-span-6">
             <Footer />
           </div>
