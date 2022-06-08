@@ -26,6 +26,33 @@
   svg {
     fill: currentColor;
   }
+
+  form {
+    @apply mb-16;
+  }
+
+  label {
+    @apply font-slab uppercase text-base font-extrabold text-black leading-6 pb-2 block
+  }
+
+  input[type=text],
+  input[type=email],
+  input[type=tel],
+  input[type=password] {
+    @apply mt-[2px] ml-[2px] mr-0 mb-0 bg-transparent border-2 border-black focus:border-veridianGreen outline-none w-full p-4 font-sans font-semibold relative
+  }
+
+  .input-wrapper {
+    @apply relative
+  }
+
+  .input-wrapper::before {
+    @apply bg-white absolute -left-[2px] -top-[2px] w-full h-full content
+  }
+
+  h1 {
+    @apply font-condensed text-punch text-[3.25rem] p-0 pb-6 m-0 leading-none
+  }
 }
 
 @layer components {
@@ -212,5 +239,31 @@
 
   .settings-subnav li a.selected {
     @apply bg-ulcaGold hover:text-black
+  }
+
+  /* FORM ELEMENTS */
+  .field {
+    @apply mb-8
+  }
+
+  .button-group {
+    @apply flex gap-6 justify-end
+  }
+
+  .submit-btn {
+    @apply font-slab uppercase text-white bg-punch hover:bg-veridianGreen text-base font-bold py-2 px-6 rounded-3xl
+  }
+
+  .input-username {
+    @apply relative;
+  }
+
+  .input-username::after {
+    content: '@';
+    @apply font-sans text-lg font-bold text-punch block absolute bottom-[18px] left-5
+  }
+
+  .input-username input[type=text] {
+    @apply pl-10
   }
 }
