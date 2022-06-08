@@ -49,13 +49,13 @@
   .input-wrapper::before {
     @apply bg-white absolute -left-[2px] -top-[2px] w-full h-full content
   }
-
-  h1 {
-    @apply font-condensed text-punch text-[3.25rem] p-0 pb-6 m-0 leading-none
-  }
 }
 
 @layer components {
+  .page-title {
+    @apply font-condensed text-punch text-[3.25rem] p-0 pb-6 m-0 leading-none
+  }
+
   .aside-heading {
     @apply font-condensed text-2xl text-onyx
   }
