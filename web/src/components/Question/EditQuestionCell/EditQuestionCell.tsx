@@ -7,7 +7,7 @@ import { navigate, routes } from '@redwoodjs/router'
 
 import QuestionForm from 'src/components/Question/QuestionForm'
 
-TODO: Write Tests
+// TODO: Write Tests
 
 export const QUERY = gql`
   query EditQuestionById($id: Int!) {
