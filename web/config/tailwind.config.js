@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         bg: "url('./images/bg.jpg')",
-        profileAside: "url('./images/bg-profile.svg')",
+        loggedInUserAside: "url('./images/bg-loggedInUser.svg')",
         search: "url('./images/bg-search.svg')",
       },
       colors: {
@@ -17,6 +17,7 @@ module.exports = {
         greenSheen: '#6ea4a0', // light blue
         veridianGreen: '#00979d', // bright teal
         heatWave: '#ff7b00', // orange
+        gray: '#969187', // beige / dark tan
       },
     },
     fontFamily: {

@@ -1,44 +1,44 @@
+import type { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { FormatKeywords, FormatThousands } from 'src/utils/FormatText'
-import { Avatar } from '../Avatar'
-import { AvatarList } from '../AvatarList'
-import { Button } from '../Button'
-import { Icon } from '../Icon'
-import { IconButton } from '../IconButton'
+import { Avatar } from '../../Avatar'
+import { AvatarList } from '../../AvatarList'
+import { Button } from '../../Button'
+import { Icon } from '../../Icon'
+import { IconButton } from '../../IconButton'
 
 export interface IProfileDetails {
+  avatarColor?: AvatarColor
   cover?: string
   coverDescription?: string
   avatar?: string
-  firstName: string
-  lastName: string
+  fullName: string
   isMe?: boolean
   username: string
   bio?: string
   location?: string
-  link?: string
+  website?: string
   followingCount?: number
   followedByCount?: number
   followedBy?: {
     src: string
-    firstName: string
-    lastName: string
+    fullName: string
     alt: string
     username: string
   }[]
 }
 
 const ProfileDetails = ({
+  avatarColor,
   cover = '',
   coverDescription = '',
   avatar,
-  firstName,
-  lastName,
+  fullName,
   username,
   isMe = false,
   bio = '',
   location = '',
-  link = '',
+  website = '',
   followingCount = 0,
   followedByCount = 0,
   followedBy = [],
@@ -47,13 +47,15 @@ const ProfileDetails = ({
     <div>
       {/* cover */}
       {/* TODO: Default Cover */}
-      {cover && (
+      {cover ? (
         <img
           className="w-full object-cover object-center h-[295px]"
           src={cover}
           alt={coverDescription && coverDescription}
           data-testid="cover"
         />
+      ) : (
+        <div className="w-full block h-24 bg-gray" />
       )}
 
       {/* content */}
@@ -61,8 +63,9 @@ const ProfileDetails = ({
         {/* avatar */}
         <div className="-mt-20 mb-5">
           <Avatar
+            avatarColor={avatarColor}
             src={avatar && avatar}
-            alt={`${firstName} ${lastName}`}
+            alt={fullName}
             height={160}
             width={160}
           />
@@ -74,7 +77,7 @@ const ProfileDetails = ({
             <Button
               label="Edit Profile"
               handleClick={() => {
-                navigate(routes.settings())
+                navigate(routes.profileSettings())
               }}
             />
           ) : (
@@ -92,7 +95,7 @@ const ProfileDetails = ({
           className="font-condensed text-punch text-[3.25rem] leading-none p-0 m-0 mb-1"
           data-testid="name"
         >
-          {firstName} {lastName}
+          {fullName}
         </h1>
         <div
           className="text-sans font-extrabold text-xl mb-2"
@@ -116,15 +119,15 @@ const ProfileDetails = ({
             )}
           </div>
           <div>
-            {link && (
+            {website && (
               <a
-                href={link}
-                data-testid="link"
+                href={website}
+                data-testid="website"
                 target="_blank"
                 rel="noreferrer"
                 className="flex gap-1 font-bold underline hover:no-underline hover:text-punch"
               >
-                <Icon name="link" /> {link}
+                <Icon name="link" /> {website}
               </a>
             )}
           </div>
@@ -143,18 +146,18 @@ const ProfileDetails = ({
             )}
           </div>
         </div>
-        {followedBy?.length > 1 && (
+        {/* followedBy?.length > 1 && (
           <div
             className="flex gap-2 items-center mb-14"
             data-testid="followedBySummary"
           >
             <AvatarList avatars={followedBy} /> Followed by{' '}
             <Link to={routes.profile({ username })} className="hover:underline">
-              {followedBy[0].firstName} {followedBy[0].lastName}
+              {followedBy[0].fullName}
             </Link>{' '}
             and {FormatThousands(--followedByCount)} others
           </div>
-        )}
+        ) */}
       </div>
     </div>
   )

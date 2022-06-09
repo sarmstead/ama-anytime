@@ -1,6 +1,6 @@
 import { Footer } from 'src/components/Footer'
 import { Navigation } from 'src/components/Navigation'
-import { Profile } from 'src/components/Profile/Profile'
+import { LoggedInUser } from 'src/components/LoggedInUser/LoggedInUser'
 
 type LegalLayoutProps = {
   children?: React.ReactNode
@@ -14,7 +14,7 @@ const LegalLayout = ({ children }: LegalLayoutProps) => {
         <div className="min-h-screen relative border-r-2 border-black">
           <Navigation notifications={3} />
           <div className="absolute left-0 bottom-0 w-full">
-            <Profile
+            <LoggedInUser
               avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
               firstName={'Amy'}
               lastName={'Dutton'}

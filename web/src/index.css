@@ -272,4 +272,41 @@
   .settings-page-top {
     @apply pt-24
   }
+
+  /* avatar background colors */
+  .PUNCH {
+    @apply bg-punch
+  }
+
+  .ULCAGOLD {
+    @apply bg-ulcaGold
+  }
+
+  .BLANC {
+    @apply bg-blanc
+  }
+
+  .ONYX {
+    @apply bg-onyx
+  }
+
+  .PESTO {
+    @apply bg-pesto
+  }
+
+  .FIORD {
+    @apply bg-fiord
+  }
+
+  .GREENSHEEN {
+    @apply bg-greenSheen
+  }
+
+  .VERIDIANGREEN {
+    @apply bg-veridianGreen
+  }
+
+  .HEATWAVE {
+    @apply bg-heatWave
+  }
 }

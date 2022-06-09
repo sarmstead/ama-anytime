@@ -1,13 +1,17 @@
 import { db } from 'src/lib/db'
-import type { QueryResolvers, MutationResolvers } from 'types/graphql'
+import type {
+  QueryResolvers,
+  MutationResolvers,
+  UserResolvers,
+} from 'types/graphql'
 
 export const users: QueryResolvers['users'] = () => {
   return db.user.findMany()
 }
 
-export const user: QueryResolvers['user'] = ({ id }) => {
+export const user: QueryResolvers['user'] = ({ id, username }) => {
   return db.user.findUnique({
-    where: { id },
+    where: { id, username },
   })
 }
 
@@ -28,4 +32,25 @@ export const deleteUser: MutationResolvers['deleteUser'] = ({ id }) => {
   return db.user.delete({
     where: { id },
   })
+}
+
+export const User: UserResolvers = {
+  questionsAsked: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).questionsAsked(),
+  questionsAnswered: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).questionsAnswered(),
+  bookmarks: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).bookmarks(),
+  likes: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).likes(),
+  askAgains: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).askAgains(),
+  votes: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).votes(),
+  recruits: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).recruits(),
+  followedBy: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).followedBy(),
+  following: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).following(),
 }

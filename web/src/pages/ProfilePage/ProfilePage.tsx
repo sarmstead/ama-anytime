@@ -1,8 +1,7 @@
 import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 import { useState } from 'react'
-import { ProfileDetails } from 'src/components/ProfileDetails'
-import { ProfileDetails as ProfileDetailsData } from 'src/components/ProfileDetails/ProfileDetails.mocks'
+import ProfileCell from 'src/components/Profile/ProfileCell/ProfileCell'
 import QuestionsCell from 'src/components/Question/QuestionsCell/QuestionsCell'
 import { Tabs } from 'src/components/Tabs'
 import { useAuth } from '@redwoodjs/auth'
@@ -43,9 +42,9 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
       <MetaTags title="Profile" description="Profile page" />
       {/* profile details */}
       <div className="border-b-2 border-black bg-[#E4E2DD]/[.45] mix-blend-multiply">
-        <ProfileDetails
-          {...ProfileDetailsData}
+        <ProfileCell
           isMe={username ? false : true}
+          username={username ? username : currentUser.username}
         />
         <div className="pl-12 pr-8 ">
           <Tabs tabs={tabsData} selected={view} switchTab={switchTab} />

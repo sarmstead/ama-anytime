@@ -1,5 +1,18 @@
+export type AvatarColor =
+  | 'PUNCH'
+  | 'ULCAGOLD'
+  | 'BLANC'
+  | 'ONYX'
+  | 'PESTO'
+  | 'FIORD'
+  | 'GREENSHEEN'
+  | 'VERIDIANGREEN'
+  | 'HEATWAVE'
+  | 'GRAY'
+
 export interface IAvatar {
   alt: string
+  avatarColor?: AvatarColor
   className?: string
   height?: number
   src?: string
@@ -8,7 +21,7 @@ export interface IAvatar {
 
 const Avatar = ({
   alt,
-  // TODO: Add custom background color
+  avatarColor,
   className = '',
   height = 32,
   src = '',
@@ -26,7 +39,7 @@ const Avatar = ({
         />
       ) : (
         <div
-          className={`rounded-full bg-punch text-white flex justify-center items-center text-center font-slab`}
+          className={`rounded-full text-white flex justify-center items-center text-center font-slab ${avatarColor}`}
           style={{ height, width }}
         >
           <svg viewBox="0 0 32 32">

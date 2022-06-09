@@ -1,7 +1,7 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Footer } from 'src/components/Footer'
 import { Navigation } from 'src/components/Navigation'
-import { Profile } from 'src/components/Profile/Profile'
+import { LoggedInUser } from 'src/components/LoggedInUser/LoggedInUser'
 import { SettingsSubnav } from 'src/components/SettingsSubnav'
 
 type SettingLayoutProps = {
@@ -21,7 +21,7 @@ const SettingLayout = ({ children }: SettingLayoutProps) => {
             <>
               <Navigation notifications={3} />
               <div className="absolute left-0 bottom-0 w-full">
-                <Profile
+                <LoggedInUser
                   avatar={currentUser.avatar}
                   firstName={'Amy'}
                   lastName={'Dutton'}

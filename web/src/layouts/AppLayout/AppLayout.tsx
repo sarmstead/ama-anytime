@@ -1,8 +1,9 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Footer } from 'src/components/Footer/Footer'
 import { Navigation } from 'src/components/Navigation'
-import { Profile } from 'src/components/Profile/Profile'
+import { LoggedInUser } from 'src/components/LoggedInUser/LoggedInUser'
 import { SearchInput } from 'src/components/SearchInput'
+import RecentlyCell from 'src/components/Recently/RecentlyCell'
 
 type AppLayoutProps = {
   children?: React.ReactNode
@@ -21,7 +22,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <>
               <Navigation notifications={3} />
               <div className="absolute left-0 bottom-0 w-full">
-                <Profile
+                <LoggedInUser
                   avatar={currentUser.avatar}
                   firstName={'Amy'}
                   lastName={'Dutton'}
@@ -62,6 +63,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           {/* RECENTLY */}
           <div className="mb-24 flex flex-col gap-7">
             <h3 className="aside-heading">Recently</h3>
+            <RecentlyCell currentUserId={currentUser?.id} />
             <div>
               <button className="text-button">Show More</button>
             </div>

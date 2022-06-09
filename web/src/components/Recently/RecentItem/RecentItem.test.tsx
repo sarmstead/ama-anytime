@@ -20,14 +20,12 @@ describe('RecentItem', () => {
     render(<RecentItem {...RecentItemData} />)
     expect(screen.getByText('How did you and James meet?')).toHaveAttribute(
       'href',
-      routes.question({ id: RecentItemData.questionId })
+      routes.question({ id: Number(RecentItemData.questionId) })
     )
   })
 
   it('displays the  name of the person that asked the question', () => {
     render(<RecentItem {...RecentItemData} />)
-    expect(
-      screen.getByText(`${RecentItemData.firstName} ${RecentItemData.lastName}`)
-    ).toBeInTheDocument()
+    expect(screen.getByText(RecentItemData.fullName)).toBeInTheDocument()
   })
 })

@@ -1,12 +1,12 @@
 import { render, screen } from '@redwoodjs/testing/web'
 
-import { Profile } from './Profile'
+import { LoggedInUser } from './LoggedInUser'
 
-describe('Profile', () => {
+describe('LoggedInUser', () => {
   it('renders successfully', () => {
     expect(() => {
       render(
-        <Profile
+        <LoggedInUser
           avatar={'https://i.pravatar.cc/150?u=a042581f4e29026704d'}
           firstName={'Amy'}
           lastName={'Dutton'}
@@ -18,7 +18,7 @@ describe('Profile', () => {
 
   it("displays the person's name", () => {
     render(
-      <Profile
+      <LoggedInUser
         avatar={'https://i.pravatar.cc/150?u=a042581f4e29026704d'}
         firstName={'Amy'}
         lastName={'Dutton'}
@@ -30,7 +30,7 @@ describe('Profile', () => {
 
   it("displays the person's username", () => {
     render(
-      <Profile
+      <LoggedInUser
         avatar={'https://i.pravatar.cc/150?u=a042581f4e29026704d'}
         firstName={'Amy'}
         lastName={'Dutton'}

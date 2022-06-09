@@ -1,23 +1,23 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { useRef, useState } from 'react'
-import { Avatar } from '../../Avatar'
-import { DropdownMenu } from '../../DropdownMenu'
-import { Icon } from '../../Icon'
+import { Avatar } from '../Avatar'
+import { DropdownMenu } from '../DropdownMenu'
+import { Icon } from '../Icon'
 
-export interface IProfile {
+export interface ILoggedInUser {
   avatar: string
   firstName: string
   lastName: string
   username: string
 }
 
-const Profile = ({
+const LoggedInUser = ({
   avatar,
   firstName,
   lastName,
   username,
-}: IProfile): JSX.Element => {
+}: ILoggedInUser): JSX.Element => {
   const [isDropdownShowing, setIsDropdownShowing] = useState<boolean>(false)
   const triggerRef = useRef()
   const { logOut } = useAuth()
@@ -27,8 +27,8 @@ const Profile = ({
   }
 
   return (
-    <div className="flex gap-3 bg-profileAside px-5 pb-3 bg-no-repeat bg-cover max-w-2xl">
-      <a href="/profile">
+    <div className="flex gap-3 bg-loggedInUserAside px-5 pb-3 bg-no-repeat bg-cover max-w-2xl">
+      <a href="/LoggedInUser">
         <Avatar
           src={avatar}
           alt={`{firstName} {lastName}`}
@@ -76,4 +76,4 @@ const Profile = ({
   )
 }
 
-export { Profile }
+export { LoggedInUser }

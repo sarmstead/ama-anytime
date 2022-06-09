@@ -1,6 +1,6 @@
-import { Profile, IProfile } from './Profile'
+import { LoggedInUser, ILoggedInUser } from './LoggedInUser'
 
-const Template = (args: IProfile) => <Profile {...args} />
+const Template = (args: ILoggedInUser) => <LoggedInUser {...args} />
 
 export const Default = Template.bind({})
 Default.args = {
@@ -11,8 +11,8 @@ Default.args = {
 }
 
 export default {
-  title: 'Components/Profile',
-  component: Profile,
+  title: 'Components/LoggedInUser',
+  component: LoggedInUser,
   argTypes: {
     avatar: {
       name: 'avatar',

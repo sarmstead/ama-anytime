@@ -12,15 +12,38 @@ export const schema = gql`
     website: String
     cover: String
     avatar: String
+    avatarColor: ColorPalette
     lastLogin: DateTime
-    clearNotifications: DateTime!
+    clearNotifications: DateTime
     resetToken: String
     resetTokenExpiresAt: DateTime
+    invitations: Int
+    questionsAsked: [Question]!
+    questionsAnswered: [Question]!
+    bookmarks: [Bookmark]!
+    likes: [Like]!
+    askAgains: [AskAgain]!
+    votes: [Vote]!
+    recruits: [Recruit]!
+    followedBy: [User]!
+    following: [User]!
+  }
+
+  enum ColorPalette {
+    PUNCH
+    ULCAGOLD
+    BLANC
+    ONYX
+    PESTO
+    FIORD
+    GREENSHEEN
+    VERIDIANGREEN
+    HEATWAVE
   }
 
   type Query {
     users: [User!]! @skipAuth
-    user(id: Int!): User @skipAuth
+    user(id: Int, username: String): User @skipAuth
   }
 
   input CreateUserInput {
@@ -35,10 +58,12 @@ export const schema = gql`
     website: String
     cover: String
     avatar: String
+    avatarColor: ColorPalette
     lastLogin: DateTime
     clearNotifications: DateTime
     resetToken: String
     resetTokenExpiresAt: DateTime
+    invitations: Int
   }
 
   input UpdateUserInput {
@@ -53,10 +78,12 @@ export const schema = gql`
     website: String
     cover: String
     avatar: String
+    avatarColor: ColorPalette
     lastLogin: DateTime
     clearNotifications: DateTime
     resetToken: String
     resetTokenExpiresAt: DateTime
+    invitations: Int
   }
 
   type Mutation {

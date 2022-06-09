@@ -29,6 +29,19 @@ export const questions: QueryResolvers['questions'] = ({
   })
 }
 
+export const recentQuestions: QueryResolvers['recentQuestions'] = ({
+  currentUsersId,
+}) => {
+  return db.question.findMany({
+    where: {
+      answeredById: {
+        not: currentUsersId,
+      },
+    },
+    orderBy: { updatedOn: 'asc' },
+  })
+}
+
 export const question: QueryResolvers['question'] = ({ id }) => {
   return db.question.findUnique({
     where: { id },
