@@ -1,38 +1,49 @@
+import type { User } from 'types/graphql.d'
 import { Link, routes } from '@redwoodjs/router'
 import { formatRelativeDate } from 'src/utils/DateHelpers'
 import { Avatar } from '../../Avatar'
+import type { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Icon } from '../../Icon'
+
+import { useMutation } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/toast'
+
+const DELETE_QUESTION_MUTATION = gql`
+  mutation DeleteQuestionMutation($id: Int!) {
+    deleteQuestion(id: $id) {
+      id
+    }
+  }
+`
 
 export interface IQuestion {
   answer?: string
+  answeredBy: User
   askAgain?: number
-  askedByName: string
-  askedByUsername: string
+  askedBy: User
   askedDate: string
   avatar?: string
+  avatarColor?: AvatarColor
   bookmark?: boolean
   className?: string
   favorite?: number
   followUp?: number
   pinned?: boolean
-  onAskAgainClick?: () => void
-  onBookmarkClick?: () => void
-  onCommentClick?: () => void
-  onFavoriteClick?: () => void
-  onShareClick?: () => void
   question: string
   questionId: string
   questionOrder?: number
   showActions?: boolean
+  rerouteOnDelete?: () => void
 }
 
 const Question = ({
   answer,
+  answeredBy,
   askAgain,
-  askedByName,
-  askedByUsername,
+  askedBy,
   askedDate,
   avatar,
+  avatarColor,
   bookmark,
   className = '',
   favorite,
@@ -40,36 +51,63 @@ const Question = ({
   pinned = false,
   question,
   questionId,
-  questionOrder = null,
   showActions = true,
+  rerouteOnDelete,
 }: IQuestion): JSX.Element => {
+  const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
+    onCompleted: () => {
+      toast.success('Question deleted')
+      rerouteOnDelete()
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
+  const onDeleteClick = (id) => {
+    if (confirm('Are you sure you want to delete question ' + id + '?')) {
+      deleteQuestion({ variables: { id } })
+    }
+  }
+
+  const onAskAgainClick = () => {}
+  const onBookmarkClick = () => {}
+  const onFollowUpClick = () => {}
+  const onFavoriteClick = () => {}
+  const onShareClick = () => {}
+
   return (
-    <div className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative ${className}`}>
-      {pinned && (
-        <div
-          className="absolute right-0 top-0 flex gap-1 uppercase font-slab text-xs bg-black text-blanc px-5 py-2 items-center font-extrabold"
-          data-testid="pinnedQuestion"
-        >
-          <Icon name="pin" />
-          Pinned Question
-        </div>
-      )}
-      {questionOrder > 0 && !pinned && (
-        <div
-          className="absolute right-0 top-0 flex gap-1 uppercase font-slab text-xs bg-blanc px-5 py-2 items-center font-extrabold"
-          data-testid="questionOrder"
-        >
-          Question #{questionOrder}
-        </div>
-      )}
-      <Avatar src={avatar} alt={askedByUsername} height={68} width={68} />
-      <div className="flex-1">
+    <div
+      className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black ${className}`}
+    >
+      <div className="absolute right-10 top-7">
+        <button>
+          <Icon name="dots" />
+        </button>
+      </div>
+      <Avatar
+        avatarColor={askedBy.avatarColor}
+        src={askedBy.avatar}
+        alt={askedBy.username}
+        height={68}
+        width={68}
+      />
+      <div className="flex-1 relative">
+        {pinned && (
+          <div
+            className="flex gap-1 uppercase font-slab text-xs text-black py-2 font-extrabold absolute -top-9"
+            data-testid="pinnedQuestion"
+          >
+            <Icon name="pin" />
+            Pinned Question
+          </div>
+        )}
         <div data-testid="askedBy">
-          <strong className="text-lg">{askedByName}</strong> @{askedByUsername}{' '}
-          • {formatRelativeDate(askedDate)}
+          <strong className="text-lg">{askedBy.fullName}</strong> @
+          {askedBy.username} • {formatRelativeDate(askedDate)}
         </div>
         <div
-          className="font-condensed  text-[2.5rem] pt-o pb-2"
+          className="font-condensed text-[2.5rem] leading-none pt-o pb-8"
           data-testid="question"
         >
           <Link
@@ -79,7 +117,14 @@ const Question = ({
             {question}
           </Link>
         </div>
-        <div className="large-body mb-8" data-testid="answer">
+        <div className="large-body mb-8 relative" data-testid="answer">
+          <Avatar
+            src={askedBy.avatar}
+            alt={askedBy.username}
+            avatarColor={askedBy.avatarColor}
+            height={48}
+            width={48}
+          />
           {answer}
         </div>
         {showActions && (
@@ -88,7 +133,11 @@ const Question = ({
             data-testid="actionButtons"
           >
             {/* Follow-Up */}
-            <button className="hover:text-punch" data-testid="followUpQuestion">
+            <button
+              className="hover:text-punch"
+              data-testid="followUpQuestion"
+              onClick={onFollowUpClick}
+            >
               {followUp ? (
                 <span className="selected-action">
                   <Icon name="commentFilled" />
@@ -103,6 +152,7 @@ const Question = ({
             <button
               className="hover:text-punch"
               data-testid="favoritedQuestion"
+              onClick={onFavoriteClick}
             >
               {favorite ? (
                 <span className="selected-action">
@@ -114,7 +164,7 @@ const Question = ({
             </button>
 
             {/* Bookmarked */}
-            <button className="hover:text-punch">
+            <button className="hover:text-punch" onClick={onBookmarkClick}>
               {bookmark ? (
                 <span data-testid="bookmarkFilled">
                   <Icon className="selected-action" name="bookmarkFilled" />
@@ -127,7 +177,11 @@ const Question = ({
             </button>
 
             {/* Ask Again? */}
-            <button className="hover:text-punch" data-testid="askAgain">
+            <button
+              className="hover:text-punch"
+              data-testid="askAgain"
+              onClick={onAskAgainClick}
+            >
               {askAgain ? (
                 <span className="selected-action">
                   <Icon name="reuse" /> {askAgain}
@@ -138,7 +192,7 @@ const Question = ({
             </button>
 
             {/* Share */}
-            <button className="hover:text-punch">
+            <button className="hover:text-punch" onClick={onShareClick}>
               <Icon name="share" />
             </button>
           </div>
