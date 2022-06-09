@@ -19,24 +19,11 @@ describe('Footer', () => {
     expect(GetYear()).toBe(2021)
   })
 
-  it('links to the about page', () => {
-    render(<Footer />)
-    expect(screen.getByText('About')).toHaveAttribute('href', routes.about())
-  })
-
   it('links to the waiting list page', () => {
     render(<Footer />)
     expect(screen.getByText('Waiting List')).toHaveAttribute(
       'href',
       routes.waitingList()
-    )
-  })
-
-  it('links to the contact page', () => {
-    render(<Footer />)
-    expect(screen.getByText('Contact')).toHaveAttribute(
-      'href',
-      routes.contact()
     )
   })
 
