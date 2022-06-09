@@ -10,7 +10,7 @@ export const GetYear = () => {
 const Footer = () => {
   const { isAuthenticated } = useAuth()
   return (
-    <footer className="border-t-2 border-black">
+    <footer className="border-t-2 border-black relative mt-1">
       <nav className="footer-nav py-5 text-center font-semibold w-full">
         <ul className="flex justify-center flex-wrap">
           {/* TODO: Write tests for showing invites or waiting list */}
