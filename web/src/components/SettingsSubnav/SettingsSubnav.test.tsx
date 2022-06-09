@@ -11,4 +11,11 @@ describe('SettingsSubnav', () => {
       render(<SettingsSubnav />)
     }).not.toThrow()
   })
+
+  // TODO: Write skipped tests
+  it.skip('link to the My Account Settings page', () => {})
+  it.skip('link to the My Profile page', () => {})
+  it.skip('link to the Invitations page', () => {})
+  it.skip('link to the Privacy and Settings page', () => {})
+  it.skip('link to the Notifications page', () => {})
 })

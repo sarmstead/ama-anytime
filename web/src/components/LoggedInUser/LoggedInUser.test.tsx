@@ -2,14 +2,16 @@ import { render, screen } from '@redwoodjs/testing/web'
 
 import { LoggedInUser } from './LoggedInUser'
 
+// TODO: Move data into a mocks file
+
 describe('LoggedInUser', () => {
   it('renders successfully', () => {
     expect(() => {
       render(
         <LoggedInUser
           avatar={'https://i.pravatar.cc/150?u=a042581f4e29026704d'}
-          firstName={'Amy'}
-          lastName={'Dutton'}
+          avatarColor="GREENSHEEN"
+          fullName={'Amy Dutton'}
           username={'selfteachme'}
         />
       )
@@ -20,8 +22,8 @@ describe('LoggedInUser', () => {
     render(
       <LoggedInUser
         avatar={'https://i.pravatar.cc/150?u=a042581f4e29026704d'}
-        firstName={'Amy'}
-        lastName={'Dutton'}
+        avatarColor="GREENSHEEN"
+        fullName={'Amy Dutton'}
         username={'selfteachme'}
       />
     )
@@ -32,11 +34,15 @@ describe('LoggedInUser', () => {
     render(
       <LoggedInUser
         avatar={'https://i.pravatar.cc/150?u=a042581f4e29026704d'}
-        firstName={'Amy'}
-        lastName={'Dutton'}
+        avatarColor="GREENSHEEN"
+        fullName={'Amy Dutton'}
         username={'selfteachme'}
       />
     )
     expect(screen.getByText('@selfteachme')).toBeInTheDocument()
   })
+
+  // TODO: Write missing tests
+  it.skip('shows the dropdown menu', () => {})
+  it.skip('hides the dropdown', () => {})
 })

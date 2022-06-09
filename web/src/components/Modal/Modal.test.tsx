@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event'
 
 import { Modal } from './Modal'
 
+// TODO: Move mocked data into a separate file
+
 describe('Modal', () => {
   it('renders successfully', () => {
     expect(() => {
@@ -58,4 +60,9 @@ describe('Modal', () => {
     await waitFor(() => userEvent.click(newButton))
     expect(onButtonClick).toHaveBeenCalledTimes(1)
   })
+
+  // TODO: Fill in skilled tests
+  it('closes when the user hits the escape key', () => {})
+  it('disables clicking behind the modal, when open', () => {})
+  it('cloes when the user clicks outside the modal', () => {})
 })

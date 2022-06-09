@@ -2,6 +2,8 @@ import { render, screen } from '@redwoodjs/testing/web'
 
 import { Avatar } from './Avatar'
 
+// TODO: Move mocked data into a separate file
+
 describe('Avatar', () => {
   it('renders successfully', () => {
     expect(() => {

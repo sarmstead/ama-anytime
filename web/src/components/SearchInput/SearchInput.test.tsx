@@ -8,4 +8,7 @@ describe('SearchInput', () => {
       render(<SearchInput />)
     }).not.toThrow()
   })
+
+  // TODO: WRITE SKIPPED TESTS
+  it('submits the search form', () => {})
 })

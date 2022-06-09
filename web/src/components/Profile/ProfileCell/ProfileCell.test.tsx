@@ -17,7 +17,7 @@ describe('ProfileCell', () => {
 
   it('renders Empty successfully', async () => {
     expect(() => {
-      render(<Empty />)
+      render(<Empty user={undefined} isMe={undefined} />)
     }).not.toThrow()
   })
 
@@ -33,6 +33,7 @@ describe('ProfileCell', () => {
   // 1. import { screen } from '@redwoodjs/testing/web'
   // 2. Add test: expect(screen.getByText('Hello, world')).toBeInTheDocument()
 
+  // TODO: Fix failing tests
   it('renders Success successfully', async () => {
     expect(() => {
       render(<Success profile={standard().profile} />)

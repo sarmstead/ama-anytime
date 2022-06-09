@@ -9,33 +9,10 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
-
+// TODO: Write Tests
 
 const QuestionForm = (props) => {
   const onSubmit = (data) => {
-
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
     props.onSave(data, props?.question?.id)
   }
 
@@ -48,7 +25,7 @@ const QuestionForm = (props) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="question"
           className="rw-label"
@@ -56,15 +33,14 @@ const QuestionForm = (props) => {
         >
           Question
         </Label>
-        
-          <TextField
-            name="question"
-            defaultValue={props.question?.question}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="question"
+          defaultValue={props.question?.question}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="question" className="rw-field-error" />
 
@@ -75,14 +51,13 @@ const QuestionForm = (props) => {
         >
           Answer
         </Label>
-        
-          <TextField
-            name="answer"
-            defaultValue={props.question?.answer}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <TextField
+          name="answer"
+          defaultValue={props.question?.answer}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="answer" className="rw-field-error" />
 
@@ -93,14 +68,13 @@ const QuestionForm = (props) => {
         >
           Order
         </Label>
-        
-          <NumberField
-            name="order"
-            defaultValue={props.question?.order}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <NumberField
+          name="order"
+          defaultValue={props.question?.order}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="order" className="rw-field-error" />
 
@@ -111,14 +85,13 @@ const QuestionForm = (props) => {
         >
           Pinned
         </Label>
-        
-          <CheckboxField
-            name="pinned"
-            defaultChecked={props.question?.pinned}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <CheckboxField
+          name="pinned"
+          defaultChecked={props.question?.pinned}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="pinned" className="rw-field-error" />
 
@@ -129,15 +102,14 @@ const QuestionForm = (props) => {
         >
           Asked by id
         </Label>
-        
-          <NumberField
-            name="askedById"
-            defaultValue={props.question?.askedById}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="askedById"
+          defaultValue={props.question?.askedById}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="askedById" className="rw-field-error" />
 
@@ -148,15 +120,14 @@ const QuestionForm = (props) => {
         >
           Answered by id
         </Label>
-        
-          <NumberField
-            name="answeredById"
-            defaultValue={props.question?.answeredById}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="answeredById"
+          defaultValue={props.question?.answeredById}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="answeredById" className="rw-field-error" />
 
@@ -167,22 +138,18 @@ const QuestionForm = (props) => {
         >
           Parent question id
         </Label>
-        
-          <NumberField
-            name="parentQuestionId"
-            defaultValue={props.question?.parentQuestionId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <NumberField
+          name="parentQuestionId"
+          defaultValue={props.question?.parentQuestionId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="parentQuestionId" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>
