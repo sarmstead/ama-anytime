@@ -7,6 +7,9 @@ module.exports = {
         loggedInUserAside: "url('./images/bg-loggedInUser.svg')",
         search: "url('./images/bg-search.svg')",
       },
+      backgroundSize: {
+        half: '50% 100%',
+      },
       colors: {
         punch: '#D35530', // red orange
         ulcaGold: '#FAB829', // gold
@@ -18,6 +21,7 @@ module.exports = {
         veridianGreen: '#00979d', // bright teal
         heatWave: '#ff7b00', // orange
         gray: '#969187', // beige / dark tan
+        eternity: '##2d2d2b', // almost black
       },
     },
     fontFamily: {

@@ -44,6 +44,20 @@
     @apply mt-[2px] ml-[2px] mr-0 mb-0 bg-transparent border-2 border-black focus:border-veridianGreen outline-none w-full p-4 font-sans font-semibold relative
   }
 
+  .input-url {
+    @apply relative;
+  }
+
+  /* have to use a class for this because you can't have a pseudo element on an input */
+  .input-url::after {
+    content: 'https://';
+    @apply font-sans text-lg font-bold text-punch block absolute bottom-[18px] left-5
+  }
+
+  .input-url input[type=url] {
+    @apply pl-10
+  }
+
   .input-wrapper {
     @apply relative
   }
@@ -260,6 +274,7 @@
     @apply relative;
   }
 
+    /* have to use a class for this because you can't have a pseudo element on an input */
   .input-username::after {
     content: '@';
     @apply font-sans text-lg font-bold text-punch block absolute bottom-[18px] left-5
