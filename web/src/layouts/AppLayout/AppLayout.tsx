@@ -77,6 +77,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
               take={RECENT_QUESTIONS_TAKE}
             />
             <div>
+              {/* TODO: DISABLE BUTTON WHEN I'VE LOADED IN ALL THE QUESTIONS */}
               <button className="text-button" onClick={showNewRecentQuestions}>
                 Show More
               </button>

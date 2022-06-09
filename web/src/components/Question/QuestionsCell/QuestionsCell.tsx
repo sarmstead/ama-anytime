@@ -18,8 +18,18 @@ export const QUERY = gql`
       question
       answer
       pinned
-      askedById
-      answeredById
+      askedBy {
+        avatar
+        avatarColor
+        fullName
+        username
+      }
+      answeredBy {
+        avatar
+        avatarColor
+        fullName
+        username
+      }
       askedOn
       updatedOn
       parentQuestionId
