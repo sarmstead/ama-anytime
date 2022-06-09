@@ -20,13 +20,6 @@ export const schema = gql`
     votes: [Vote]!
   }
 
-  interface QuestionOrderedBy {
-    pinned: String
-    order: String
-    updatedOn: String
-    askedOn: String
-  }
-
   type Query {
     questions(
       answeredById: Int
@@ -36,7 +29,8 @@ export const schema = gql`
       answeredByUsername: String
     ): [Question!]! @skipAuth
     question(id: Int!): Question @skipAuth
-    recentQuestions(currentUsersId: Int!): [Question!]! @skipAuth
+    recentQuestions(currentUsersId: Int!, skip: Int, take: Int): [Question!]!
+      @skipAuth
   }
 
   input CreateQuestionInput {

@@ -4,6 +4,7 @@ import { Navigation } from 'src/components/Navigation'
 import { LoggedInUser } from 'src/components/LoggedInUser/LoggedInUser'
 import { SearchInput } from 'src/components/SearchInput'
 import RecentlyCell from 'src/components/Recently/RecentlyCell'
+import { useState } from 'react'
 
 type AppLayoutProps = {
   children?: React.ReactNode
@@ -11,6 +12,13 @@ type AppLayoutProps = {
 
 const AppLayout = ({ children }: AppLayoutProps) => {
   const { isAuthenticated, currentUser } = useAuth()
+  const [recentQuestionsSkip, setRecentQuestionsSkip] = useState(0)
+
+  const RECENT_QUESTIONS_TAKE = 4
+
+  const showNewRecentQuestions = () => {
+    setRecentQuestionsSkip((prevValue) => prevValue + RECENT_QUESTIONS_TAKE)
+  }
 
   return (
     <div className="grid grid-cols-12">
@@ -63,9 +71,15 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           {/* RECENTLY */}
           <div className="mb-24 flex flex-col gap-7">
             <h3 className="aside-heading">Recently</h3>
-            <RecentlyCell currentUserId={currentUser?.id} />
+            <RecentlyCell
+              currentUserId={currentUser?.id}
+              skip={recentQuestionsSkip}
+              take={RECENT_QUESTIONS_TAKE}
+            />
             <div>
-              <button className="text-button">Show More</button>
+              <button className="text-button" onClick={showNewRecentQuestions}>
+                Show More
+              </button>
             </div>
           </div>
         </div>

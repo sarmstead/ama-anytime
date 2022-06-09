@@ -2,8 +2,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { RecentItem } from '../RecentItem'
 
 export const QUERY = gql`
-  query RecentItems($currentUserId: Int!) {
-    recentQuestions(currentUsersId: $currentUserId) {
+  query RecentItems($currentUserId: Int!, $skip: Int, $take: Int) {
+    recentQuestions(currentUsersId: $currentUserId, skip: $skip, take: $take) {
       id
       question
       answeredBy {

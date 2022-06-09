@@ -31,6 +31,8 @@ export const questions: QueryResolvers['questions'] = ({
 
 export const recentQuestions: QueryResolvers['recentQuestions'] = ({
   currentUsersId,
+  skip,
+  take,
 }) => {
   return db.question.findMany({
     where: {
@@ -38,7 +40,9 @@ export const recentQuestions: QueryResolvers['recentQuestions'] = ({
         not: currentUsersId,
       },
     },
-    orderBy: { updatedOn: 'asc' },
+    orderBy: { updatedOn: 'desc' },
+    skip,
+    take,
   })
 }
 
