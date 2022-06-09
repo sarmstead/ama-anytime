@@ -33,6 +33,8 @@ model User {
   askAgains           AskAgain[]
   votes               Vote[]
   recruits            Recruit[]
+  followedBy          User[]     @relation("UserFollows", references: [id])
+  following           User[]     @relation("UserFollows", references: [id])
 }
 
 model Question {

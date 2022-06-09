@@ -62,9 +62,19 @@ CommentFilled.args = {
   name: 'CommentFilled',
 }
 
+export const Delete = Template.bind({})
+Delete.args = {
+  name: 'Delete',
+}
+
 export const Dots = Template.bind({})
 Dots.args = {
   name: 'Dots',
+}
+
+export const Edit = Template.bind({})
+Edit.args = {
+  name: 'Edit',
 }
 
 export const Flag = Template.bind({})
@@ -170,7 +180,9 @@ const iconOptions = [
   'close',
   'comment',
   'commentFilled',
+  'delete',
   'dots',
+  'edit',
   'flag',
   'follow',
   'heart',

@@ -35,12 +35,12 @@
     @apply font-slab uppercase text-base font-extrabold text-black leading-6 pb-2 block
   }
 
-  textarea,
-  input[type=text],
-  input[type=email],
-  input[type=tel],
-  input[type=url],
-  input[type=password] {
+  .field textarea,
+  .field input[type=text],
+  .field input[type=email],
+  .field input[type=tel],
+  .field input[type=url],
+  .field input[type=password] {
     @apply mt-[2px] ml-[2px] mr-0 mb-0 bg-transparent border-2 border-black focus:border-veridianGreen outline-none w-full p-4 font-sans font-semibold relative
   }
 

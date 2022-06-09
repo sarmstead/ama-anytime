@@ -1,9 +1,9 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { useRef, useState } from 'react'
-import { Avatar } from '../Avatar'
-import { DropdownMenu } from '../DropdownMenu'
-import { Icon } from '../Icon'
+import { Avatar } from '../../Avatar'
+import { DropdownMenu } from '../../DropdownMenu'
+import { Icon } from '../../Icon'
 
 export interface IProfile {
   avatar: string

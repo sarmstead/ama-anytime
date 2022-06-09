@@ -1,7 +1,7 @@
 import { useAuth } from '@redwoodjs/auth'
 import { Footer } from 'src/components/Footer/Footer'
 import { Navigation } from 'src/components/Navigation'
-import { Profile } from 'src/components/Profile'
+import { Profile } from 'src/components/Profile/Profile'
 import { SearchInput } from 'src/components/SearchInput'
 
 type AppLayoutProps = {
@@ -17,7 +17,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       <div className="col-span-3 z-50 relative">
         <div className="min-h-screen relative border-r-2 border-black">
           {/* write tests for which navigation we're showing  */}
-          {isAuthenticated ? (
+          {isAuthenticated && currentUser ? (
             <>
               <Navigation notifications={3} />
               <div className="absolute left-0 bottom-0 w-full">

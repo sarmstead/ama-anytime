@@ -1,6 +1,6 @@
 import { Footer } from 'src/components/Footer'
 import { Navigation } from 'src/components/Navigation'
-import { Profile } from 'src/components/Profile'
+import { Profile } from 'src/components/Profile/Profile'
 
 type ContentLayoutProps = {
   children?: React.ReactNode

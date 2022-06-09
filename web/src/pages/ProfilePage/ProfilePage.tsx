@@ -3,14 +3,17 @@ import { MetaTags } from '@redwoodjs/web'
 import { useState } from 'react'
 import { ProfileDetails } from 'src/components/ProfileDetails'
 import { ProfileDetails as ProfileDetailsData } from 'src/components/ProfileDetails/ProfileDetails.mocks'
+import QuestionsCell from 'src/components/Question/QuestionsCell/QuestionsCell'
 import { Tabs } from 'src/components/Tabs'
+import { useAuth } from '@redwoodjs/auth'
 
 interface IProfilePage {
   username?: string
 }
 
-const ProfilePage = ({ username = '' }: IProfilePage): JSX.Element => {
+const ProfilePage = ({ username = '' }: IProfilePage) => {
   const [view, setView] = useState<string>('answered')
+  const { currentUser } = useAuth()
 
   const tabsData = [
     {
@@ -50,13 +53,27 @@ const ProfilePage = ({ username = '' }: IProfilePage): JSX.Element => {
       </div>
 
       {/* questions answered */}
-      {view === 'answered' && <div>questions answered</div>}
+      {view === 'answered' && (
+        <QuestionsCell
+          answeredByUsername={username ? username : currentUser.username}
+          answerIsEmpty={false}
+        />
+      )}
 
       {/* unanswered questions */}
-      {view === 'unanswered' && <div>unanswered questions</div>}
+      {view === 'unanswered' && (
+        <QuestionsCell
+          answeredByUsername={username ? username : currentUser.username}
+          answerIsEmpty={true}
+        />
+      )}
 
       {/* questions asked */}
-      {view === 'asked' && <div>questions asked</div>}
+      {view === 'asked' && (
+        <QuestionsCell
+          askedByUsername={username ? username : currentUser.username}
+        />
+      )}
     </>
   )
 }

@@ -4,13 +4,15 @@ import { Block } from './Block'
 import { Bookmark } from './Bookmark'
 import { BookmarkFilled } from './BookmarkFilled'
 import { Close } from './Close'
-import { Dots } from './Dots'
 import { ChevronDown } from './ChevronDown'
 import { ChevronLeft } from './ChevronLeft'
 import { ChevronRight } from './ChevronRight'
 import { ChevronUp } from './ChevronUp'
 import { Comment } from './Comment'
 import { CommentFilled } from './CommentFilled'
+import { Edit } from './Edit'
+import { Delete } from './Delete'
+import { Dots } from './Dots'
 import { Flag } from './Flag'
 import { Follow } from './Follow'
 import { Heart } from './Heart'
@@ -42,9 +44,11 @@ export interface IIcon {
     | 'chevronRight'
     | 'chevronUp'
     | 'close'
-    | 'dots'
     | 'comment'
     | 'commentFilled'
+    | 'delete'
+    | 'dots'
+    | 'edit'
     | 'flag'
     | 'follow'
     | 'hide'
@@ -100,8 +104,12 @@ const Icon = ({ name, className = '', width, height }: IIcon): JSX.Element => {
       return (
         <CommentFilled className={className} width={width} height={height} />
       )
+    case 'delete':
+      return <Delete className={className} width={width} height={height} />
     case 'dots':
       return <Dots className={className} width={width} height={height} />
+    case 'edit':
+      return <Edit className={className} width={width} height={height} />
     case 'flag':
       return <Flag className={className} width={width} height={height} />
     case 'follow':

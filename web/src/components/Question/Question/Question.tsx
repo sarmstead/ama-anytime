@@ -1,7 +1,7 @@
 import { Link, routes } from '@redwoodjs/router'
 import { formatRelativeDate } from 'src/utils/DateHelpers'
-import { Avatar } from '../Avatar'
-import { Icon } from '../Icon'
+import { Avatar } from '../../Avatar'
+import { Icon } from '../../Icon'
 
 export interface IQuestion {
   answer?: string
@@ -73,7 +73,7 @@ const Question = ({
           data-testid="question"
         >
           <Link
-            to={routes.question({ id: questionId })}
+            to={routes.question({ id: Number(questionId) })}
             className="hover:text-punch"
           >
             {question}

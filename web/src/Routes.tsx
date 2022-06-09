@@ -46,9 +46,9 @@ const Routes = () => {
       </Set>
 
       <Set wrap={[AppLayout]}>
+        <Route path="/questions/{id:Int}" page={QuestionQuestionPage} name="question" />
         <Route path="/" page={FeedPage} name="home" />
         <Route path="/profile/{username}" page={ProfilePage} name="profile" />
-        <Route path="/question/{id}" page={QuestionPage} name="question" />
         <Private unauthenticated="login">
           <Route path="/profile" page={ProfilePage} name="me" />
           <Route path="/bookmarks" page={BookmarksPage} name="bookmarks" />
