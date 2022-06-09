@@ -25,12 +25,6 @@ describe('Question', () => {
     expect(screen.queryByTestId('pinnedQuestion')).not.toBeInTheDocument()
   })
 
-  it('shows the question order', () => {
-    render(<Question {...QuestionOrder} />)
-    expect(screen.getByTestId('questionOrder')).toHaveTextContent('Question #2')
-    expect(screen.queryByTestId('pinnedQuestion')).not.toBeInTheDocument()
-  })
-
   it('does not show the question order, when the question order is not passed in', () => {
     render(<Question {...QuestionNoActions} />)
     expect(screen.queryByTestId('questionOrder')).not.toBeInTheDocument()
