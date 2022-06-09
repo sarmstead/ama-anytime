@@ -20,6 +20,8 @@ describe('users', () => {
     expect(result).toEqual(scenario.user.one)
   })
 
+  // TODO returns a specific user based on their screenname
+
   scenario('creates a user', async () => {
     const result = await createUser({
       input: {

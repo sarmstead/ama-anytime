@@ -56,4 +56,10 @@ describe('questions', () => {
 
     expect(result).toEqual(null)
   })
+
+  // TODO returns all the questions that a specific user has answered
+  // TODO returns all the questions that a specific user hasn't answered yet
+  // TODO returns all the questions a user has asked
+  // TODO returns all the recently asked questions
+  // TODO shows more recently asked questions
 })

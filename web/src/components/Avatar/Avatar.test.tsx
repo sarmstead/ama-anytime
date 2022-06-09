@@ -36,4 +36,9 @@ describe('Avatar', () => {
     )
     expect(screen.getByAltText('Name')).toBeInTheDocument()
   })
+
+  // TODO: Write tests for the first initial avatar
+  it.skip('creates an avatar when no avatar is provided', () => {})
+  it.skip('displays the correct background color for the avatar', () => {})
+  it.skip('displays a default background color for the avatar', () => {})
 })
