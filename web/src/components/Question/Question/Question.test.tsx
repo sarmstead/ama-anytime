@@ -27,18 +27,6 @@ describe('Question', () => {
     expect(screen.queryByTestId('pinnedQuestion')).not.toBeInTheDocument()
   })
 
-  it('does not show the question order, when the question order is not passed in', () => {
-    render(<Question {...QuestionNoActions} />)
-    expect(screen.queryByTestId('questionOrder')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('pinnedQuestion')).not.toBeInTheDocument()
-  })
-
-  it('does not show the question order, when the question order is 0', () => {
-    render(<Question {...QuestionOrder} questionOrder={0} />)
-    expect(screen.queryByTestId('questionOrder')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('pinnedQuestion')).not.toBeInTheDocument()
-  })
-
   it('shows the question', () => {
     render(<Question {...QuestionNoActions} />)
     expect(screen.getByTestId('question')).toHaveTextContent(
@@ -56,9 +44,18 @@ describe('Question', () => {
   it('shows the details from the person asking the question', () => {
     render(<Question {...QuestionNoActions} />)
     expect(screen.getByTestId('askedBy')).toHaveTextContent(
-      `${QuestionNoActions.askedByName} @${
-        QuestionNoActions.askedByUsername
-      } • ${formatRelativeDate(QuestionNoActions.askedDate)}`
+      `${QuestionNoActions.askedBy.fullName} @${
+        QuestionNoActions.askedBy.username
+      } • ${formatRelativeDate(QuestionNoActions.askedOn)}`
+    )
+  })
+
+  it('shows the details from the person answering the question', () => {
+    render(<Question {...QuestionNoActions} />)
+    expect(screen.getByTestId('answer')).toHaveTextContent(
+      `${QuestionNoActions.answeredBy.fullName} @${
+        QuestionNoActions.answeredBy.username
+      } • ${formatRelativeDate(QuestionNoActions.updatedOn)}`
     )
   })
 

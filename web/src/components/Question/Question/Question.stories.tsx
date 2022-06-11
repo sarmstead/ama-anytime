@@ -10,9 +10,6 @@ const Template = (args: IQuestion): JSX.Element => <Question {...args} />
 export const PinnedQuestion = Template.bind({})
 PinnedQuestion.args = { ...PinnedQuestionData }
 
-export const QuestionOrder = Template.bind({})
-QuestionOrder.args = { ...QuestionOrderData }
-
 export const QuestionNoActions = Template.bind({})
 QuestionNoActions.args = { ...QuestionNoActionsData }
 

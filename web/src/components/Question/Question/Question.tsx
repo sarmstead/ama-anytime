@@ -1,4 +1,3 @@
-import type { User } from 'types/graphql.d'
 import { Link, routes } from '@redwoodjs/router'
 import { formatRelativeDate } from 'src/utils/DateHelpers'
 import { Avatar } from '../../Avatar'
@@ -16,14 +15,19 @@ const DELETE_QUESTION_MUTATION = gql`
   }
 `
 
+interface User {
+  fullName: string
+  username: string
+  avatar?: string
+  avatarColor: AvatarColor
+}
+
 export interface IQuestion {
   answer?: string
   answeredBy: User
   askAgain?: number
   askedBy: User
-  askedDate: string
-  avatar?: string
-  avatarColor?: AvatarColor
+  askedOn: string
   bookmark?: boolean
   className?: string
   favorite?: number
@@ -33,6 +37,7 @@ export interface IQuestion {
   questionId: string
   questionOrder?: number
   showActions?: boolean
+  updatedOn?: string
   rerouteOnDelete?: () => void
 }
 
@@ -41,9 +46,7 @@ const Question = ({
   answeredBy,
   askAgain,
   askedBy,
-  askedDate,
-  avatar,
-  avatarColor,
+  askedOn,
   bookmark,
   className = '',
   favorite,
@@ -53,6 +56,7 @@ const Question = ({
   questionId,
   showActions = true,
   rerouteOnDelete,
+  updatedOn,
 }: IQuestion): JSX.Element => {
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
@@ -105,7 +109,7 @@ const Question = ({
         )}
         <div data-testid="askedBy">
           <strong className="text-lg">{askedBy.fullName}</strong> @
-          {askedBy.username} • {formatRelativeDate(askedDate)}
+          {askedBy.username} • {formatRelativeDate(askedOn)}
         </div>
         <div
           className="font-condensed text-[2.5rem] leading-none pt-o pb-8 relative"
@@ -132,6 +136,12 @@ const Question = ({
               height={48}
               width={48}
             />
+            <p>
+              <strong>{answeredBy.fullName}</strong> @{answeredBy.username}
+              {updatedOn &&
+                ` •
+              ${formatRelativeDate(updatedOn)}`}
+            </p>
             {answer}
           </div>
         )}
