@@ -1,37 +1,43 @@
+// Reference for growing Textarea; https://medium.com/@lucasalgus/creating-a-custom-auto-resize-textarea-component-for-your-react-web-application-6959c0ad68bc
+
 import {
   FieldError,
   useErrorStyles,
-  useRegister,
   RegisterOptions,
+  TextAreaField,
 } from '@redwoodjs/forms'
-import { RefObject } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export interface AmaTextFieldProps {
   className?: string
+  cols?: number
   defaultValue?: string
-  textareaRef?: RefObject<HTMLTextAreaElement>
   label: string
   name: string
   placeholder?: string
   type?: 'text' | 'tel' | 'url' | 'password' | 'email'
   required?: boolean
+  rows?: number
   validation?: RegisterOptions
 }
 
-const AmaTextField = ({
-  className,
-  defaultValue = '',
-  textareaRef,
-  label,
-  name,
-  placeholder = '',
-  required = false,
-  validation,
-}: AmaTextFieldProps) => {
-  const register = useRegister({
+const AmaTextarea = (props: AmaTextFieldProps) => {
+  const textAreaRef = useRef<HTMLTextAreaElement>()
+  const [text, setText] = useState<string>()
+  const [parentHeight, setParentHeight] = useState<string>('auto')
+  const [textAreaHeight, setTextAreaHeight] = useState('auto')
+
+  const {
+    className,
+    cols = 2,
+    defaultValue = '',
+    label,
     name,
-    validation: { ...validation, required },
-  })
+    placeholder = '',
+    required = false,
+    rows = 2,
+    validation,
+  } = props
 
   const { className: labelClassName, style: labelStyle } = useErrorStyles({
     className: ``,
@@ -45,6 +51,17 @@ const AmaTextField = ({
     name,
   })
 
+  useEffect(() => {
+    setParentHeight(`${textAreaRef.current.scrollHeight}px`)
+    setTextAreaHeight(`${textAreaRef.current.scrollHeight}px`)
+  }, [text])
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setTextAreaHeight('auto')
+    setParentHeight(`${textAreaRef.current.scrollHeight}px`)
+    setText(event.target.value)
+  }
+
   return (
     <div className="field">
       <label
@@ -54,23 +71,32 @@ const AmaTextField = ({
       >
         {label}
       </label>
-      <div className={`input-wrapper ${className}`} data-testid="inputWrapper">
-        {/* TODO: Getting a type mismatch */}
-        <textarea
-          className={inputClassName}
-          data-testid="textarea"
-          defaultValue={defaultValue}
-          style={inputStyle}
-          id={`input-${name}`}
-          name={name}
-          placeholder={placeholder}
-          ref={textareaRef}
-          {...register}
-        />
+      <div style={{ height: textAreaHeight }}>
+        <div
+          className={`input-wrapper ${className}`}
+          data-testid="inputWrapper"
+          style={{ height: parentHeight }}
+        >
+          <TextAreaField
+            name={name}
+            cols={cols}
+            placeholder={placeholder}
+            className={inputClassName}
+            data-testid="textarea"
+            defaultValue={defaultValue}
+            id={`input-${name}`}
+            required={required}
+            rows={rows}
+            validation={validation}
+            ref={textAreaRef}
+            style={{ ...inputStyle, height: textAreaHeight }}
+            onChange={onChangeHandler}
+          />
+        </div>
       </div>
       <FieldError name={name} className="rw-field-error" />
     </div>
   )
 }
 
-export { AmaTextField }
+export { AmaTextarea }
