@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
-import { Avatar } from '../Avatar'
-import { Button } from '../Button'
+import { Avatar } from '../../Avatar'
+import { Button } from '../../Button'
 
 export interface IMightLikeUser {
   avatar: string

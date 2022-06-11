@@ -16,6 +16,7 @@ export const QUERY = gql`
       askedById
       answeredById
       askedOn
+      updatedOn
     }
   }
 `

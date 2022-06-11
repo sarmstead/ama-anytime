@@ -48,6 +48,7 @@ enum ColorPalette {
   GREENSHEEN
   VERIDIANGREEN
   HEATWAVE
+  GRAY
 }
 
 model Question {
@@ -55,7 +56,7 @@ model Question {
   question         String
   answer           String?
   order            Int?
-  pinned           Boolean    @default(false)
+  pinned           Boolean?   @default(false)
   askedBy          User       @relation("QuestionAskedBy", fields: [askedById], references: [id])
   askedById        Int
   answeredBy       User       @relation("QuestionAnsweredBy", fields: [answeredById], references: [id])
@@ -63,6 +64,9 @@ model Question {
   askedOn          DateTime?  @default(now())
   updatedOn        DateTime?  @updatedAt
   parentQuestionId Int?       @unique
+  notGoingToAnswer Boolean?   @default(false)
+  flag             Boolean?   @default(false)
+  archive          Boolean?   @default(false)
   parentQuestion   Question?  @relation("ThreadedQuestions", fields: [parentQuestionId], references: [id])
   questions        Question[] @relation("ThreadedQuestions")
   bookmarks        Bookmark[]

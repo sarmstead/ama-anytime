@@ -1,12 +1,15 @@
-import type { User } from 'types/graphql.d'
 import { Link, routes } from '@redwoodjs/router'
 import { formatRelativeDate } from 'src/utils/DateHelpers'
 import { Avatar } from '../../Avatar'
 import type { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Icon } from '../../Icon'
-
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+import { useAuth } from '@redwoodjs/auth'
+import { Answer } from './components/Answer/Answer'
+import { Byline } from './components/Byline'
+import { useState } from 'react'
+import { DropdownMenu } from 'src/components/DropdownMenu'
 
 const DELETE_QUESTION_MUTATION = gql`
   mutation DeleteQuestionMutation($id: Int!) {
@@ -16,14 +19,19 @@ const DELETE_QUESTION_MUTATION = gql`
   }
 `
 
+export interface IUser {
+  fullName: string
+  username: string
+  avatar?: string
+  avatarColor: AvatarColor
+}
+
 export interface IQuestion {
   answer?: string
-  answeredBy: User
+  answeredBy: IUser
   askAgain?: number
-  askedBy: User
-  askedDate: string
-  avatar?: string
-  avatarColor?: AvatarColor
+  askedBy: IUser
+  askedOn: string
   bookmark?: boolean
   className?: string
   favorite?: number
@@ -33,6 +41,7 @@ export interface IQuestion {
   questionId: string
   questionOrder?: number
   showActions?: boolean
+  updatedOn?: string
   rerouteOnDelete?: () => void
 }
 
@@ -41,9 +50,7 @@ const Question = ({
   answeredBy,
   askAgain,
   askedBy,
-  askedDate,
-  avatar,
-  avatarColor,
+  askedOn,
   bookmark,
   className = '',
   favorite,
@@ -53,7 +60,11 @@ const Question = ({
   questionId,
   showActions = true,
   rerouteOnDelete,
+  updatedOn,
 }: IQuestion): JSX.Element => {
+  const { currentUser } = useAuth()
+  const [isQuestionOptionsShowing, setIsQuestionOptionsShow] = useState(false)
+
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
       toast.success('Question deleted')
@@ -70,6 +81,10 @@ const Question = ({
     }
   }
 
+  const toggleQuestionOptions = () => {
+    setIsQuestionOptionsShow((prevValue) => !prevValue)
+  }
+
   const onAskAgainClick = () => {}
   const onBookmarkClick = () => {}
   const onFollowUpClick = () => {}
@@ -80,13 +95,40 @@ const Question = ({
     <div
       className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black ${className}`}
     >
-      <div className="absolute right-10 top-7">
-        <button>
+      <div className="absolute right-10 top-7 z-40">
+        {isQuestionOptionsShowing && (
+          <DropdownMenu
+            isShowing={true}
+            onClickOutside={() => toggleQuestionOptions()}
+            options={[
+              {
+                label: 'Hide',
+                icon: { name: 'hide' },
+                action: () => {},
+              },
+              {
+                label: 'Flag',
+                icon: { name: 'flag' },
+                action: () => {},
+              },
+              {
+                label: 'Delete',
+                icon: { name: 'delete' },
+                action: () => {},
+              },
+            ]}
+            className="absolute -right-2 top-8"
+            direction="top right"
+            // triggerRef={triggerRef}
+          />
+        )}
+        <button onClick={() => toggleQuestionOptions()}>
           <Icon name="dots" />
         </button>
       </div>
       <Avatar
         avatarColor={askedBy.avatarColor}
+        className="z-10 relative"
         src={askedBy.avatar}
         alt={askedBy.username}
         height={68}
@@ -103,13 +145,16 @@ const Question = ({
           </div>
         )}
         <div data-testid="askedBy">
-          <strong className="text-lg">{askedBy.fullName}</strong> @
-          {askedBy.username} • {formatRelativeDate(askedDate)}
+          <Byline person={askedBy} displayDate={askedOn} />
         </div>
         <div
-          className="font-condensed text-[2.5rem] leading-none pt-o pb-8"
+          className="font-condensed text-[2.5rem] leading-none pt-o pb-8 relative"
           data-testid="question"
         >
+          {/* connect question and answer */}
+          {answer && (
+            <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-0" />
+          )}
           <Link
             to={routes.question({ id: Number(questionId) })}
             className="hover:text-punch"
@@ -117,82 +162,106 @@ const Question = ({
             {question}
           </Link>
         </div>
-        <div className="large-body mb-8 relative" data-testid="answer">
-          <Avatar
-            src={askedBy.avatar}
-            alt={askedBy.username}
-            avatarColor={askedBy.avatarColor}
-            height={48}
-            width={48}
+
+        {/* display the answer */}
+        {answer && (
+          <Answer
+            answer={answer}
+            answeredBy={answeredBy}
+            updatedOn={updatedOn}
           />
-          {answer}
-        </div>
+        )}
+
         {showActions && (
-          <div
-            className="flex justify-between items-center"
-            data-testid="actionButtons"
-          >
+          <div className="grid grid-cols-5 w-full" data-testid="actionButtons">
             {/* Follow-Up */}
-            <button
-              className="hover:text-punch"
-              data-testid="followUpQuestion"
-              onClick={onFollowUpClick}
-            >
-              {followUp ? (
-                <span className="selected-action">
-                  <Icon name="commentFilled" />
-                  {followUp}
-                </span>
-              ) : (
-                <Icon name="comment" />
-              )}
-            </button>
+            {(currentUser || followUp > 0) && (
+              <button
+                className={`col-start-1 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="followUpQuestion"
+                onClick={onFollowUpClick}
+                disabled={!currentUser}
+              >
+                {followUp ? (
+                  <span className="selected-action">
+                    <Icon name="commentFilled" />
+                    {followUp}
+                  </span>
+                ) : (
+                  <Icon name="comment" />
+                )}
+              </button>
+            )}
 
             {/* Like / Favorite */}
-            <button
-              className="hover:text-punch"
-              data-testid="favoritedQuestion"
-              onClick={onFavoriteClick}
-            >
-              {favorite ? (
-                <span className="selected-action">
-                  <Icon name="heartFilled" /> {favorite}
-                </span>
-              ) : (
-                <Icon name="heart" />
-              )}
-            </button>
-
-            {/* Bookmarked */}
-            <button className="hover:text-punch" onClick={onBookmarkClick}>
-              {bookmark ? (
-                <span data-testid="bookmarkFilled">
-                  <Icon className="selected-action" name="bookmarkFilled" />
-                </span>
-              ) : (
-                <span data-testid="bookmarkEmpty">
-                  <Icon name="bookmark" />
-                </span>
-              )}
-            </button>
+            {(currentUser || favorite > 0) && (
+              <button
+                className={`col-start-2 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="favoritedQuestion"
+                onClick={onFavoriteClick}
+                disabled={!currentUser}
+              >
+                {favorite ? (
+                  <span className="selected-action">
+                    <Icon name="heartFilled" /> {favorite}
+                  </span>
+                ) : (
+                  <Icon name="heart" />
+                )}
+              </button>
+            )}
 
             {/* Ask Again? */}
-            <button
-              className="hover:text-punch"
-              data-testid="askAgain"
-              onClick={onAskAgainClick}
-            >
-              {askAgain ? (
-                <span className="selected-action">
-                  <Icon name="reuse" /> {askAgain}
-                </span>
-              ) : (
-                <Icon name="reuse" />
-              )}
-            </button>
+            {(currentUser || askAgain > 0) && (
+              <button
+                className={`col-start-3 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="askAgain"
+                onClick={onAskAgainClick}
+                disabled={!currentUser}
+              >
+                {askAgain ? (
+                  <span className="selected-action">
+                    <Icon name="reuse" /> {askAgain}
+                  </span>
+                ) : (
+                  <Icon name="reuse" />
+                )}
+              </button>
+            )}
+
+            {/* Bookmarked */}
+            {currentUser && (
+              <button
+                className={`col-start-4 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="bookmarkButton"
+                onClick={onBookmarkClick}
+                disabled={!currentUser}
+              >
+                {bookmark ? (
+                  <span data-testid="bookmarkFilled">
+                    <Icon className="selected-action" name="bookmarkFilled" />
+                  </span>
+                ) : (
+                  <span data-testid="bookmarkEmpty">
+                    <Icon name="bookmark" />
+                  </span>
+                )}
+              </button>
+            )}
 
             {/* Share */}
-            <button className="hover:text-punch" onClick={onShareClick}>
+            <button
+              className="col-start-5 col-span-1 hover:text-punch"
+              onClick={onShareClick}
+            >
               <Icon name="share" />
             </button>
           </div>

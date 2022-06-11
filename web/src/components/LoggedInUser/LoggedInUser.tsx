@@ -59,7 +59,8 @@ const LoggedInUser = ({
               },
               { label: 'Logout', icon: { name: 'logout' }, action: logOut },
             ]}
-            className="bottom right absolute -right-2 bottom-9"
+            className="absolute -right-2 bottom-9"
+            direction="bottom right"
             triggerRef={triggerRef}
           />
         )}

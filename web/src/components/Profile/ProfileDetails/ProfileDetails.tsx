@@ -8,7 +8,7 @@ import { Icon } from '../../Icon'
 import { IconButton } from '../../IconButton'
 
 export interface IProfileDetails {
-  avatarColor?: AvatarColor
+  avatarColor: AvatarColor
   cover?: string
   coverDescription?: string
   avatar?: string

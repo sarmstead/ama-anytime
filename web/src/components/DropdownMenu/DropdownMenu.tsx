@@ -1,20 +1,30 @@
 import { useEffect, useRef, RefObject } from 'react'
 import { Icon, IIcon } from '../Icon/Icon'
 
+export interface IDropdownMenuOptions {
+  icon?: IIcon
+  label: string
+  action?: () => void
+}
+
 export interface IDropdownMenu {
   className?: string
+  direction?:
+    | 'bottom left'
+    | 'bottom center'
+    | 'bottom right'
+    | 'top left'
+    | 'top center'
+    | 'top right'
   isShowing: boolean
-  options: {
-    icon?: IIcon
-    label: string
-    action?: () => void
-  }[]
+  options: IDropdownMenuOptions[]
   triggerRef?: RefObject<HTMLButtonElement>
-  onClickOutside: () => void
+  onClickOutside?: () => void
 }
 
 const DropdownMenu = ({
   className,
+  direction = 'bottom right',
   isShowing,
   onClickOutside,
   triggerRef,
@@ -43,7 +53,8 @@ const DropdownMenu = ({
   if (isShowing)
     return (
       <div
-        className={`tooltip-tag bg-ulcaGold text-ulcaGold inline-block ${className}`}
+        className={`tooltip-tag bg-ulcaGold text-ulcaGold inline-block ${className} ${direction}`}
+        data-testid="dropdownMenu"
         ref={dropdownRef}
       >
         <ul>

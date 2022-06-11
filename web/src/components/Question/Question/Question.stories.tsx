@@ -1,7 +1,7 @@
 import { Question, IQuestion } from './Question'
 import {
   PinnedQuestion as PinnedQuestionData,
-  QuestionOrder as QuestionOrderData,
+  // QuestionOrder as QuestionOrderData,
   QuestionNoActions as QuestionNoActionsData,
 } from './Question.mocks'
 
@@ -10,11 +10,10 @@ const Template = (args: IQuestion): JSX.Element => <Question {...args} />
 export const PinnedQuestion = Template.bind({})
 PinnedQuestion.args = { ...PinnedQuestionData }
 
-export const QuestionOrder = Template.bind({})
-QuestionOrder.args = { ...QuestionOrderData }
-
 export const QuestionNoActions = Template.bind({})
 QuestionNoActions.args = { ...QuestionNoActionsData }
+
+// export const
 
 // TODO: Update arg types
 export default {

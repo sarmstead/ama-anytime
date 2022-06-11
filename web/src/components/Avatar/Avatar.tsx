@@ -39,10 +39,13 @@ const Avatar = ({
         />
       ) : (
         <div
-          className={`rounded-full text-white flex justify-center items-center text-center font-slab ${avatarColor}`}
+          className={`rounded-full text-white flex justify-center items-center text-center font-slab ${className} ${
+            avatarColor || 'PUNCH'
+          }`}
+          data-testid="avatar"
           style={{ height, width }}
         >
-          <svg viewBox="0 0 32 32">
+          <svg viewBox="0 0 32 32" data-testid="initials">
             <text x="50%" y="53%" dominantBaseline="middle" textAnchor="middle">
               {alt.charAt(0).toUpperCase()}
             </text>

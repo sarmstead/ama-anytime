@@ -1,4 +1,6 @@
-export const DropdownMenuOptions = [
+import type { IDropdownMenuOptions } from './DropdownMenu'
+
+export const DropdownMenuOptions: IDropdownMenuOptions[] = [
   {
     icon: { name: 'follow' },
     label: 'Follow @lilysmith',

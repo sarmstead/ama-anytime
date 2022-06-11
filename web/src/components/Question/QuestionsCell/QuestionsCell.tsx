@@ -50,14 +50,8 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ questions }: CellSuccessProps<FindQuestions>) => {
+  // console.log(questions)
   return questions.map((question, index) => (
-    <Question
-      askedByName={'Amy Dutton'}
-      askedByUsername={'selfteachme'}
-      askedDate={'2022-06-08'}
-      questionId={'1'}
-      key={index}
-      {...question}
-    />
+    <Question questionId={question.id.toString()} key={index} {...question} />
   ))
 }

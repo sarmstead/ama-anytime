@@ -23,11 +23,11 @@ describe('LoggedInUser', () => {
       <LoggedInUser
         avatar={'https://i.pravatar.cc/150?u=a042581f4e29026704d'}
         avatarColor="GREENSHEEN"
-        fullName={'Amy Dutton'}
+        fullName={'Amy Haywood'}
         username={'selfteachme'}
       />
     )
-    expect(screen.getByText('Amy Dutton')).toBeInTheDocument()
+    expect(screen.getByText('Amy Haywood')).toBeInTheDocument()
   })
 
   it("displays the person's username", () => {
