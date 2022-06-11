@@ -5,6 +5,7 @@ describe('Date Helpers', () => {
   jest
     .spyOn(global.Date, 'now')
     .mockImplementation(() => new Date('2022-06-02T13:18:02.631Z').valueOf())
+
   it('Shows minutes ago', () => {
     const date = '2022-06-02T13:21:02.631Z'
     expect(formatRelativeDate(date)).toEqual('3m')
@@ -28,5 +29,10 @@ describe('Date Helpers', () => {
   it('Shows the date', () => {
     const date = '2022-03-30T12:18:02.631Z'
     expect(formatRelativeDate(date)).toEqual('March 30, 2022')
+  })
+
+  it('Handles date format from the database', () => {
+    const date = '2022-05-02T20:59:11.229Z'
+    expect(formatRelativeDate(date)).toEqual('May 2, 2022')
   })
 })

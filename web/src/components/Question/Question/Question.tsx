@@ -3,10 +3,11 @@ import { formatRelativeDate } from 'src/utils/DateHelpers'
 import { Avatar } from '../../Avatar'
 import type { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Icon } from '../../Icon'
-
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
+import { Answer } from './components/Answer/Answer'
+import { Byline } from './components/Byline'
 
 const DELETE_QUESTION_MUTATION = gql`
   mutation DeleteQuestionMutation($id: Int!) {
@@ -16,7 +17,7 @@ const DELETE_QUESTION_MUTATION = gql`
   }
 `
 
-interface User {
+export interface IUser {
   fullName: string
   username: string
   avatar?: string
@@ -25,9 +26,9 @@ interface User {
 
 export interface IQuestion {
   answer?: string
-  answeredBy: User
+  answeredBy: IUser
   askAgain?: number
-  askedBy: User
+  askedBy: IUser
   askedOn: string
   bookmark?: boolean
   className?: string
@@ -59,7 +60,7 @@ const Question = ({
   rerouteOnDelete,
   updatedOn,
 }: IQuestion): JSX.Element => {
-  const { isAuthenticated, currentUser } = useAuth()
+  const { currentUser } = useAuth()
 
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
@@ -111,8 +112,7 @@ const Question = ({
           </div>
         )}
         <div data-testid="askedBy">
-          <strong className="text-lg">{askedBy.fullName}</strong> @
-          {askedBy.username} • {formatRelativeDate(askedOn)}
+          <Byline person={askedBy} displayDate={askedOn} />
         </div>
         <div
           className="font-condensed text-[2.5rem] leading-none pt-o pb-8 relative"
@@ -129,25 +129,16 @@ const Question = ({
             {question}
           </Link>
         </div>
+
+        {/* display the answer */}
         {answer && (
-          <div className="large-body mb-8 relative" data-testid="answer">
-            <Avatar
-              className="absolute -left-20 -top-3 z-20"
-              src={answeredBy.avatar}
-              alt={answeredBy.username}
-              avatarColor={answeredBy.avatarColor}
-              height={48}
-              width={48}
-            />
-            <p>
-              <strong>{answeredBy.fullName}</strong> @{answeredBy.username}
-              {updatedOn &&
-                ` •
-              ${formatRelativeDate(updatedOn)}`}
-            </p>
-            {answer}
-          </div>
+          <Answer
+            answer={answer}
+            answeredBy={answeredBy}
+            updatedOn={updatedOn}
+          />
         )}
+
         {showActions && (
           <div className="grid grid-cols-5 w-full" data-testid="actionButtons">
             {/* Follow-Up */}
