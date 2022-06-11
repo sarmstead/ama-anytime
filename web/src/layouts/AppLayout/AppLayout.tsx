@@ -33,7 +33,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
                 {/* TODO: Make "Amy Dutton" dynamic" */}
                 <LoggedInUser
                   avatar={currentUser.avatar}
-                  fullName={'Amy Dutton'}
+                  fullName={currentUser.fullName}
                   username={currentUser.username}
                 />
               </div>
