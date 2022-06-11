@@ -17,7 +17,7 @@ describe('ProfileCell', () => {
 
   it('renders Empty successfully', async () => {
     expect(() => {
-      render(<Empty user={undefined} isMe={undefined} />)
+      render(<Empty />)
     }).not.toThrow()
   })
 
@@ -27,16 +27,15 @@ describe('ProfileCell', () => {
     }).not.toThrow()
   })
 
-  // When you're ready to test the actual output of your component render
-  // you could test that, for example, certain text is present:
-  //
-  // 1. import { screen } from '@redwoodjs/testing/web'
-  // 2. Add test: expect(screen.getByText('Hello, world')).toBeInTheDocument()
-
-  // TODO: Fix failing tests
-  it('renders Success successfully', async () => {
+  it('renders a generic profile successfully', () => {
     expect(() => {
-      render(<Success profile={standard().profile} />)
+      render(<Success user={standard().profile} />)
+    }).not.toThrow()
+  })
+
+  it('renders my profile successfully', () => {
+    expect(() => {
+      render(<Success user={standard().myProfile} />)
     }).not.toThrow()
   })
 })

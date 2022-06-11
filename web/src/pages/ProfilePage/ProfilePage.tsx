@@ -43,7 +43,7 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
       {/* profile details */}
       <div className="border-b-2 border-black bg-[#E4E2DD]/[.45] mix-blend-multiply">
         <ProfileCell
-          isMe={username ? false : true}
+          isMe={!!username}
           username={username ? username : currentUser.username}
         />
         <div className="pl-12 pr-8 ">

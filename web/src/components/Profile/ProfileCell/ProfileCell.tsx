@@ -1,4 +1,3 @@
-// import type { FindUserQuery, FindUserQ } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { ProfileDetails } from '../ProfileDetails/ProfileDetails'
 
@@ -19,8 +18,7 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = ({ user, isMe }) => {
-  console.log({ user, isMe })
+export const Empty = () => {
   return <div>Empty</div>
 }
 
@@ -29,6 +27,5 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ user, isMe }: CellSuccessProps) => {
-  console.log({ user, isMe })
   return <ProfileDetails {...user} isMe={isMe} />
 }
