@@ -39,7 +39,7 @@ const Avatar = ({
         />
       ) : (
         <div
-          className={`rounded-full text-white flex justify-center items-center text-center font-slab ${
+          className={`rounded-full text-white flex justify-center items-center text-center font-slab ${className} ${
             avatarColor || 'PUNCH'
           }`}
           data-testid="avatar"

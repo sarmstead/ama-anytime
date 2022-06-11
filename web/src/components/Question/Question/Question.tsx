@@ -87,6 +87,7 @@ const Question = ({
       </div>
       <Avatar
         avatarColor={askedBy.avatarColor}
+        className="z-10 relative"
         src={askedBy.avatar}
         alt={askedBy.username}
         height={68}
@@ -107,9 +108,13 @@ const Question = ({
           {askedBy.username} • {formatRelativeDate(askedDate)}
         </div>
         <div
-          className="font-condensed text-[2.5rem] leading-none pt-o pb-8"
+          className="font-condensed text-[2.5rem] leading-none pt-o pb-8 relative"
           data-testid="question"
         >
+          {/* connect question and answer */}
+          {answer && (
+            <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-0" />
+          )}
           <Link
             to={routes.question({ id: Number(questionId) })}
             className="hover:text-punch"
@@ -117,16 +122,19 @@ const Question = ({
             {question}
           </Link>
         </div>
-        <div className="large-body mb-8 relative" data-testid="answer">
-          <Avatar
-            src={askedBy.avatar}
-            alt={askedBy.username}
-            avatarColor={askedBy.avatarColor}
-            height={48}
-            width={48}
-          />
-          {answer}
-        </div>
+        {answer && (
+          <div className="large-body mb-8 relative" data-testid="answer">
+            <Avatar
+              className="absolute -left-20 -top-3 z-20"
+              src={answeredBy.avatar}
+              alt={answeredBy.username}
+              avatarColor={answeredBy.avatarColor}
+              height={48}
+              width={48}
+            />
+            {answer}
+          </div>
+        )}
         {showActions && (
           <div
             className="flex justify-between items-center"
