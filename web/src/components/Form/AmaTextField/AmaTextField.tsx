@@ -15,6 +15,7 @@ export interface AmaTextFieldProps {
   placeholder?: string
   type?: 'text' | 'tel' | 'url' | 'password' | 'email'
   required?: boolean
+  tabIndex?: number
   validation?: RegisterOptions
 }
 
@@ -28,6 +29,7 @@ const AmaTextField = forwardRef((props: AmaTextFieldProps, ref) => {
     placeholder = '',
     type = 'text',
     required = false,
+    tabIndex,
     validation,
   } = props
 
@@ -69,6 +71,7 @@ const AmaTextField = forwardRef((props: AmaTextFieldProps, ref) => {
           name={name}
           placeholder={placeholder}
           ref={ref}
+          tabIndex={tabIndex}
           {...register}
         />
       </div>

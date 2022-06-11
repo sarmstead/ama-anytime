@@ -1,7 +1,12 @@
 import { Form, TextField } from '@redwoodjs/forms'
 import { useForm } from 'react-hook-form'
 
-const SearchInput = () => {
+interface ISearchInput {
+  className: string
+  understated?: boolean
+}
+
+const SearchInput = ({ className, understated = false }: ISearchInput) => {
   const formMethods = useForm()
 
   const onSubmit = (data) => {
@@ -10,7 +15,11 @@ const SearchInput = () => {
   }
 
   return (
-    <div className="bg-search bg-no-repeat max-w-[305px] h-16 bg-contain">
+    <div
+      className={`${
+        understated ? 'bg-searchUnderstated' : 'bg-search'
+      } bg-no-repeat max-w-[305px] h-16 bg-contain ${className}`}
+    >
       <Form
         className="flex items-center h-16 tracking-wide gap-1 pl-5"
         onSubmit={onSubmit}
