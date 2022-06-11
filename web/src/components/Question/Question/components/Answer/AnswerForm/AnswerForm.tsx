@@ -1,5 +1,6 @@
 import { Form, Submit } from '@redwoodjs/forms'
 import { Avatar } from 'src/components/Avatar'
+import { Button } from 'src/components/Button'
 import { AmaTextarea } from 'src/components/Form/AmaTextarea'
 
 const AnswerForm = ({ answeredBy }) => {
@@ -22,9 +23,17 @@ const AnswerForm = ({ answeredBy }) => {
           placeholder="Your answer..."
           rows={1}
         />
-        <Submit className="relative -top-4 font-slab uppercase text-xs border-2 border-black rounded-3xl px-4 py-1 hover:bg-punch hover:border-punch hover:text-white">
-          Answer Question
-        </Submit>
+        <div className="flex justify-between items-center -top-4 relative">
+          <Submit className="relative font-slab uppercase text-xs border-2 border-black rounded-3xl px-4 py-1 hover:bg-punch hover:border-punch hover:text-white">
+            Answer Question
+          </Submit>
+          <Button
+            label="Dismiss Question"
+            size="small"
+            style="underline"
+            className="text-sonicSilver"
+          />
+        </div>
       </Form>
     </div>
   )

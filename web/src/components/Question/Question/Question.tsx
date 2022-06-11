@@ -8,6 +8,8 @@ import { toast } from '@redwoodjs/web/toast'
 import { useAuth } from '@redwoodjs/auth'
 import { Answer } from './components/Answer/Answer'
 import { Byline } from './components/Byline'
+import { useState } from 'react'
+import { DropdownMenu } from 'src/components/DropdownMenu'
 
 const DELETE_QUESTION_MUTATION = gql`
   mutation DeleteQuestionMutation($id: Int!) {
@@ -61,6 +63,7 @@ const Question = ({
   updatedOn,
 }: IQuestion): JSX.Element => {
   const { currentUser } = useAuth()
+  const [isQuestionOptionsShowing, setIsQuestionOptionsShow] = useState(false)
 
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
@@ -78,6 +81,10 @@ const Question = ({
     }
   }
 
+  const toggleQuestionOptions = () => {
+    setIsQuestionOptionsShow((prevValue) => !prevValue)
+  }
+
   const onAskAgainClick = () => {}
   const onBookmarkClick = () => {}
   const onFollowUpClick = () => {}
@@ -88,8 +95,34 @@ const Question = ({
     <div
       className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black ${className}`}
     >
-      <div className="absolute right-10 top-7">
-        <button>
+      <div className="absolute right-10 top-7 z-40">
+        {isQuestionOptionsShowing && (
+          <DropdownMenu
+            isShowing={true}
+            onClickOutside={() => toggleQuestionOptions()}
+            options={[
+              {
+                label: 'Hide',
+                icon: { name: 'hide' },
+                action: () => {},
+              },
+              {
+                label: 'Flag',
+                icon: { name: 'flag' },
+                action: () => {},
+              },
+              {
+                label: 'Delete',
+                icon: { name: 'delete' },
+                action: () => {},
+              },
+            ]}
+            className="absolute -right-2 top-8"
+            direction="top right"
+            // triggerRef={triggerRef}
+          />
+        )}
+        <button onClick={() => toggleQuestionOptions()}>
           <Icon name="dots" />
         </button>
       </div>
@@ -182,10 +215,30 @@ const Question = ({
               </button>
             )}
 
+            {/* Ask Again? */}
+            {(currentUser || askAgain > 0) && (
+              <button
+                className={`col-start-3 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="askAgain"
+                onClick={onAskAgainClick}
+                disabled={!currentUser}
+              >
+                {askAgain ? (
+                  <span className="selected-action">
+                    <Icon name="reuse" /> {askAgain}
+                  </span>
+                ) : (
+                  <Icon name="reuse" />
+                )}
+              </button>
+            )}
+
             {/* Bookmarked */}
             {currentUser && (
               <button
-                className={`col-start-3 col-span-1 ${
+                className={`col-start-4 col-span-1 ${
                   currentUser && `hover:text-punch`
                 }`}
                 data-testid="bookmarkButton"
@@ -200,26 +253,6 @@ const Question = ({
                   <span data-testid="bookmarkEmpty">
                     <Icon name="bookmark" />
                   </span>
-                )}
-              </button>
-            )}
-
-            {/* Ask Again? */}
-            {(currentUser || askAgain > 0) && (
-              <button
-                className={`col-start-4 col-span-1 ${
-                  currentUser && `hover:text-punch`
-                }`}
-                data-testid="askAgain"
-                onClick={onAskAgainClick}
-                disabled={!currentUser}
-              >
-                {askAgain ? (
-                  <span className="selected-action">
-                    <Icon name="reuse" /> {askAgain}
-                  </span>
-                ) : (
-                  <Icon name="reuse" />
                 )}
               </button>
             )}
