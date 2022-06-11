@@ -24,7 +24,9 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ recentQuestions }: CellSuccessProps) => {
+export const Success = ({ recentQuestions, take }: CellSuccessProps) => {
+  if (recentQuestions.length <= take)
+    console.log('reached the end of questions')
   return recentQuestions.map((question, index) => (
     <RecentItem
       key={index}
