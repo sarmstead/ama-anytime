@@ -6,6 +6,7 @@ import { Icon } from '../../Icon'
 
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+import { useAuth } from '@redwoodjs/auth'
 
 const DELETE_QUESTION_MUTATION = gql`
   mutation DeleteQuestionMutation($id: Int!) {
@@ -58,6 +59,8 @@ const Question = ({
   rerouteOnDelete,
   updatedOn,
 }: IQuestion): JSX.Element => {
+  const { isAuthenticated, currentUser } = useAuth()
+
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
       toast.success('Question deleted')
@@ -146,71 +149,95 @@ const Question = ({
           </div>
         )}
         {showActions && (
-          <div
-            className="flex justify-between items-center"
-            data-testid="actionButtons"
-          >
+          <div className="grid grid-cols-5 w-full" data-testid="actionButtons">
             {/* Follow-Up */}
-            <button
-              className="hover:text-punch"
-              data-testid="followUpQuestion"
-              onClick={onFollowUpClick}
-            >
-              {followUp ? (
-                <span className="selected-action">
-                  <Icon name="commentFilled" />
-                  {followUp}
-                </span>
-              ) : (
-                <Icon name="comment" />
-              )}
-            </button>
+            {(currentUser || followUp > 0) && (
+              <button
+                className={`col-start-1 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="followUpQuestion"
+                onClick={onFollowUpClick}
+                disabled={!currentUser}
+              >
+                {followUp ? (
+                  <span className="selected-action">
+                    <Icon name="commentFilled" />
+                    {followUp}
+                  </span>
+                ) : (
+                  <Icon name="comment" />
+                )}
+              </button>
+            )}
 
             {/* Like / Favorite */}
-            <button
-              className="hover:text-punch"
-              data-testid="favoritedQuestion"
-              onClick={onFavoriteClick}
-            >
-              {favorite ? (
-                <span className="selected-action">
-                  <Icon name="heartFilled" /> {favorite}
-                </span>
-              ) : (
-                <Icon name="heart" />
-              )}
-            </button>
+            {(currentUser || favorite > 0) && (
+              <button
+                className={`col-start-2 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="favoritedQuestion"
+                onClick={onFavoriteClick}
+                disabled={!currentUser}
+              >
+                {favorite ? (
+                  <span className="selected-action">
+                    <Icon name="heartFilled" /> {favorite}
+                  </span>
+                ) : (
+                  <Icon name="heart" />
+                )}
+              </button>
+            )}
 
             {/* Bookmarked */}
-            <button className="hover:text-punch" onClick={onBookmarkClick}>
-              {bookmark ? (
-                <span data-testid="bookmarkFilled">
-                  <Icon className="selected-action" name="bookmarkFilled" />
-                </span>
-              ) : (
-                <span data-testid="bookmarkEmpty">
-                  <Icon name="bookmark" />
-                </span>
-              )}
-            </button>
+            {currentUser && (
+              <button
+                className={`col-start-3 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="bookmarkButton"
+                onClick={onBookmarkClick}
+                disabled={!currentUser}
+              >
+                {bookmark ? (
+                  <span data-testid="bookmarkFilled">
+                    <Icon className="selected-action" name="bookmarkFilled" />
+                  </span>
+                ) : (
+                  <span data-testid="bookmarkEmpty">
+                    <Icon name="bookmark" />
+                  </span>
+                )}
+              </button>
+            )}
 
             {/* Ask Again? */}
-            <button
-              className="hover:text-punch"
-              data-testid="askAgain"
-              onClick={onAskAgainClick}
-            >
-              {askAgain ? (
-                <span className="selected-action">
-                  <Icon name="reuse" /> {askAgain}
-                </span>
-              ) : (
-                <Icon name="reuse" />
-              )}
-            </button>
+            {(currentUser || askAgain > 0) && (
+              <button
+                className={`col-start-4 col-span-1 ${
+                  currentUser && `hover:text-punch`
+                }`}
+                data-testid="askAgain"
+                onClick={onAskAgainClick}
+                disabled={!currentUser}
+              >
+                {askAgain ? (
+                  <span className="selected-action">
+                    <Icon name="reuse" /> {askAgain}
+                  </span>
+                ) : (
+                  <Icon name="reuse" />
+                )}
+              </button>
+            )}
 
             {/* Share */}
-            <button className="hover:text-punch" onClick={onShareClick}>
+            <button
+              className="col-start-5 col-span-1 hover:text-punch"
+              onClick={onShareClick}
+            >
               <Icon name="share" />
             </button>
           </div>

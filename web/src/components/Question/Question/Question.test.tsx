@@ -1,7 +1,5 @@
-import { render, screen } from '@redwoodjs/testing/web'
+import { render, screen, waitFor } from '@redwoodjs/testing/web'
 import { formatRelativeDate } from 'src/utils/DateHelpers'
-
-// TODO: Fix failing tests (I think it's related to the mocked data)
 
 import { Question } from './Question'
 import {
@@ -69,6 +67,11 @@ describe('Question', () => {
     expect(screen.getByTestId('actionButtons')).toBeInTheDocument()
   })
 
+  it('hides the bookmark if the user is not logged in', () => {
+    render(<Question {...QuestionOrder} />)
+    expect(screen.queryByTestId('bookmarkButton')).not.toBeInTheDocument()
+  })
+
   it('shows follow-up question count', () => {
     render(<Question {...QuestionOrder} />)
     expect(screen.getByTestId('followUpQuestion')).toHaveTextContent(
@@ -76,11 +79,14 @@ describe('Question', () => {
     )
   })
 
-  it.skip('can ask a follow-up question', () => {})
-
-  it('hides follow-up question count if less than 0', () => {
+  it("hides the follow-up question if the user isn't logged in and it's less than 0", () => {
     render(<Question {...QuestionOrder} followUp={0} />)
-    expect(screen.getByTestId('followUpQuestion')).toHaveTextContent('')
+    expect(screen.queryByTestId('followUpQuestion')).not.toBeInTheDocument()
+  })
+
+  it("shows the follow-up question if it's more than 0", () => {
+    render(<Question {...QuestionOrder} followUp={1} />)
+    expect(screen.getByTestId('followUpQuestion')).toHaveTextContent(1)
   })
 
   it('shows how many people have favorited', () => {
@@ -90,24 +96,7 @@ describe('Question', () => {
     )
   })
 
-  it('hides how many people have favorited if less than 0', () => {
-    render(<Question {...QuestionOrder} favorite={0} />)
-    expect(screen.getByTestId('favoritedQuestion')).toHaveTextContent('')
-  })
-
   it.skip('can favorite the question', () => {})
-
-  it('has bookmarked this question', () => {
-    render(<Question {...QuestionOrder} />)
-    expect(screen.queryByTestId('bookmarkFilled')).toBeInTheDocument()
-    expect(screen.queryByTestId('bookmarkEmpty')).not.toBeInTheDocument()
-  })
-
-  it('has not bookmarked this question', () => {
-    render(<Question {...QuestionOrder} bookmark={false} />)
-    expect(screen.getByTestId('bookmarkEmpty')).toBeInTheDocument()
-    expect(screen.queryByTestId('bookmarkFilled')).not.toBeInTheDocument()
-  })
 
   it.skip('can toggle the bookmark', () => {})
 
@@ -118,11 +107,75 @@ describe('Question', () => {
     )
   })
 
-  it('hides how many people have reused the question, if less than 0', () => {
-    render(<Question {...QuestionOrder} askAgain={0} />)
-    expect(screen.queryByTestId('askAgain')).toHaveTextContent('')
-  })
-
-  it.skip('can reuse the question', () => {})
   it.skip('can share the question', () => {})
+  it.skip("can not ask a follow-up question (user isn't logged in)", () => {})
+
+  // ----------- user is logged in ------------- */
+  describe('user is logged in', () => {
+    beforeEach(() => {
+      mockCurrentUser({
+        username: 'selfteachme',
+        fullName: 'Amy Dutton',
+        id: 1,
+        email: 'amy@amaanything.com',
+        avatar: '',
+        avatarColor: 'PUNCH',
+      })
+    })
+
+    it('shows the follow-up question as an option, even at 0', async () => {
+      render(<Question {...QuestionOrder} followUp={0} />)
+      await waitFor(() => {
+        expect(screen.getByTestId('followUpQuestion')).toBeInTheDocument()
+      })
+    })
+
+    it('hides follow-up question count if less than 0 and the user is logged in', async () => {
+      render(<Question {...QuestionOrder} followUp={0} />)
+      await waitFor(() => {
+        expect(screen.getByTestId('followUpQuestion')).toHaveTextContent('')
+      })
+    })
+
+    it('hides how many people have favorited if less than 1', async () => {
+      render(<Question {...QuestionOrder} favorite={0} />)
+      await waitFor(() => {
+        expect(screen.getByTestId('favoritedQuestion')).toHaveTextContent('')
+      })
+    })
+
+    it('has bookmarked this question (if the user is logged in)', async () => {
+      render(<Question {...QuestionOrder} />)
+      await waitFor(() => {
+        expect(screen.queryByTestId('bookmarkFilled')).toBeInTheDocument()
+        expect(screen.queryByTestId('bookmarkEmpty')).not.toBeInTheDocument()
+      })
+    })
+
+    it('has not bookmarked this question', async () => {
+      render(<Question {...QuestionOrder} bookmark={false} />)
+      await waitFor(() => {
+        expect(screen.getByTestId('bookmarkEmpty')).toBeInTheDocument()
+        expect(screen.queryByTestId('bookmarkFilled')).not.toBeInTheDocument()
+      })
+    })
+
+    it('hides how many people have reused the question, if less than 1', async () => {
+      render(<Question {...QuestionOrder} askAgain={0} />)
+      await waitFor(() => {
+        expect(screen.queryByTestId('askAgain')).not.toHaveTextContent('0')
+      })
+    })
+
+    it('can ask a follow-up question, even at 0', async () => {
+      render(<Question {...QuestionOrder} favorite={0} />)
+      await waitFor(() => {
+        expect(screen.queryByTestId('favoritedQuestion')).not.toHaveTextContent(
+          '0'
+        )
+      })
+    })
+
+    it.skip('can reuse the question', () => {})
+  })
 })
