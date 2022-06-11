@@ -1,6 +1,6 @@
 import { navigate, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProfileCell from 'src/components/Profile/ProfileCell/ProfileCell'
 import QuestionsCell from 'src/components/Question/QuestionsCell/QuestionsCell'
 import { Tabs } from 'src/components/Tabs'
@@ -12,7 +12,16 @@ interface IProfilePage {
 
 const ProfilePage = ({ username = '' }: IProfilePage) => {
   const [view, setView] = useState<string>('answered')
+  const [currentUsername, setCurrentUsername] = useState(username)
   const { currentUser } = useAuth()
+
+  useEffect(() => {
+    if (username) {
+      setCurrentUsername(username)
+    } else {
+      setCurrentUsername(currentUser?.username && currentUser.username)
+    }
+  }, [username, currentUser])
 
   const tabsData = [
     {
@@ -42,10 +51,7 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
       <MetaTags title="Profile" description="Profile page" />
       {/* profile details */}
       <div className="border-b-2 border-black bg-[#E4E2DD]/[.45] mix-blend-multiply">
-        <ProfileCell
-          isMe={!!username}
-          username={username ? username : currentUser.username}
-        />
+        <ProfileCell isMe={!!username} username={currentUsername} />
         <div className="pl-12 pr-8 ">
           <Tabs tabs={tabsData} selected={view} switchTab={switchTab} />
         </div>
@@ -54,7 +60,7 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
       {/* questions answered */}
       {view === 'answered' && (
         <QuestionsCell
-          answeredByUsername={username ? username : currentUser.username}
+          answeredByUsername={currentUsername}
           answerIsEmpty={false}
         />
       )}
@@ -62,17 +68,13 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
       {/* unanswered questions */}
       {view === 'unanswered' && (
         <QuestionsCell
-          answeredByUsername={username ? username : currentUser.username}
+          answeredByUsername={currentUsername}
           answerIsEmpty={true}
         />
       )}
 
       {/* questions asked */}
-      {view === 'asked' && (
-        <QuestionsCell
-          askedByUsername={username ? username : currentUser.username}
-        />
-      )}
+      {view === 'asked' && <QuestionsCell askedByUsername={currentUsername} />}
     </>
   )
 }
