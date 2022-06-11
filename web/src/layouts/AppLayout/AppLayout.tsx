@@ -30,10 +30,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             <>
               <Navigation notifications={3} />
               <div className="absolute left-0 bottom-0 w-full">
+                {/* TODO: Make "Amy Dutton" dynamic" */}
                 <LoggedInUser
                   avatar={currentUser.avatar}
-                  firstName={'Amy'}
-                  lastName={'Dutton'}
+                  fullName={'Amy Dutton'}
                   username={currentUser.username}
                 />
               </div>
