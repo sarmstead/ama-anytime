@@ -12,6 +12,7 @@ import { useAuth } from '@redwoodjs/auth'
 import { MetaTags } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useEffect } from 'react'
+import { AmaTextField } from 'src/components/Form/AmaTextField'
 
 const LoginPage = () => {
   const { isAuthenticated, logIn } = useAuth()
@@ -24,7 +25,7 @@ const LoginPage = () => {
 
   const usernameRef = useRef<HTMLInputElement>()
   useEffect(() => {
-    usernameRef.current.focus()
+    usernameRef?.current && usernameRef.current.focus()
   }, [])
 
   const onSubmit = async (data) => {
@@ -49,17 +50,9 @@ const LoginPage = () => {
           Sign In
         </h1>
         <Form onSubmit={onSubmit}>
-          <Label
+          <AmaTextField
             name="username"
-            className="rw-label"
-            errorClassName="rw-label rw-label-error"
-          >
-            Username
-          </Label>
-          <TextField
-            name="username"
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
+            label="Username"
             ref={usernameRef}
             validation={{
               required: {
@@ -67,28 +60,21 @@ const LoginPage = () => {
                 message: 'Username is required',
               },
             }}
+            required={true}
           />
 
-          <FieldError name="username" className="rw-field-error" />
-
-          <Label
-            name="password"
-            className="rw-label"
-            errorClassName="rw-label rw-label-error"
-          >
-            Password
-          </Label>
-          <PasswordField
-            name="password"
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
+          <AmaTextField
             autoComplete="current-password"
+            name="password"
+            label="Password"
+            type="password"
             validation={{
               required: {
                 value: true,
                 message: 'Password is required',
               },
             }}
+            required={true}
           />
 
           <div className="rw-forgot-link">

@@ -1,15 +1,15 @@
+import { forwardRef } from 'react'
 import {
   FieldError,
   useErrorStyles,
   useRegister,
   RegisterOptions,
 } from '@redwoodjs/forms'
-import { RefObject } from 'react'
 
 export interface AmaTextFieldProps {
+  autoComplete?: string
   className?: string
   defaultValue?: string
-  inputRef?: RefObject<HTMLInputElement>
   label: string
   name: string
   placeholder?: string
@@ -18,17 +18,19 @@ export interface AmaTextFieldProps {
   validation?: RegisterOptions
 }
 
-const AmaTextField = ({
-  className,
-  defaultValue = '',
-  inputRef,
-  label,
-  name,
-  placeholder = '',
-  type = 'text',
-  required = false,
-  validation,
-}: AmaTextFieldProps) => {
+const AmaTextField = forwardRef((props: AmaTextFieldProps, ref) => {
+  const {
+    autoComplete,
+    className,
+    defaultValue = '',
+    label,
+    name,
+    placeholder = '',
+    type = 'text',
+    required = false,
+    validation,
+  } = props
+
   const register = useRegister({
     name,
     validation: { ...validation, required },
@@ -57,6 +59,7 @@ const AmaTextField = ({
       </label>
       <div className={`input-wrapper ${className}`} data-testid="inputWrapper">
         <input
+          autoComplete={autoComplete}
           className={inputClassName}
           data-testid="input"
           defaultValue={defaultValue}
@@ -65,13 +68,13 @@ const AmaTextField = ({
           id={`input-${name}`}
           name={name}
           placeholder={placeholder}
-          ref={inputRef}
+          ref={ref}
           {...register}
         />
       </div>
       <FieldError name={name} className="rw-field-error" />
     </div>
   )
-}
+})
 
 export { AmaTextField }
