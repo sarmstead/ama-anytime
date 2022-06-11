@@ -41,7 +41,24 @@ const LoginPage = () => {
       <main className="grid grid-cols-12 pt-24">
         <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
 
-        <div className="grid grid-cols-9 col-start-3 col-span-9 border-2 border-black mt-28 mb-5">
+        <div className="grid grid-cols-9 col-start-3 col-span-9 border-2 border-black mt-28 mb-5 relative">
+          {/* image decorations */}
+          <img
+            src="/images/questions--left.svg"
+            alt="Question Bubbles"
+            className="absolute -left-[17rem] -top-[5rem]"
+          />
+          <img
+            src="/images/questions--top.svg"
+            alt="Question Bubbles"
+            className="absolute -top-[12rem] left-[18rem]"
+          />
+          <img
+            src="/images/questions--right.svg"
+            alt="Question Bubbles"
+            className="absolute right-[9.5rem] -top-[5rem]"
+          />
+
           {/* logo */}
           <div className="col-span-4 relative">
             <img
