@@ -63,7 +63,7 @@ const AmaTextarea = (props: AmaTextFieldProps) => {
   }
 
   return (
-    <div className="field">
+    <div className="field" data-testid="textareaField">
       <label
         htmlFor={`input-${name}`}
         className={labelClassName}
