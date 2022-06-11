@@ -12,14 +12,17 @@ import { AppLayout } from './layouts/AppLayout'
 import { ContentLayout } from './layouts/ContentLayout'
 import { LegalLayout } from './layouts/LegalLayout'
 import { SettingLayout } from './layouts/SettingLayout'
+import { LoginLayout } from './layouts/LoginLayout/LoginLayout'
 
 const Routes = () => {
   return (
     <Router>
-      <Route path="/signup" page={SignupPage} name="signup" />
-      <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
-      <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
-      <Route path="/login" page={LoginPage} name="login" />
+      <Set wrap={[LoginLayout]}>
+        <Route path="/signup" page={SignupPage} name="signup" />
+        <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
+        <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
+        <Route path="/login" page={LoginPage} name="login" />
+      </Set>
 
       <Set wrap={[ContentLayout]}>
         <Route path="/waiting-list" page={WaitingListPage} name="waitingList" />
