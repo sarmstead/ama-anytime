@@ -55,7 +55,7 @@ model Question {
   question         String
   answer           String?
   order            Int?
-  pinned           Boolean    @default(false)
+  pinned           Boolean?   @default(false)
   askedBy          User       @relation("QuestionAskedBy", fields: [askedById], references: [id])
   askedById        Int
   answeredBy       User       @relation("QuestionAnsweredBy", fields: [answeredById], references: [id])
