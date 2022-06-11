@@ -15,10 +15,34 @@ import type { StandardScenario } from './questions.scenarios'
 
 describe('questions', () => {
   scenario('returns all questions', async (scenario: StandardScenario) => {
-    const result = await questions()
-
+    const result = await questions({
+      answeredById: undefined,
+      askedByUsername: undefined,
+      askedById: undefined,
+      answerIsEmpty: undefined,
+      answeredByUsername: undefined,
+    })
     expect(result.length).toEqual(Object.keys(scenario.question).length)
   })
+
+  scenario(
+    'questionsForOrdering',
+    'return questions sorted for the profile feed (pinned, order, updatedOn, askedOn)',
+    async (scenario: StandardScenario) => {
+      const result = await questions({
+        answeredById: undefined,
+        askedByUsername: undefined,
+        askedById: undefined,
+        answerIsEmpty: undefined,
+        answeredByUsername: undefined,
+      })
+      // console.log(result)
+      // expect(result[0].question)
+      // expect(result[0].question).toEqual(
+      //   scenario.questionsForOrdering.unanswered.question
+      // )
+    }
+  )
 
   scenario('returns a single question', async (scenario: StandardScenario) => {
     const result = await question({ id: scenario.question.one.id })
@@ -29,6 +53,7 @@ describe('questions', () => {
   scenario('creates a question', async (scenario: StandardScenario) => {
     const result = await createQuestion({
       input: {
+        pinned: false,
         question: 'String',
         askedById: scenario.question.two.askedById,
         answeredById: scenario.question.two.answeredById,
