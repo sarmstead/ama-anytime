@@ -2,6 +2,7 @@ export const ProfileDetails = {
   cover: 'https://picsum.photos/750/295',
   coverDescription: 'apple computer on a desk',
   avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
+  avatarColor: 'PUNCH',
   fullName: 'Amy',
   username: 'selfteachme',
   bio: '#DirectorOfDesign at @codingzeal I love teaching #designers how to #code and #developers how to #design.',
@@ -32,7 +33,7 @@ export const ProfileDetails = {
 }
 
 export const ProfileDetailsMinimum = {
-  firstName: 'Amy',
-  lastName: 'Dutton',
+  fullName: 'Amy Dutton',
   username: 'selfteachme',
+  avatarColor: 'PUNCH',
 }
