@@ -1,9 +1,11 @@
 import { Link, routes } from '@redwoodjs/router'
+import { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Avatar } from '../../Avatar'
 import { Button } from '../../Button'
 
 export interface IMightLikeUser {
   avatar: string
+  avatarColor: AvatarColor
   handleClick?: () => void
   name: string
   username: string
@@ -11,6 +13,7 @@ export interface IMightLikeUser {
 
 const MightLikeUser = ({
   avatar,
+  avatarColor,
   handleClick,
   name,
   username,
@@ -21,7 +24,13 @@ const MightLikeUser = ({
         to={routes.profile({ username: username })}
         className="might-like-user__link"
       >
-        <Avatar src={avatar} alt={name} width={72} height={72} />
+        <Avatar
+          src={avatar}
+          avatarColor={avatarColor}
+          alt={name}
+          width={72}
+          height={72}
+        />
       </Link>
       <div className="text-sm">
         <Link

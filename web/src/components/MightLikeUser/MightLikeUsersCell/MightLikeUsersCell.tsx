@@ -2,35 +2,31 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { MightLikeUser } from '../MightLikeUser'
 
 export const QUERY = gql`
-  # query FindQuestionById($id: Int!) {
-  #   question: question(id: $id) {
-  #     id
-  #     question
-  #     answer
-  #     order
-  #     pinned
-  #     askedById
-  #     answeredById
-  #     askedOn
-  #   }
-  # }
+  query MyQuery {
+    users {
+      avatar
+      id
+      fullName
+    }
+  }
 `
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Question not found</div>
+export const Empty = () => <div>Empty</div>
 
 export const Failure = ({ error }: CellFailureProps) => (
-  <div className="rw-cell-error">{error.message}</div>
+  <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ users }: CellSuccessProps<FindUserById>) => {
+export const Success = ({ users }: CellSuccessProps) => {
   return users.map((user, index) => (
     <MightLikeUser
       key={index}
-      avatar={user.avatar}
-      name={user.fullName}
-      username={user.username}
+      avatar={user.answeredBy.avatar}
+      avatarColor={user.answeredBy.avatarColor}
+      name={user.answeredBy.fullName}
+      username={user.answeredBy.username}
     />
   ))
 }
