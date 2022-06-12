@@ -1,14 +1,12 @@
 import { render } from '@redwoodjs/testing/web'
 
 import AnswerForm from './AnswerForm'
-
-//   Improve this test with help from the Redwood Testing Doc:
-//    https://redwoodjs.com/docs/testing#testing-components
+import { PinnedQuestion as data } from '../../../Question.mocks'
 
 describe('AnswerForm', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<AnswerForm />)
+      render(<AnswerForm answeredBy={data.answeredBy} />)
     }).not.toThrow()
   })
 })

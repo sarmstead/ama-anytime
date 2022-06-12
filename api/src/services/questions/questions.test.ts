@@ -25,24 +25,24 @@ describe('questions', () => {
     expect(result.length).toEqual(Object.keys(scenario.question).length)
   })
 
-  scenario(
-    'questionsForOrdering',
-    'return questions sorted for the profile feed (pinned, order, updatedOn, askedOn)',
-    async (scenario: StandardScenario) => {
-      const result = await questions({
-        answeredById: undefined,
-        askedByUsername: undefined,
-        askedById: undefined,
-        answerIsEmpty: undefined,
-        answeredByUsername: undefined,
-      })
-      // console.log(result)
-      // expect(result[0].question)
-      // expect(result[0].question).toEqual(
-      //   scenario.questionsForOrdering.unanswered.question
-      // )
-    }
-  )
+  // scenario(
+  //   'questionsForOrdering',
+  //   'return questions sorted for the profile feed (pinned, order, updatedOn, askedOn)',
+  //   async (scenario: StandardScenario) => {
+  //     const result = await questions({
+  //       answeredById: undefined,
+  //       askedByUsername: undefined,
+  //       askedById: undefined,
+  //       answerIsEmpty: undefined,
+  //       answeredByUsername: undefined,
+  //     })
+  // console.log(result)
+  // expect(result[0].question)
+  // expect(result[0].question).toEqual(
+  //   scenario.questionsForOrdering.unanswered.question
+  // )
+  //   }
+  // )
 
   scenario('returns a single question', async (scenario: StandardScenario) => {
     const result = await question({ id: scenario.question.one.id })

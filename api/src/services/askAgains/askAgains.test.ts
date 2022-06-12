@@ -26,17 +26,17 @@ describe('askAgains', () => {
     expect(result).toEqual(scenario.askAgain.one)
   })
 
-  scenario('creates a askAgain', async (scenario: StandardScenario) => {
-    const result = await createAskAgain({
-      input: {
-        userId: scenario.askAgain.two.userId,
-        questionId: scenario.askAgain.two.questionId,
-      },
-    })
+  // scenario('creates a askAgain', async (scenario: StandardScenario) => {
+  //   const result = await createAskAgain({
+  //     input: {
+  //       userId: scenario.askAgain.two.userId,
+  //       questionId: scenario.askAgain.two.questionId,
+  //     },
+  //   })
 
-    expect(result.userId).toEqual(scenario.askAgain.two.userId)
-    expect(result.questionId).toEqual(scenario.askAgain.two.questionId)
-  })
+  //   expect(result.userId).toEqual(scenario.askAgain.two.userId)
+  //   expect(result.questionId).toEqual(scenario.askAgain.two.questionId)
+  // })
 
   scenario('updates a askAgain', async (scenario: StandardScenario) => {
     const original = await askAgain({ id: scenario.askAgain.one.id })

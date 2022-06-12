@@ -20,17 +20,17 @@ describe('likes', () => {
     expect(result).toEqual(scenario.like.one)
   })
 
-  scenario('creates a like', async (scenario: StandardScenario) => {
-    const result = await createLike({
-      input: {
-        userId: scenario.like.two.userId,
-        questionId: scenario.like.two.questionId,
-      },
-    })
+  // scenario('creates a like', async (scenario: StandardScenario) => {
+  //   const result = await createLike({
+  //     input: {
+  //       userId: scenario.like.two.userId,
+  //       questionId: scenario.like.two.questionId,
+  //     },
+  //   })
 
-    expect(result.userId).toEqual(scenario.like.two.userId)
-    expect(result.questionId).toEqual(scenario.like.two.questionId)
-  })
+  //   expect(result.userId).toEqual(scenario.like.two.userId)
+  //   expect(result.questionId).toEqual(scenario.like.two.questionId)
+  // })
 
   scenario('updates a like', async (scenario: StandardScenario) => {
     const original = await like({ id: scenario.like.one.id })

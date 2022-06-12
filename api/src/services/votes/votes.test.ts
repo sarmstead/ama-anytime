@@ -20,19 +20,19 @@ describe('votes', () => {
     expect(result).toEqual(scenario.vote.one)
   })
 
-  scenario('creates a vote', async (scenario: StandardScenario) => {
-    const result = await createVote({
-      input: {
-        userId: scenario.vote.two.userId,
-        direction: 'UP',
-        questionId: scenario.vote.two.questionId,
-      },
-    })
+  // scenario('creates a vote', async (scenario: StandardScenario) => {
+  //   const result = await createVote({
+  //     input: {
+  //       userId: scenario.vote.two.userId,
+  //       direction: 'UP',
+  //       questionId: scenario.vote.two.questionId,
+  //     },
+  //   })
 
-    expect(result.userId).toEqual(scenario.vote.two.userId)
-    expect(result.direction).toEqual('UP')
-    expect(result.questionId).toEqual(scenario.vote.two.questionId)
-  })
+  //   expect(result.userId).toEqual(scenario.vote.two.userId)
+  //   expect(result.direction).toEqual('UP')
+  //   expect(result.questionId).toEqual(scenario.vote.two.questionId)
+  // })
 
   scenario('updates a vote', async (scenario: StandardScenario) => {
     const original = await vote({ id: scenario.vote.one.id })
