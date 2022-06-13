@@ -51,9 +51,9 @@ const Routes = () => {
         <Route path="/following" page={FollowingPage} name="following" />
         <Route path="/tag/{tag}" page={TagPage} name="tag" />
         <Route path="/questions/{id}" page={QuestionQuestionPage} name="question" />
-        <Route path="/" page={FeedPage} name="home" />
         <Route path="/profile/{username}" page={ProfilePage} name="profile" />
         <Private unauthenticated="login">
+          <Route path="/" page={FeedPage} name="home" />
           <Route path="/profile" page={ProfilePage} name="me" />
           <Route path="/bookmarks" page={BookmarksPage} name="bookmarks" />
           <Route path="/notifications" page={NotificationsPage} name="notifications" />
