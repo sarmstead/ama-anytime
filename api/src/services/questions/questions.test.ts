@@ -25,6 +25,15 @@ describe('questions', () => {
     expect(result.length).toEqual(Object.keys(scenario.question).length)
   })
 
+  scenario(
+    'questionWithBookmarks',
+    'returns bookmarks for a specific user',
+    async (scenario) => {
+      const result = await question({ id: scenario.question.first.id })
+      console.log(result)
+    }
+  )
+
   // scenario(
   //   'questionsForOrdering',
   //   'return questions sorted for the profile feed (pinned, order, updatedOn, askedOn)',
@@ -49,6 +58,15 @@ describe('questions', () => {
 
     expect(result).toEqual(scenario.question.one)
   })
+
+  scenario(
+    "returns a question with the current user's bookmarks",
+    async (scenario: StandardScenario) => {
+      const result = await question({ id: scenario.question.one.id })
+
+      expect(result).toEqual(scenario.question.one)
+    }
+  )
 
   scenario('creates a question', async (scenario: StandardScenario) => {
     const result = await createQuestion({

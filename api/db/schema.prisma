@@ -88,6 +88,7 @@ model Bookmark {
   user       User     @relation(fields: [userId], references: [id])
   questionId Int
   question   Question @relation(fields: [questionId], references: [id])
+  createdOn  DateTime @default(now())
 
   @@unique([userId, questionId])
 }

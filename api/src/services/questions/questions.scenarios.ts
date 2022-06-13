@@ -66,6 +66,59 @@ export const standard = defineScenario<Prisma.QuestionCreateArgs>({
   },
 })
 
+export const questionWithBookmarks = defineScenario({
+  user: {
+    first: {
+      data: {
+        username: 'ahhacreative',
+        email: 'ama@ahhacreative.com',
+        fullName: 'Ah Ha Creative',
+        hashedPassword: 'String',
+        salt: 'String',
+      },
+    },
+    second: {
+      data: {
+        username: 'selfteachme',
+        email: 'ama@selfteach.me',
+        fullName: 'SelfTeach.me',
+        hashedPassword: 'String',
+        salt: 'String',
+      },
+    },
+  },
+  question: {
+    first: (scenario) => ({
+      data: {
+        question: 'Is this question 1?',
+        askedById: scenario.user.first.id,
+        answeredById: scenario.user.second.id,
+        askedOn: '2022-06-01T13:21:02.631Z',
+        bookmarks: {
+          create: [
+            {
+              userId: scenario.user.first.id,
+              questionId: scenario.question.first.id,
+            },
+            {
+              userId: scenario.user.second.id,
+              questionId: scenario.question.first.id,
+            },
+          ],
+        },
+      },
+    }),
+    second: (scenario) => ({
+      data: {
+        question: 'Is this the second question?',
+        askedById: scenario.user.first.id,
+        answeredById: scenario.user.second.id,
+        askedOn: '2022-06-01T13:21:02.631Z',
+      },
+    }),
+  },
+})
+
 export const questionsForOrdering = defineScenario<Prisma.QuestionCreateArgs>({
   question: {
     one: {

@@ -9,7 +9,7 @@ import {
 } from './Question.mocks'
 
 describe('Question', () => {
-  it.only('renders successfully', () => {
+  it('renders successfully', () => {
     expect(() => {
       render(<Question {...PinnedQuestion} />)
     }).not.toThrow()

@@ -18,6 +18,7 @@ export const schema = gql`
     likes: [Like]!
     askAgains: [AskAgain]!
     votes: [Vote]!
+    currentUserBookmarks: [Bookmark]!
   }
 
   type Query {

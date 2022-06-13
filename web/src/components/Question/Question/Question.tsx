@@ -1,5 +1,4 @@
 import { Link, routes } from '@redwoodjs/router'
-import { formatRelativeDate } from 'src/utils/DateHelpers'
 import { Avatar } from '../../Avatar'
 import type { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Icon } from '../../Icon'
@@ -10,6 +9,8 @@ import { Answer } from './components/Answer/Answer'
 import { Byline } from './components/Byline'
 import { useState } from 'react'
 import { DropdownMenu } from 'src/components/DropdownMenu'
+import { ShareButton } from './components/ShareButton'
+import { BookmarkButton } from './components/BookmarkButton'
 
 const DELETE_QUESTION_MUTATION = gql`
   mutation DeleteQuestionMutation($id: Int!) {
@@ -86,16 +87,15 @@ const Question = ({
   }
 
   const onAskAgainClick = () => {}
-  const onBookmarkClick = () => {}
   const onFollowUpClick = () => {}
   const onFavoriteClick = () => {}
-  const onShareClick = () => {}
 
   return (
     <div
       className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black ${className}`}
     >
       <div className="absolute right-10 top-7 z-40">
+        {/* TODO: Display different options based on who is logged in */}
         {isQuestionOptionsShowing && (
           <DropdownMenu
             isShowing={true}
@@ -237,33 +237,15 @@ const Question = ({
 
             {/* Bookmarked */}
             {currentUser && (
-              <button
-                className={`col-start-4 col-span-1 ${
-                  currentUser && `hover:text-punch`
-                }`}
-                data-testid="bookmarkButton"
-                onClick={onBookmarkClick}
-                disabled={!currentUser}
-              >
-                {bookmark ? (
-                  <span data-testid="bookmarkFilled">
-                    <Icon className="selected-action" name="bookmarkFilled" />
-                  </span>
-                ) : (
-                  <span data-testid="bookmarkEmpty">
-                    <Icon name="bookmark" />
-                  </span>
-                )}
-              </button>
+              <BookmarkButton
+                currentUserId={currentUser.id}
+                bookmarked={bookmark}
+                questionId={Number(questionId)}
+              />
             )}
 
             {/* Share */}
-            <button
-              className="col-start-5 col-span-1 hover:text-punch"
-              onClick={onShareClick}
-            >
-              <Icon name="share" />
-            </button>
+            <ShareButton />
           </div>
         )}
       </div>

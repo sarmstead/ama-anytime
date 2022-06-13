@@ -93,4 +93,10 @@ export const Question: QuestionResolvers = {
     db.question.findUnique({ where: { id: root.id } }).askAgains(),
   votes: (_obj, { root }) =>
     db.question.findUnique({ where: { id: root.id } }).votes(),
+  currentUserBookmarks: (_obj, { root, context }) =>
+    db.question.findUnique({ where: { id: root.id } }).bookmarks({
+      where: {
+        userId: context?.currentUser?.id ? context.currentUser.id : undefined,
+      },
+    }),
 }

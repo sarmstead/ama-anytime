@@ -1,5 +1,5 @@
 import { routes } from '@redwoodjs/router'
-import { render, screen } from '@redwoodjs/testing/web'
+import { render, screen, waitFor } from '@redwoodjs/testing/web'
 
 import { Footer, GetYear } from './Footer'
 
@@ -49,5 +49,31 @@ describe('Footer', () => {
       'href',
       routes.disclaimers()
     )
+  })
+
+  describe('user is logged in', () => {
+    beforeEach(() => {
+      mockCurrentUser({
+        username: 'selfteachme',
+        fullName: 'Amy Dutton',
+        id: 1,
+        email: 'amy@amaanything.com',
+        avatar: '',
+        avatarColor: 'PUNCH',
+      })
+      render(<Footer />)
+    })
+
+    it('hides the waiting list link', async () => {
+      await waitFor(() =>
+        expect(screen.queryByText('Waiting List')).not.toBeInTheDocument()
+      )
+    })
+
+    it('shows the invite link', async () => {
+      await waitFor(() =>
+        expect(screen.getByText('Invites')).toBeInTheDocument()
+      )
+    })
   })
 })

@@ -8,8 +8,9 @@ export const schema = gql`
   }
 
   type Query {
-    bookmarks: [Bookmark!]! @requireAuth
-    bookmark(id: Int!): Bookmark @requireAuth
+    bookmarks(userId: Int): [Bookmark!]! @requireAuth
+    bookmark(id: Int, questionId: Int, userId: Int): Bookmark @skipAuth
+    specificBookmark(userId: Int!, questionId: Int!): Bookmark @skipAuth
   }
 
   input CreateBookmarkInput {

@@ -56,7 +56,7 @@ const LoginPage = () => {
           <img
             src="/images/questions--right.svg"
             alt="Question Bubbles"
-            className="absolute right-[9.5rem] -top-[5rem]"
+            className="absolute -right-[9.5rem] -top-[5rem]"
           />
 
           {/* logo */}

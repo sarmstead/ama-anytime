@@ -5,13 +5,30 @@ import type {
   BookmarkResolvers,
 } from 'types/graphql'
 
-export const bookmarks: QueryResolvers['bookmarks'] = () => {
-  return db.bookmark.findMany()
+export const bookmarks: QueryResolvers['bookmarks'] = ({ userId }) => {
+  return db.bookmark.findMany({
+    where: {
+      user: {
+        id: userId, // can find all the bookmarks for a given user
+      },
+    },
+    orderBy: [{ createdOn: 'asc' }],
+  })
 }
 
 export const bookmark: QueryResolvers['bookmark'] = ({ id }) => {
   return db.bookmark.findUnique({
     where: { id },
+  })
+}
+
+export const specificBookmark = ({ questionId, userId }) => {
+  return db.bookmark.findFirst({
+    where: {
+      questionId,
+      userId,
+    },
+    select: { id: true },
   })
 }
 
