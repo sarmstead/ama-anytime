@@ -19,12 +19,14 @@ const ShareButton = () => {
       onMouseEnter={toggleTooltip}
       onMouseLeave={toggleTooltip}
     >
-      <Icon name="share" />
-      <Tooltip
-        text="Share"
-        isShowing={showTooltip}
-        className="absolute -left-1/2 mt-1"
-      />
+      <div className="inline-block">
+        <Icon name="share" />
+        <Tooltip
+          text="Share"
+          isShowing={showTooltip}
+          className="absolute mt-1 left-1/2 -translate-x-1/2"
+        />
+      </div>
     </button>
   )
 }
