@@ -194,7 +194,7 @@
   }
 
   .inset-border::after {
-    @apply block border-2 border-black absolute left-1 right-1 bottom-1 top-1 content
+    @apply block border-2 border-black absolute left-1 right-1 bottom-1 top-1 content pointer-events-none
   }
 
 
