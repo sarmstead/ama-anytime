@@ -11,7 +11,7 @@ const Navigation = ({
 }: INavigation): JSX.Element => {
   // TODO: CREATE A DIFFERENT NAV FOR PEOPLE NOT LOGGED IN
   return (
-    <div className={`flex justify-end -mr-4 ${className}`}>
+    <div className={`flex justify-end pr-2 ${className}`}>
       <svg
         width="374"
         height="722"

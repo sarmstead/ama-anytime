@@ -12,7 +12,7 @@ const Answer = ({ answer, answeredBy, updatedOn }: IAnswer) => {
   return (
     <div className="large-body mb-8 relative" data-testid="answer">
       <Avatar
-        className="absolute -left-20 -top-3 z-20"
+        className="absolute -left-20 -top-3 z-avatar"
         src={answeredBy.avatar}
         alt={answeredBy.username}
         avatarColor={answeredBy.avatarColor}

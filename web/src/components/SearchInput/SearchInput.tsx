@@ -34,7 +34,7 @@ const SearchInput = ({ className, understated = false }: ISearchInput) => {
             id="search"
           />
         </div>
-        <button className="relative translate-x-0 hover:translate-x-2 transition-transform">
+        <button className="relative translate-x-0 hover:translate-x-2 transition-transform z-searchButton">
           <img src="/images/btn__search.svg" alt="Arrow" width="32" />
         </button>
       </Form>

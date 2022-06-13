@@ -92,9 +92,9 @@ const Question = ({
 
   return (
     <div
-      className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black ${className}`}
+      className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black z-question ${className}`}
     >
-      <div className="absolute right-10 top-7 z-40">
+      <div className="absolute right-10 top-7">
         {/* TODO: Display different options based on who is logged in */}
         {isQuestionOptionsShowing && (
           <DropdownMenu
@@ -128,7 +128,7 @@ const Question = ({
       </div>
       <Avatar
         avatarColor={askedBy.avatarColor}
-        className="z-10 relative"
+        className="z-avatar relative"
         src={askedBy.avatar}
         alt={askedBy.username}
         height={68}
@@ -144,7 +144,7 @@ const Question = ({
             Pinned Question
           </div>
         )}
-        <div data-testid="askedBy">
+        <div data-testid="askedBy" className="z-byline">
           <Byline person={askedBy} displayDate={askedOn} />
         </div>
         <div
@@ -153,7 +153,7 @@ const Question = ({
         >
           {/* connect question and answer */}
           {answer && (
-            <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-0" />
+            <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-avatarConnector" />
           )}
           <Link
             to={routes.question({ id: Number(questionId) })}

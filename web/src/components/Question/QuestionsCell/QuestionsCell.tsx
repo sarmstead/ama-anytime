@@ -35,6 +35,9 @@ export const QUERY = gql`
       askedOn
       updatedOn
       parentQuestionId
+      currentUserBookmarks {
+        id
+      }
     }
   }
 `
@@ -50,7 +53,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ questions }: CellSuccessProps<FindQuestions>) => {
-  // console.log(questions)
+  console.log(questions)
   return questions.map((question, index) => (
     <Question questionId={question.id.toString()} key={index} {...question} />
   ))

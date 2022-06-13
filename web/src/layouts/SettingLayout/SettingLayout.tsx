@@ -14,7 +14,7 @@ const SettingLayout = ({ children }: SettingLayoutProps) => {
   return (
     <div className="grid grid-cols-12">
       {/* NAVIGATION */}
-      <div className="col-span-3 z-50 relative">
+      <div className="col-span-3">
         <div className="min-h-screen relative border-r-2 border-black">
           {/* write tests for which navigation we're showing  */}
           {isAuthenticated ? (
@@ -23,8 +23,7 @@ const SettingLayout = ({ children }: SettingLayoutProps) => {
               <div className="absolute left-0 bottom-0 w-full">
                 <LoggedInUser
                   avatar={currentUser.avatar}
-                  firstName={'Amy'}
-                  lastName={'Dutton'}
+                  fullName={currentUser.fullName}
                   username={currentUser.username}
                 />
               </div>

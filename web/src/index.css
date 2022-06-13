@@ -200,16 +200,16 @@
 
   /* TOOL TIP TAG */
   .tooltip-tag {
-    @apply z-20 relative
+    @apply z-tooltip relative
   }
 
   .tooltip-tag button {
-    @apply relative z-40
+    @apply relative z-tooltipButton
   }
 
   .tooltip-tag::before {
     background: currentColor;
-    @apply h-4 w-4 z-10 absolute rotate-45 block content
+    @apply h-4 w-4 z-tooltip absolute rotate-45 block content
   }
 
   .tooltip-tag.center::before {

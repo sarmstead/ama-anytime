@@ -5,6 +5,7 @@ import { LoggedInUser } from 'src/components/LoggedInUser/LoggedInUser'
 import { SearchInput } from 'src/components/SearchInput'
 import RecentlyCell from 'src/components/Recently/RecentlyCell'
 import { useState } from 'react'
+import { Modal } from 'src/components/Modal'
 
 type AppLayoutProps = {
   children?: React.ReactNode
@@ -23,7 +24,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <div className="grid grid-cols-12">
       {/* NAVIGATION */}
-      <div className="col-span-3 z-50 relative">
+      <div className="col-span-3 relative">
         <div className="min-h-screen relative border-r-2 border-black">
           {/* write tests for which navigation we're showing  */}
           {isAuthenticated && currentUser ? (
@@ -45,7 +46,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       </div>
 
       {/* MAIN CONTENT */}
-      <main className="col-span-6 relative">
+      <main className="col-span-6">
         <div className="h-screen overflow-y-auto w-full">
           {children}
           <Footer />

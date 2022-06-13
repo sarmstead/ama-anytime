@@ -50,7 +50,7 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
     <>
       <MetaTags title="Profile" description="Profile page" />
       {/* profile details */}
-      <div className="border-b-2 border-black bg-[#E4E2DD]/[.45] mix-blend-multiply">
+      <div className="border-b-2 border-black bg-[#E4E2DD]/[.45]">
         <ProfileCell isMe={!!username} username={currentUsername} />
         <div className="pl-12 pr-8 ">
           <Tabs tabs={tabsData} selected={view} switchTab={switchTab} />

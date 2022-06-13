@@ -1,3 +1,4 @@
+import { useAuth } from '@redwoodjs/auth'
 import {
   Form,
   FormError,
@@ -8,16 +9,20 @@ import {
   CheckboxField,
   Submit,
 } from '@redwoodjs/forms'
+import { Avatar } from 'src/components/Avatar'
+import { AmaTextarea } from 'src/components/Form/AmaTextarea'
 
 // TODO: Write Tests
 
 const QuestionForm = (props) => {
+  const { currentUser } = useAuth()
+
   const onSubmit = (data) => {
     props.onSave(data, props?.question?.id)
   }
 
   return (
-    <div className="rw-form-wrapper">
+    <div>
       <Form onSubmit={onSubmit} error={props.error}>
         <FormError
           error={props.error}
@@ -26,131 +31,46 @@ const QuestionForm = (props) => {
           listClassName="rw-form-error-list"
         />
 
-        <Label
-          name="question"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Question
-        </Label>
+        <div className="grid grid-cols-[72px_minmax(0,_1fr)] gap-x-6 gap-y-2">
+          <div className="relative">
+            <Avatar
+              alt={props.answeredBy.fullName}
+              avatarColor={props.answeredBy.avatarColor}
+              className="mx-auto z-avatar relative"
+              height={32}
+              width={32}
+            />
+            <div className="absolute h-full w-0 border-l-2 border-black left-1/2 z-avatarConnector" />
+          </div>
+          <div className="items-center self-center">
+            <p>
+              Question for <strong>{props.answeredBy.fullName}</strong> @
+              {props.answeredBy.username}
+            </p>
+          </div>
+          <Avatar
+            alt={currentUser.fullName}
+            avatarColor={currentUser.avatarColor}
+            className="z-avatar relative"
+            height={72}
+            width={72}
+          />
+          <div>
+            <AmaTextarea
+              name="question"
+              defaultValue={props.question?.question}
+              label=""
+              required={true}
+              validation={{ required: true }}
+            />
+          </div>
+        </div>
+        <input type="hidden" name="askedById" value={currentUser.id} />
+        <input type="hidden" name="answeredById" value={props.answeredById} />
 
-        <TextField
-          name="question"
-          defaultValue={props.question?.question}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="question" className="rw-field-error" />
-
-        <Label
-          name="answer"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Answer
-        </Label>
-
-        <TextField
-          name="answer"
-          defaultValue={props.question?.answer}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
-
-        <FieldError name="answer" className="rw-field-error" />
-
-        <Label
-          name="order"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Order
-        </Label>
-
-        <NumberField
-          name="order"
-          defaultValue={props.question?.order}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
-
-        <FieldError name="order" className="rw-field-error" />
-
-        <Label
-          name="pinned"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Pinned
-        </Label>
-
-        <CheckboxField
-          name="pinned"
-          defaultChecked={props.question?.pinned}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
-
-        <FieldError name="pinned" className="rw-field-error" />
-
-        <Label
-          name="askedById"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Asked by id
-        </Label>
-
-        <NumberField
-          name="askedById"
-          defaultValue={props.question?.askedById}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="askedById" className="rw-field-error" />
-
-        <Label
-          name="answeredById"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Answered by id
-        </Label>
-
-        <NumberField
-          name="answeredById"
-          defaultValue={props.question?.answeredById}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="answeredById" className="rw-field-error" />
-
-        <Label
-          name="parentQuestionId"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Parent question id
-        </Label>
-
-        <NumberField
-          name="parentQuestionId"
-          defaultValue={props.question?.parentQuestionId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
-
-        <FieldError name="parentQuestionId" className="rw-field-error" />
-
-        <div className="rw-button-group">
-          <Submit disabled={props.loading} className="rw-button rw-button-blue">
-            Save
+        <div className="button-group">
+          <Submit className="submit-btn" disabled={props.loading}>
+            Ask Question
           </Submit>
         </div>
       </Form>
