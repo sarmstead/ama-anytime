@@ -1,14 +1,5 @@
 import { useAuth } from '@redwoodjs/auth'
-import {
-  Form,
-  FormError,
-  FieldError,
-  Label,
-  TextField,
-  NumberField,
-  CheckboxField,
-  Submit,
-} from '@redwoodjs/forms'
+import { Form, FormError, Submit, HiddenField } from '@redwoodjs/forms'
 import { Avatar } from 'src/components/Avatar'
 import { AmaTextarea } from 'src/components/Form/AmaTextarea'
 
@@ -23,7 +14,7 @@ const QuestionForm = (props) => {
 
   return (
     <div>
-      <Form onSubmit={onSubmit} error={props.error}>
+      <Form onSubmit={onSubmit} error={props.error} className="mb-0">
         <FormError
           error={props.error}
           wrapperClassName="rw-form-error-wrapper"
@@ -65,8 +56,8 @@ const QuestionForm = (props) => {
             />
           </div>
         </div>
-        <input type="hidden" name="askedById" value={currentUser.id} />
-        <input type="hidden" name="answeredById" value={props.answeredById} />
+        <HiddenField name="askedById" value={currentUser.id} />
+        <HiddenField name="answeredById" value={props.answeredBy.id} />
 
         <div className="button-group">
           <Submit className="submit-btn" disabled={props.loading}>

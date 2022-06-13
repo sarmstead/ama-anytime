@@ -38,7 +38,7 @@ export const schema = gql`
     question: String!
     answer: String
     order: Int
-    pinned: Boolean!
+    pinned: Boolean
     askedById: Int!
     answeredById: Int!
     askedOn: DateTime

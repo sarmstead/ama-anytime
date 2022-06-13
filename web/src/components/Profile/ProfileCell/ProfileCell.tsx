@@ -4,6 +4,7 @@ import { ProfileDetails } from '../ProfileDetails/ProfileDetails'
 export const QUERY = gql`
   query User($username: String!) {
     user: user(username: $username) {
+      id
       avatar
       avatarColor
       bio

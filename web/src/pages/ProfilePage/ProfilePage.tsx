@@ -22,7 +22,7 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
     } // else if the user is logged in, we're on their profile page
     else if (currentUser?.username) {
       setCurrentUsername(currentUser.username)
-    } // otherwise, the user should be redirected to the login page
+    } // otherwise, the user should be redirected to the login page (through routes)
   }, [username, currentUser])
 
   const tabsData = [
@@ -48,12 +48,17 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
     navigate(routes.profile({ username: username, tab: updatedView }))
   }
 
+  console.log({ currentUsername })
+
   return (
     <>
       <MetaTags title="Profile" description="Profile page" />
       {/* profile details */}
       <div className="border-b-2 border-black bg-[#E4E2DD]/[.45]">
-        <ProfileCell isMe={!!username} username={currentUsername} />
+        <ProfileCell
+          isMe={!username || username === currentUser?.username}
+          username={currentUsername}
+        />
         <div className="pl-12 pr-8 ">
           <Tabs tabs={tabsData} selected={view} switchTab={switchTab} />
         </div>

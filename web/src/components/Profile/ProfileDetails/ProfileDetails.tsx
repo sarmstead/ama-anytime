@@ -16,6 +16,7 @@ export interface IProfileDetails {
   coverDescription?: string
   avatar?: string
   fullName: string
+  id: number
   isMe?: boolean
   username: string
   bio?: string
@@ -38,6 +39,7 @@ const ProfileDetails = ({
   avatar,
   fullName,
   username,
+  id,
   isMe = false,
   bio = '',
   location = '',
@@ -50,7 +52,6 @@ const ProfileDetails = ({
 
   // show question modal
   const askUserQuestion = () => {
-    console.log('ask question')
     openQuestionModal()
   }
 
@@ -65,6 +66,19 @@ const ProfileDetails = ({
   return (
     <>
       <div>
+        <Modal isShowing={isModalShowing} closeModal={closeQuestionModal}>
+          <NewQuestion
+            answeredBy={{
+              id,
+              username,
+              avatarColor,
+              avatar,
+              fullName,
+            }}
+            afterCreate={closeQuestionModal}
+          />
+        </Modal>
+
         {/* cover */}
         {cover ? (
           <img
@@ -184,17 +198,6 @@ const ProfileDetails = ({
         ) */}
         </div>
       </div>
-
-      <Modal isShowing={isModalShowing} closeModal={closeQuestionModal}>
-        <NewQuestion
-          answeredBy={{
-            username,
-            avatarColor,
-            avatar,
-            fullName,
-          }}
-        />
-      </Modal>
     </>
   )
 }
