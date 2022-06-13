@@ -20,13 +20,21 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ users }: CellSuccessProps) => {
-  return users.map((user, index) => (
-    <MightLikeUser
-      key={index}
-      avatar={user.answeredBy.avatar}
-      avatarColor={user.answeredBy.avatarColor}
-      name={user.answeredBy.fullName}
-      username={user.answeredBy.username}
-    />
-  ))
+  return (
+    <div className="mb-24 flex flex-col gap-7">
+      <h3 className="aside-heading">You might like</h3>
+      {users.map((user, index) => (
+        <MightLikeUser
+          key={index}
+          avatar={user.answeredBy.avatar}
+          avatarColor={user.answeredBy.avatarColor}
+          name={user.answeredBy.fullName}
+          username={user.answeredBy.username}
+        />
+      ))}
+      <div>
+        <button className="text-button">Show More</button>
+      </div>
+    </div>
+  )
 }

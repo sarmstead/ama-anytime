@@ -166,7 +166,7 @@ const Question = ({
           </Link>
         </div>
         {/* display the answer */}
-        {answer && (
+        {/* {answer && (
           <Answer
             answer={answer}
             answeredBy={answeredBy}
@@ -175,7 +175,7 @@ const Question = ({
         )}
         {!answer && answeredBy.id === currentUser.id && (
           <AnswerForm answeredBy={currentUser} className="-ml-[5.25rem]" />
-        )}
+        )} */}
       </div>
     </div>
   )

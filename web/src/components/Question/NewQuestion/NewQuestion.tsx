@@ -1,8 +1,8 @@
 import { useMutation } from '@redwoodjs/web'
 import QuestionForm from 'src/components/Question/QuestionForm'
 import { toast } from '@redwoodjs/web/toast'
-import { AvatarColor } from 'src/components/Avatar/Avatar'
 import { QUERY } from '../QuestionsCell/QuestionsCell'
+import { IUser } from '../Question/Question'
 
 // TODO: Write Tests
 
@@ -16,12 +16,7 @@ const CREATE_QUESTION_MUTATION = gql`
 
 interface INewQuestion {
   afterCreate: () => void
-  answeredBy: {
-    id: number
-    fullName: string
-    avatar: string
-    avatarColor: AvatarColor
-  }
+  answeredBy: IUser
 }
 
 const NewQuestion = ({ afterCreate, answeredBy }: INewQuestion) => {

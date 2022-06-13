@@ -117,13 +117,7 @@ const ProfileDetails = ({
               </div>
             ) : (
               <>
-                <IconButton icon={{ name: 'dots' }} />
-                <IconButton
-                  icon={{ name: 'comment' }}
-                  handleClick={askUserQuestion}
-                />
-                <IconButton icon={{ name: 'bell' }} />
-                <Button label="Follow" />
+                <Button label="ask a question" handleClick={askUserQuestion} />
               </>
             )}
           </div>

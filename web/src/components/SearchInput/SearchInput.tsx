@@ -2,7 +2,7 @@ import { Form, TextField } from '@redwoodjs/forms'
 import { useForm } from 'react-hook-form'
 
 interface ISearchInput {
-  className: string
+  className?: string
   understated?: boolean
 }
 

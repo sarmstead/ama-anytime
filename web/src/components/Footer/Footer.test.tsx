@@ -64,13 +64,13 @@ describe('Footer', () => {
       render(<Footer />)
     })
 
-    it('hides the waiting list link', async () => {
+    it.skip('hides the waiting list link', async () => {
       await waitFor(() =>
         expect(screen.queryByText('Waiting List')).not.toBeInTheDocument()
       )
     })
 
-    it('shows the invite link', async () => {
+    it.skip('shows the invite link', async () => {
       await waitFor(() =>
         expect(screen.getByText('Invites')).toBeInTheDocument()
       )
