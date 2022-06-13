@@ -11,6 +11,8 @@ import { useState } from 'react'
 import { DropdownMenu } from 'src/components/DropdownMenu'
 import { ShareButton } from './components/ShareButton'
 import { BookmarkButton } from './components/BookmarkButton'
+import AnswerForm from './components/Answer/AnswerForm/AnswerForm'
+import { LikeButton } from './components/LikeButton/LikeButton'
 
 const DELETE_QUESTION_MUTATION = gql`
   mutation DeleteQuestionMutation($id: Int!) {
@@ -21,6 +23,7 @@ const DELETE_QUESTION_MUTATION = gql`
 `
 
 export interface IUser {
+  id: number
   fullName: string
   username: string
   avatar?: string
@@ -94,7 +97,7 @@ const Question = ({
     <div
       className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black z-question ${className}`}
     >
-      <div className="absolute right-10 top-7">
+      <div className="absolute right-10 top-7 z-optionsMenu">
         {/* TODO: Display different options based on who is logged in */}
         {isQuestionOptionsShowing && (
           <DropdownMenu
@@ -107,7 +110,7 @@ const Question = ({
                 action: () => {},
               },
               {
-                label: 'Flag',
+                label: 'Report',
                 icon: { name: 'flag' },
                 action: () => {},
               },
@@ -156,13 +159,12 @@ const Question = ({
             <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-avatarConnector" />
           )}
           <Link
-            to={routes.question({ id: Number(questionId) })}
+            to={routes.question({ id: questionId })}
             className="hover:text-punch"
           >
             {question}
           </Link>
         </div>
-
         {/* display the answer */}
         {answer && (
           <Answer
@@ -171,82 +173,8 @@ const Question = ({
             updatedOn={updatedOn}
           />
         )}
-
-        {showActions && (
-          <div className="grid grid-cols-5 w-full" data-testid="actionButtons">
-            {/* Follow-Up */}
-            {(currentUser || followUp > 0) && (
-              <button
-                className={`col-start-1 col-span-1 ${
-                  currentUser && `hover:text-punch`
-                }`}
-                data-testid="followUpQuestion"
-                onClick={onFollowUpClick}
-                disabled={!currentUser}
-              >
-                {followUp ? (
-                  <span className="selected-action">
-                    <Icon name="commentFilled" />
-                    {followUp}
-                  </span>
-                ) : (
-                  <Icon name="comment" />
-                )}
-              </button>
-            )}
-
-            {/* Like / Favorite */}
-            {(currentUser || favorite > 0) && (
-              <button
-                className={`col-start-2 col-span-1 ${
-                  currentUser && `hover:text-punch`
-                }`}
-                data-testid="favoritedQuestion"
-                onClick={onFavoriteClick}
-                disabled={!currentUser}
-              >
-                {favorite ? (
-                  <span className="selected-action">
-                    <Icon name="heartFilled" /> {favorite}
-                  </span>
-                ) : (
-                  <Icon name="heart" />
-                )}
-              </button>
-            )}
-
-            {/* Ask Again? */}
-            {(currentUser || askAgain > 0) && (
-              <button
-                className={`col-start-3 col-span-1 ${
-                  currentUser && `hover:text-punch`
-                }`}
-                data-testid="askAgain"
-                onClick={onAskAgainClick}
-                disabled={!currentUser}
-              >
-                {askAgain ? (
-                  <span className="selected-action">
-                    <Icon name="reuse" /> {askAgain}
-                  </span>
-                ) : (
-                  <Icon name="reuse" />
-                )}
-              </button>
-            )}
-
-            {/* Bookmarked */}
-            {currentUser && (
-              <BookmarkButton
-                currentUserId={currentUser.id}
-                bookmarked={bookmark}
-                questionId={Number(questionId)}
-              />
-            )}
-
-            {/* Share */}
-            <ShareButton />
-          </div>
+        {!answer && answeredBy.id === currentUser.id && (
+          <AnswerForm answeredBy={currentUser} className="-ml-[5.25rem]" />
         )}
       </div>
     </div>

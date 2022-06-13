@@ -39,6 +39,7 @@ module.exports = {
       avatar: '5',
       byline: '6',
       searchButton: '7',
+      optionsMenu: '8',
       actionButtons: '9',
       tooltip: '10',
       tooltipButton: '11',

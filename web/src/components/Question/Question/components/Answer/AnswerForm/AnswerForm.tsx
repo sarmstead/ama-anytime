@@ -1,22 +1,32 @@
 import { Form, Submit } from '@redwoodjs/forms'
 import { Avatar } from 'src/components/Avatar'
+import { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Button } from 'src/components/Button'
 import { AmaTextarea } from 'src/components/Form/AmaTextarea'
 
-const AnswerForm = ({ answeredBy }) => {
+interface IAnswerForm {
+  answeredBy: {
+    avatarColor: AvatarColor
+    avatar: string
+    fullName: string
+  }
+  className: string
+}
+
+const AnswerForm = ({ answeredBy, className }: IAnswerForm) => {
   return (
-    <div className="relative flex w-full">
+    <div className={`relative flex w-full gap-6 ${className}`}>
       <div className="w-[68px] text-center">
         <Avatar
           avatarColor={answeredBy.avatarColor}
           className="mx-auto top-4 relative"
-          src={answeredBy.src}
+          src={answeredBy.avatar}
           alt={answeredBy.fullName}
           height={48}
           width={48}
         />
       </div>
-      <Form className="flex-1">
+      <Form className="flex-1 mb-6">
         <AmaTextarea
           label={''}
           name={'answer'}

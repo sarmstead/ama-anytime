@@ -21,12 +21,14 @@ export const QUERY = gql`
       answer
       pinned
       askedBy {
+        id
         avatar
         avatarColor
         fullName
         username
       }
       answeredBy {
+        id
         avatar
         avatarColor
         fullName

@@ -1,10 +1,10 @@
+import { useAuth } from '@redwoodjs/auth'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 import { useState } from 'react'
 import { Icon } from 'src/components/Icon'
 
 interface IBookmarkButton {
-  currentUserId: number
   bookmarked: boolean
   questionId: number
 }
@@ -31,12 +31,9 @@ interface IBookmarkButton {
 //   }
 // `
 
-const BookmarkButton = ({
-  bookmarked,
-  currentUserId,
-  questionId,
-}: IBookmarkButton) => {
+const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
   const [isBookmarked, setIsBookmarked] = useState(bookmarked)
+  const { currentUser } = useAuth()
 
   // const [createBookmark, { loading, error }] = useMutation(
   //   BOOKMARK_QUESTION_MUTATION,
@@ -56,23 +53,26 @@ const BookmarkButton = ({
     // })
   }
 
-  return (
-    <button
-      className="col-start-4 col-span-1 hover:text-punch"
-      data-testid="bookmarkButton"
-      onClick={handleClick}
-    >
-      {isBookmarked ? (
-        <span data-testid="bookmarkFilled">
-          <Icon className="selected-action" name="bookmarkFilled" />
-        </span>
-      ) : (
-        <span data-testid="bookmarkEmpty">
-          <Icon name="bookmark" />
-        </span>
-      )}
-    </button>
-  )
+  if (currentUser)
+    return (
+      <button
+        className="col-start-4 col-span-1 hover:text-punch"
+        data-testid="bookmarkButton"
+        onClick={handleClick}
+      >
+        {isBookmarked ? (
+          <span data-testid="bookmarkFilled">
+            <Icon className="selected-action" name="bookmarkFilled" />
+          </span>
+        ) : (
+          <span data-testid="bookmarkEmpty">
+            <Icon name="bookmark" />
+          </span>
+        )}
+      </button>
+    )
+
+  return <span />
 }
 
 export { BookmarkButton }
