@@ -98,22 +98,12 @@ export const questionWithBookmarks = defineScenario({
           create: [
             {
               userId: scenario.user.first.id,
-              questionId: scenario.question.first.id,
             },
             {
               userId: scenario.user.second.id,
-              questionId: scenario.question.first.id,
             },
           ],
         },
-      },
-    }),
-    second: (scenario) => ({
-      data: {
-        question: 'Is this the second question?',
-        askedById: scenario.user.first.id,
-        answeredById: scenario.user.second.id,
-        askedOn: '2022-06-01T13:21:02.631Z',
       },
     }),
   },

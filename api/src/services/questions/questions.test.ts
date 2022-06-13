@@ -1,3 +1,4 @@
+import { bookmark, bookmarks, createBookmark } from '../bookmarks/bookmarks'
 import {
   questions,
   question,
@@ -6,12 +7,6 @@ import {
   deleteQuestion,
 } from './questions'
 import type { StandardScenario } from './questions.scenarios'
-
-// Generated boilerplate tests do not account for all circumstances
-// and can fail without adjustments, e.g. Float and DateTime types.
-//           Please refer to the RedwoodJS Testing Docs:
-//       https://redwoodjs.com/docs/testing#testing-services
-// https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('questions', () => {
   scenario('returns all questions', async (scenario: StandardScenario) => {
@@ -29,8 +24,20 @@ describe('questions', () => {
     'questionWithBookmarks',
     'returns bookmarks for a specific user',
     async (scenario) => {
-      const result = await question({ id: scenario.question.first.id })
-      console.log(result)
+      mockCurrentUser({
+        id: scenario.user.second.id,
+        username: 'selfteachme',
+        email: 'amy@amaanytime.com',
+        fullName: 'Amy Dutton',
+        avatar: '',
+        avatarColor: 'PUNCH',
+      })
+
+      const result = await question({
+        id: scenario.question.first.id,
+      }).bookmarks({ where: { userId: context.currentUser.id } })
+
+      expect(result.length).toEqual(1)
     }
   )
 
@@ -53,11 +60,15 @@ describe('questions', () => {
   //   }
   // )
 
-  scenario('returns a single question', async (scenario: StandardScenario) => {
-    const result = await question({ id: scenario.question.one.id })
+  scenario(
+    'standard',
+    'returns a single question',
+    async (scenario: StandardScenario) => {
+      const result = await question({ id: scenario.question.one.id })
 
-    expect(result).toEqual(scenario.question.one)
-  })
+      expect(result).toEqual(scenario.question.one)
+    }
+  )
 
   scenario(
     "returns a question with the current user's bookmarks",
