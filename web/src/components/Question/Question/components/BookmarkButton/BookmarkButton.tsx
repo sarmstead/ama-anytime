@@ -50,8 +50,6 @@ const BookmarkButton = ({
   //   }
   // )
 
-  // console.log({ loading, error })
-
   const handleClick = () => {
     // createBookmark({
     //   variables: { userId: currentUserId, questionId: questionId },
