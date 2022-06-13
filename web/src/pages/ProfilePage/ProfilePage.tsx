@@ -16,11 +16,13 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
   const { currentUser } = useAuth()
 
   useEffect(() => {
+    // if a username is passed in, set the current user to that
     if (username) {
       setCurrentUsername(username)
-    } else {
-      setCurrentUsername(currentUser?.username && currentUser.username)
-    }
+    } // else if the user is logged in, we're on their profile page
+    else if (currentUser?.username) {
+      setCurrentUsername(currentUser.username)
+    } // otherwise, the user should be redirected to the login page
   }, [username, currentUser])
 
   const tabsData = [
