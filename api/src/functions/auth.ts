@@ -106,12 +106,8 @@ export const handler = async (event, context) => {
         data: {
           username: username,
           email: userAttributes.email,
-          // bio: userAttributes.bio,
-          // location: userAttributes.location,
-          // website: userAttributes.website,
           fullName: userAttributes.fullName,
-          // cover: userAttributes.cover,
-          // avatar: userAttributes.avatar,
+          avatar: userAttributes.avatar,
           hashedPassword: hashedPassword,
           salt: salt,
         },
