@@ -93,12 +93,14 @@ const ProfileDetails = ({
           {/* action buttons */}
           <div className="absolute top-24 right-8 flex gap-3 z-actionButtons">
             {isMe ? (
-              <Button
-                label="Edit Profile"
-                handleClick={() => {
-                  navigate(routes.profileSettings())
-                }}
-              />
+              <div data-testid="editProfile">
+                <Button
+                  label="Edit Profile"
+                  handleClick={() => {
+                    navigate(routes.profileSettings())
+                  }}
+                />
+              </div>
             ) : (
               <>
                 <IconButton icon={{ name: 'dots' }} />

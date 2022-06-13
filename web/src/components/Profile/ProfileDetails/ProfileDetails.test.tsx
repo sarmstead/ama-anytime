@@ -6,12 +6,25 @@ import { ProfileDetails as ProfileDetailsData } from './ProfileDetails.mocks'
 describe('ProfileDetails', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<ProfileDetails {...ProfileDetailsData} />)
+      render(
+        <ProfileDetails
+          avatarColor={ProfileDetailsData.avatarColor}
+          fullName={ProfileDetailsData.fullName}
+          username={ProfileDetailsData.username}
+        />
+      )
     }).not.toThrow()
   })
 
   it('shows the cover', () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
+    render(
+      <ProfileDetails
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
+        cover={ProfileDetailsData.cover}
+      />
+    )
     expect(screen.getByTestId('cover')).toHaveAttribute(
       'src',
       ProfileDetailsData.cover
@@ -19,24 +32,41 @@ describe('ProfileDetails', () => {
   })
 
   it("shows user's full name", () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
+    render(
+      <ProfileDetails
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
+      />
+    )
     expect(screen.getByTestId('name')).toHaveTextContent(
       ProfileDetailsData.fullName
     )
   })
 
   it('shows username', () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
+    render(
+      <ProfileDetails
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
+      />
+    )
     expect(screen.getByTestId('username')).toHaveTextContent(
       ProfileDetailsData.username
     )
   })
 
   it('shows the bio', () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
-    expect(screen.getByTestId('bio')).toHaveTextContent(
-      '#DirectorOfDesign at @codingzeal I love teaching #designers how to #code and #developers how to #design.'
+    render(
+      <ProfileDetails
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
+        bio={ProfileDetailsData.bio}
+      />
     )
+    expect(screen.getByTestId('bio')).toHaveTextContent(ProfileDetailsData.bio)
   })
 
   it('shows the location', () => {
@@ -49,16 +79,23 @@ describe('ProfileDetails', () => {
   it("doesn't show the location when blank", () => {
     render(
       <ProfileDetails
-        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        fullName="Amy Dutton"
-        username="selfteachme"
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
       />
     )
     expect(screen.queryByTestId('location')).toHaveTextContent('')
   })
 
   it('shows the url', () => {
-    render(<ProfileDetails {...ProfileDetailsData} />)
+    render(
+      <ProfileDetails
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
+        website={ProfileDetailsData.website}
+      />
+    )
     expect(screen.getByTestId('website')).toHaveTextContent(
       ProfileDetailsData.website
     )
@@ -67,9 +104,9 @@ describe('ProfileDetails', () => {
   it("doesn't show the url when blank", () => {
     render(
       <ProfileDetails
-        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        fullName="Amy Dutton"
-        username="selfteachme"
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
       />
     )
     expect(screen.queryByTestId('website')).not.toBeInTheDocument()
@@ -85,9 +122,9 @@ describe('ProfileDetails', () => {
   it("doesn't show the follower count when zero", () => {
     render(
       <ProfileDetails
-        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        fullName="Amy Dutton"
-        username="selfteachme"
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
       />
     )
     expect(screen.getByTestId('followingCount')).toHaveTextContent('')
@@ -103,9 +140,9 @@ describe('ProfileDetails', () => {
   it("doesn't show the followers count when zero", () => {
     render(
       <ProfileDetails
-        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        fullName="Amy Dutton"
-        username="selfteachme"
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
       />
     )
     expect(screen.getByTestId('followedByCount')).toHaveTextContent('')
@@ -121,11 +158,21 @@ describe('ProfileDetails', () => {
   it("doesn't show the follower summary when zero", () => {
     render(
       <ProfileDetails
-        avatar="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-        fullName="Amy Dutton"
-        username="selfteachme"
+        avatarColor={ProfileDetailsData.avatarColor}
+        fullName={ProfileDetailsData.fullName}
+        username={ProfileDetailsData.username}
       />
     )
     expect(screen.queryByTestId('followedBySummary')).not.toBeInTheDocument()
+  })
+
+  it("doesn't show the profile as me", () => {
+    render(<ProfileDetails {...ProfileDetailsData} />)
+    expect(screen.queryByTestId('editProfile')).not.toBeInTheDocument()
+  })
+
+  it('shows the profile as me', () => {
+    render(<ProfileDetails {...ProfileDetailsData} isMe={true} />)
+    expect(screen.getByTestId('editProfile')).toBeInTheDocument()
   })
 })

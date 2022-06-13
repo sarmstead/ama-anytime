@@ -1,4 +1,6 @@
-export const ProfileDetails = {
+import { IProfileDetails } from './ProfileDetails'
+
+export const ProfileDetails: IProfileDetails = {
   cover: 'https://picsum.photos/750/295',
   coverDescription: 'apple computer on a desk',
   avatar: 'https://i.pravatar.cc/150?u=a042581f4e29026704d',
