@@ -36,7 +36,10 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
     },
     {
       id: 'asked',
-      name: "Questions They've Asked",
+      name:
+        !username || username === currentUser?.username
+          ? "Questions I've Asked"
+          : "Questions They've Asked",
     },
   ]
 
@@ -47,8 +50,6 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
     // update router
     navigate(routes.profile({ username: username, tab: updatedView }))
   }
-
-  console.log({ currentUsername })
 
   return (
     <>
