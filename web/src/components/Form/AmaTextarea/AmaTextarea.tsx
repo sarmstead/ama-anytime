@@ -8,7 +8,7 @@ import {
 } from '@redwoodjs/forms'
 import { useEffect, useRef, useState } from 'react'
 
-export interface AmaTextFieldProps {
+export interface AmaTextareaProps {
   className?: string
   cols?: number
   defaultValue?: string
@@ -21,7 +21,7 @@ export interface AmaTextFieldProps {
   validation?: RegisterOptions
 }
 
-const AmaTextarea = (props: AmaTextFieldProps) => {
+const AmaTextarea = (props: AmaTextareaProps) => {
   const textAreaRef = useRef<HTMLTextAreaElement>()
   const [text, setText] = useState<string>()
   const [parentHeight, setParentHeight] = useState<string>('auto')

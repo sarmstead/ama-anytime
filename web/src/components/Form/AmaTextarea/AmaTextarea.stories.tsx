@@ -1,13 +1,19 @@
 import { Form } from '@redwoodjs/forms'
-import { AmaTextField, AmaTextFieldProps } from './AmaTextField'
+import { AmaTextarea, AmaTextareaProps } from './AmaTextarea'
 
-const Template = (args: AmaTextFieldProps) => (
+const Template = (args: AmaTextareaProps) => (
   <Form>
-    <AmaTextField {...args} />
+    <AmaTextarea {...args} />
   </Form>
 )
 
-// export const Minimum = Template.bind({})
-// Minimum.args = { ...minimum }
+export const Default = Template.bind({})
+Default.args = {
+  name: 'question',
+  defaultValue: '',
+  label: '',
+  required: true,
+  validation: { required: true },
+}
 
 export default { title: 'Components/AmaTextField' }
