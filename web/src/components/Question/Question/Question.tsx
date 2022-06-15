@@ -89,10 +89,6 @@ const Question = ({
     setIsQuestionOptionsShow((prevValue) => !prevValue)
   }
 
-  const onAskAgainClick = () => {}
-  const onFollowUpClick = () => {}
-  const onFavoriteClick = () => {}
-
   return (
     <div
       className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black z-question ${className}`}
@@ -166,14 +162,14 @@ const Question = ({
           </Link>
         </div>
         {/* display the answer */}
-        {/* {answer && (
+        {answer && (
           <Answer
             answer={answer}
             answeredBy={answeredBy}
             updatedOn={updatedOn}
           />
         )}
-        {!answer && answeredBy.id === currentUser.id && (
+        {/* {!answer && answeredBy.id === currentUser.id && (
           <AnswerForm answeredBy={currentUser} className="-ml-[5.25rem]" />
         )} */}
       </div>

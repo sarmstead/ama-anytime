@@ -3,8 +3,6 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { Question } from '../Question/Question'
 import { FindQuestions } from 'types/graphql'
 
-// TODO: Write Tests
-
 export const QUERY = gql`
   query FindQuestions(
     $answerIsEmpty: Boolean = false
@@ -55,8 +53,12 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ questions }: CellSuccessProps<FindQuestions>) => {
-  console.log(questions)
   return questions.map((question, index) => (
-    <Question questionId={question.id.toString()} key={index} {...question} />
+    <Question
+      data-testid="questionWrapper"
+      questionId={question.id.toString()}
+      key={index}
+      {...question}
+    />
   ))
 }
