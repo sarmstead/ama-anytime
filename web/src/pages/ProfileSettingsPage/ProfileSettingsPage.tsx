@@ -9,6 +9,7 @@ import {
 } from '@redwoodjs/forms'
 import { MetaTags } from '@redwoodjs/web'
 import { useEffect, useRef } from 'react'
+import { AmaFileUpload } from 'src/components/Form/AmaFileUpload'
 
 const ProfileSettingsPage = () => {
   const fullNameRef = useRef<HTMLInputElement>()
@@ -25,7 +26,7 @@ const ProfileSettingsPage = () => {
       <MetaTags title="ProfileSettings" description="ProfileSettings page" />
 
       <Form onSubmit={onSubmit}>
-        <p>Cover Photo</p>
+        <AmaFileUpload />
 
         <p>Avatar</p>
 
