@@ -114,13 +114,13 @@ const LoginPage = () => {
 
               <div className="flex justify-between items-center">
                 <div>
-                  Don’t have an account?{' '}
+                  {/* Don’t have an account?{' '}
                   <Link
                     to={routes.signup()}
                     className="font-bold underline hover:no-underline"
                   >
                     Sign up
-                  </Link>
+                  </Link> */}
                 </div>
 
                 <div className="rw-button-group">
