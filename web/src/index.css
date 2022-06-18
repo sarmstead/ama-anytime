@@ -324,4 +324,33 @@
   .HEATWAVE {
     @apply bg-heatWave
   }
+
+  /* TOGGLE */
+  .toggle input[type=checkbox] {
+    @apply hidden;
+  }
+
+  .toggle input[type=checkbox] + label {
+    @apply inline-flex items-center justify-center bg-red-600 gap-2 pl-4 pr-1 py-1 rounded-3xl text-white font-bold font-sans cursor-pointer transition-all
+  }
+
+  .toggle input[type=checkbox] + label .yes {
+    @apply hidden
+  }
+
+  .toggle input[type=checkbox]:checked + label {
+    @apply pr-4 pl-1 bg-green-600
+  }
+
+  .toggle input[type=checkbox]:checked + label .yes {
+    @apply block
+  }
+
+  .toggle input[type=checkbox]:checked + label .no {
+    @apply hidden
+  }
+
+  /* CUSTOM CHECKBOX */
+
+  /* CUSTOM RADIO BUTTON */
 }
