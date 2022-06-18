@@ -16,12 +16,7 @@ const FeedPage = () => {
       <PageHeading title="My Feed" isActionsShowing={false} />
 
       {isAuthenticated ? (
-        <div>
-          <span>Logged in</span>{' '}
-          <button type="button" onClick={logOut}>
-            Logout
-          </button>
-        </div>
+        <div>Homepage Feed</div>
       ) : (
         <Link to={routes.login()}>Login</Link>
       )}
