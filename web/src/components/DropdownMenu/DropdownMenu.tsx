@@ -66,7 +66,7 @@ const DropdownMenu = ({
                   className="font-slab uppercase text-sm font-extrabold flex items-center justify-start gap-3 leading-10 pl-4 pr-5 bg-ulcaGold hover:bg-heatWave text-black w-full min-h-[40px]"
                 >
                   {option.icon && <Icon name={option.icon.name} />}
-                  {option.label}
+                  <span className="whitespace-nowrap">{option.label}</span>
                 </button>
               </li>
             ))}
