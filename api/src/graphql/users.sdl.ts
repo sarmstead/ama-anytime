@@ -18,6 +18,7 @@ export const schema = gql`
     resetToken: String
     resetTokenExpiresAt: DateTime
     invitations: Int
+    privateAccount: Boolean
     questionsAsked: [Question]!
     questionsAnswered: [Question]!
     bookmarks: [Bookmark]!
@@ -27,6 +28,8 @@ export const schema = gql`
     recruits: [Recruit]!
     followedBy: [User]!
     following: [User]!
+    privateUser: AllowedToFollow
+    approvedFollowers: [AllowedToFollow]!
   }
 
   enum ColorPalette {

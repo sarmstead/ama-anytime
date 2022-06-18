@@ -9,33 +9,36 @@ generator client {
 }
 
 model User {
-  id                  Int           @id @default(autoincrement())
-  username            String        @unique
-  email               String        @unique
+  id                  Int               @id @default(autoincrement())
+  username            String            @unique
+  email               String            @unique
   fullName            String
   hashedPassword      String
   salt                String
-  joinedDate          DateTime      @default(now())
+  joinedDate          DateTime          @default(now())
   bio                 String?
   location            String?
   website             String?
   cover               String?
   avatar              String?
   avatarColor         ColorPalette?
-  lastLogin           DateTime?     @updatedAt
-  clearNotifications  DateTime?     @default(now())
+  lastLogin           DateTime?         @updatedAt
+  clearNotifications  DateTime?         @default(now())
   resetToken          String?
   resetTokenExpiresAt DateTime?
-  invitations         Int?          @default(0)
-  questionsAsked      Question[]    @relation("QuestionAskedBy")
-  questionsAnswered   Question[]    @relation("QuestionAnsweredBy")
+  invitations         Int?              @default(0)
+  privateAccount      Boolean?          @default(false)
+  questionsAsked      Question[]        @relation("QuestionAskedBy")
+  questionsAnswered   Question[]        @relation("QuestionAnsweredBy")
   bookmarks           Bookmark[]
   likes               Like[]
   askAgains           AskAgain[]
   votes               Vote[]
   recruits            Recruit[]
-  followedBy          User[]        @relation("UserFollows", references: [id])
-  following           User[]        @relation("UserFollows", references: [id])
+  followedBy          User[]            @relation("UserFollows", references: [id])
+  following           User[]            @relation("UserFollows", references: [id])
+  privateUser         AllowedToFollow[] @relation("privateUser")
+  approvedFollowers   AllowedToFollow[] @relation("approvedFollowers")
 }
 
 enum ColorPalette {
@@ -49,6 +52,15 @@ enum ColorPalette {
   VERIDIANGREEN
   HEATWAVE
   GRAY
+}
+
+model AllowedToFollow {
+  id                  Int     @id @default(autoincrement())
+  approved            Boolean @default(false)
+  privateUserId       Int
+  privateUser         User    @relation("privateUser", fields: [privateUserId], references: [id])
+  approvedFollowersId Int
+  approvedFollowers   User    @relation("approvedFollowers", fields: [approvedFollowersId], references: [id])
 }
 
 model Question {
