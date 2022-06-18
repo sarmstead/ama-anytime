@@ -24,7 +24,7 @@ const SettingsSubnav = () => {
           <Icon name="chevronRight" className="icon" />
         </NavLink>
       </li>
-      {/* <li>
+      <li>
         <NavLink
           activeClassName="selected"
           to={routes.invites()}
@@ -53,7 +53,7 @@ const SettingsSubnav = () => {
           <span>Notifications</span>
           <Icon name="chevronRight" className="icon" />
         </NavLink>
-      </li> */}
+      </li>
     </ul>
   )
 }
