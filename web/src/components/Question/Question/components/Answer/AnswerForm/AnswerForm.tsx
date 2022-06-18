@@ -1,4 +1,4 @@
-import { Form, Submit } from '@redwoodjs/forms'
+import { Form, HiddenField, Submit } from '@redwoodjs/forms'
 import { Avatar } from 'src/components/Avatar'
 import { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Button } from 'src/components/Button'
@@ -11,9 +11,18 @@ interface IAnswerForm {
     fullName: string
   }
   className: string
+  onSave: () => void
 }
 
-const AnswerForm = ({ answeredBy, className }: IAnswerForm) => {
+const AnswerForm = ({
+  answeredBy,
+  className,
+  onSave,
+}: IAnswerForm): JSX.Element => {
+  const onSubmit = (data) => {
+    onSave(data)
+  }
+
   return (
     <div className={`relative flex w-full gap-6 ${className}`}>
       <div className="w-[68px] text-center">
@@ -26,7 +35,7 @@ const AnswerForm = ({ answeredBy, className }: IAnswerForm) => {
           width={48}
         />
       </div>
-      <Form className="flex-1 mb-6">
+      <Form className="flex-1 mb-6" onSubmit={onSubmit}>
         <AmaTextarea
           label={''}
           name={'answer'}

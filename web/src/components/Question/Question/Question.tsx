@@ -13,10 +13,22 @@ import { ShareButton } from './components/ShareButton'
 import { BookmarkButton } from './components/BookmarkButton'
 import AnswerForm from './components/Answer/AnswerForm/AnswerForm'
 import { LikeButton } from './components/LikeButton/LikeButton'
+import { IDropdownMenuOptions } from 'src/components/DropdownMenu/DropdownMenu'
 
 const DELETE_QUESTION_MUTATION = gql`
   mutation DeleteQuestionMutation($id: Int!) {
     deleteQuestion(id: $id) {
+      id
+    }
+  }
+`
+
+const ANSWER_QUESTION_MUTATION = gql`
+  mutation AnswerQuestionMutation(
+    $questionId: Int!
+    $input: UpdateQuestionInput
+  ) {
+    updateQuestion(id: $questionId, input: $input) {
       id
     }
   }
@@ -72,12 +84,23 @@ const Question = ({
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
       toast.success('Question deleted')
-      rerouteOnDelete()
     },
     onError: (error) => {
       toast.error(error.message)
     },
   })
+
+  const [answerQuestion, { loading, error }] = useMutation(
+    ANSWER_QUESTION_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Question Answered')
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onDeleteClick = (id) => {
     if (confirm('Are you sure you want to delete question ' + id + '?')) {
@@ -89,34 +112,80 @@ const Question = ({
     setIsQuestionOptionsShow((prevValue) => !prevValue)
   }
 
+  const handleAnswerQuestion = (data) => {
+    answerQuestion({
+      variables: {
+        id: questionId,
+        input: { answer: data.answer },
+      },
+    })
+  }
+
+  const DisplayQuestionOptions = (): IDropdownMenuOptions[] => {
+    // if this is a question I asked...
+    if (currentUser.id === askedBy.id)
+      return [
+        {
+          label: 'Edit the Question',
+          icon: { name: 'edit' },
+          action: () => {},
+        },
+        {
+          label: 'Delete',
+          icon: { name: 'delete' },
+          action: () => onDeleteClick(questionId),
+        },
+      ]
+
+    // if I was asked this question...
+    if (currentUser.id === answeredBy.id) {
+      const options = [
+        {
+          label: 'Hide',
+          icon: { name: 'hide' },
+          action: () => {},
+        },
+        {
+          label: 'Report',
+          icon: { name: 'flag' },
+          action: () => {},
+        },
+      ]
+
+      if (answer) {
+        options.push({
+          label: 'Edit the Answer',
+          icon: { name: 'edit' },
+          action: () => {},
+        })
+      }
+
+      console.log({ options })
+
+      // return [...options]
+    }
+
+    // if I'm a nobody...
+    return [
+      {
+        label: 'Report',
+        icon: { name: 'flag' },
+        action: () => {},
+      },
+    ]
+  }
+
   return (
     <div
       className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black z-question ${className}`}
     >
       <div className="absolute right-10 top-7 z-optionsMenu">
-        {/* TODO: Display different options based on who is logged in */}
         {isQuestionOptionsShowing && (
           <DropdownMenu
             isShowing={true}
             onClickOutside={() => toggleQuestionOptions()}
-            options={[
-              {
-                label: 'Hide',
-                icon: { name: 'hide' },
-                action: () => {},
-              },
-              {
-                label: 'Report',
-                icon: { name: 'flag' },
-                action: () => {},
-              },
-              {
-                label: 'Delete',
-                icon: { name: 'delete' },
-                action: () => {},
-              },
-            ]}
-            className="absolute -right-2 top-8"
+            options={DisplayQuestionOptions()}
+            className="absolute -right-2 top-8 z-question"
             direction="top right"
             // triggerRef={triggerRef}
           />
@@ -169,9 +238,13 @@ const Question = ({
             updatedOn={updatedOn}
           />
         )}
-        {/* {!answer && answeredBy.id === currentUser.id && (
-          <AnswerForm answeredBy={currentUser} className="-ml-[5.25rem]" />
-        )} */}
+        {!answer && answeredBy.id === currentUser.id && (
+          <AnswerForm
+            answeredBy={currentUser}
+            className="-ml-[5.25rem]"
+            onSave={handleAnswerQuestion}
+          />
+        )}
       </div>
     </div>
   )
