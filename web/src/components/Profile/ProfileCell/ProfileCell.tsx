@@ -2,7 +2,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { ProfileDetails } from '../ProfileDetails/ProfileDetails'
 
 export const QUERY = gql`
-  query User($username: String!) {
+  query QueryEditProfile($username: String!) {
     user: user(username: $username) {
       id
       avatar
@@ -13,6 +13,7 @@ export const QUERY = gql`
       location
       username
       website
+      privateAccount
     }
   }
 `
@@ -27,6 +28,6 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error.message}</div>
 )
 
-export const Success = ({ user, isMe }: CellSuccessProps) => {
-  return <ProfileDetails {...user} isMe={isMe} />
-}
+export const Success = ({ user, isMe }: CellSuccessProps) => (
+  <ProfileDetails {...user} isMe={isMe} />
+)
