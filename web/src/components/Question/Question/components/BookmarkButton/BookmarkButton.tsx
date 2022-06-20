@@ -62,7 +62,7 @@ const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
       >
         {isBookmarked ? (
           <span data-testid="bookmarkFilled">
-            <Icon className="selected-action" name="bookmarkFilled" />
+            <Icon className="selected-action action" name="bookmarkFilled" />
           </span>
         ) : (
           <span data-testid="bookmarkEmpty">

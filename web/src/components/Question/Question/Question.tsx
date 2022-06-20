@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import { Avatar } from '../../Avatar'
-import type { AvatarColor } from 'src/components/Avatar/Avatar'
+import type { IQuestion } from './Question.d'
 import { Icon } from '../../Icon'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -14,52 +14,10 @@ import { BookmarkButton } from './components/BookmarkButton'
 import AnswerForm from './components/Answer/AnswerForm/AnswerForm'
 import { LikeButton } from './components/LikeButton/LikeButton'
 import { IDropdownMenuOptions } from 'src/components/DropdownMenu/DropdownMenu'
-
-const DELETE_QUESTION_MUTATION = gql`
-  mutation DeleteQuestionMutation($id: Int!) {
-    deleteQuestion(id: $id) {
-      id
-    }
-  }
-`
-
-const ANSWER_QUESTION_MUTATION = gql`
-  mutation AnswerQuestionMutation(
-    $questionId: Int!
-    $input: UpdateQuestionInput
-  ) {
-    updateQuestion(id: $questionId, input: $input) {
-      id
-    }
-  }
-`
-
-export interface IUser {
-  id: number
-  fullName: string
-  username: string
-  avatar?: string
-  avatarColor: AvatarColor
-}
-
-export interface IQuestion {
-  answer?: string
-  answeredBy: IUser
-  askAgain?: number
-  askedBy: IUser
-  askedOn: string
-  bookmark?: boolean
-  className?: string
-  favorite?: number
-  followUp?: number
-  pinned?: boolean
-  question: string
-  questionId: string
-  questionOrder?: number
-  showActions?: boolean
-  updatedOn?: string
-  rerouteOnDelete?: () => void
-}
+import { AskAgainButton } from './components/AskAgainButton'
+import { ANSWER_QUESTION_MUTATION, DELETE_QUESTION_MUTATION } from './Mutations'
+import { FollowupButton } from './components/FollowupButton'
+import { PinnedQuestion } from './components/PinnedQuestion/PinnedQuestion'
 
 const Question = ({
   answer,
@@ -69,6 +27,8 @@ const Question = ({
   askedOn,
   bookmark,
   className = '',
+  countLikes = 0,
+  currentUserLikes,
   favorite,
   followUp,
   pinned = false,
@@ -80,6 +40,9 @@ const Question = ({
 }: IQuestion): JSX.Element => {
   const { currentUser } = useAuth()
   const [isQuestionOptionsShowing, setIsQuestionOptionsShow] = useState(false)
+
+  // FIXME: Temporary Value
+  const numberOfFavorites = 0
 
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
@@ -175,6 +138,9 @@ const Question = ({
     ]
   }
 
+  const onAskAgainClick = () => {}
+  const onFollowUpClick = () => {}
+
   return (
     <div
       className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black z-question ${className}`}
@@ -203,15 +169,7 @@ const Question = ({
         width={68}
       />
       <div className="flex-1 relative">
-        {pinned && (
-          <div
-            className="flex gap-1 uppercase font-slab text-xs text-black py-2 font-extrabold absolute -top-9"
-            data-testid="pinnedQuestion"
-          >
-            <Icon name="pin" />
-            Pinned Question
-          </div>
-        )}
+        {pinned && <PinnedQuestion />}
         <div data-testid="askedBy" className="z-byline">
           <Byline person={askedBy} displayDate={askedOn} />
         </div>
@@ -230,6 +188,15 @@ const Question = ({
             {question}
           </Link>
         </div>
+
+        {!answer && answeredBy.id === currentUser.id && (
+          <AnswerForm
+            answeredBy={currentUser}
+            className="-ml-[5.25rem]"
+            onSave={handleAnswerQuestion}
+          />
+        )}
+
         {/* display the answer */}
         {answer && (
           <Answer
@@ -238,12 +205,43 @@ const Question = ({
             updatedOn={updatedOn}
           />
         )}
-        {!answer && answeredBy.id === currentUser.id && (
-          <AnswerForm
-            answeredBy={currentUser}
-            className="-ml-[5.25rem]"
-            onSave={handleAnswerQuestion}
-          />
+
+        {/* action buttons */}
+        {showActions && (
+          <div className="grid grid-cols-5 w-full" data-testid="actionButtons">
+            {/* Follow-Up */}
+            {(currentUser || followUp > 0) && (
+              <FollowupButton
+                followUp={followUp}
+                onFollowUpClick={onFollowUpClick}
+              />
+            )}
+
+            {/* Like / Favorite */}
+            {(currentUser || numberOfFavorites > 0) && (
+              <LikeButton
+                favorite={currentUserLikes}
+                numberOfFavorites={countLikes}
+                questionId={questionId}
+              />
+            )}
+
+            {/* Ask Again? */}
+            {(currentUser || askAgain > 0) && (
+              <AskAgainButton
+                askAgain={askAgain}
+                onAskAgainClick={onAskAgainClick}
+              />
+            )}
+
+            {/* Bookmarked */}
+            {currentUser && (
+              <BookmarkButton bookmarked={bookmark} questionId={questionId} />
+            )}
+
+            {/* Share */}
+            <ShareButton />
+          </div>
         )}
       </div>
     </div>

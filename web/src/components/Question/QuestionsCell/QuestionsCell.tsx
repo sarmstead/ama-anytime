@@ -18,6 +18,11 @@ export const QUERY = gql`
       question
       answer
       pinned
+      countLikes
+      currentUserLikes
+      currentUserBookmarks {
+        id
+      }
       askedBy {
         id
         avatar

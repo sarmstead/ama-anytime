@@ -34,6 +34,20 @@ export const deleteLike: MutationResolvers['deleteLike'] = ({ id }) => {
   })
 }
 
+export const deleteQuestionLike: MutationResolvers['deleteQuestionLike'] = ({
+  questionId,
+  userId,
+}) => {
+  return db.like.delete({
+    where: {
+      userId_questionId: {
+        questionId,
+        userId,
+      },
+    },
+  })
+}
+
 export const Like: LikeResolvers = {
   user: (_obj, { root }) =>
     db.like.findUnique({ where: { id: root.id } }).user(),

@@ -2,7 +2,7 @@ import { useMutation } from '@redwoodjs/web'
 import QuestionForm from 'src/components/Question/QuestionForm'
 import { toast } from '@redwoodjs/web/toast'
 import { QUERY } from '../QuestionsCell/QuestionsCell'
-import { IUser } from '../Question/Question'
+import { IUser } from '../Question/Question.d'
 
 // TODO: Write Tests
 
@@ -28,18 +28,11 @@ const NewQuestion = ({ afterCreate, answeredBy }: INewQuestion) => {
         'FindQuestions', // Query name
       ],
       onCompleted: () => {
-        console.log('question created')
-        // close the modal window
-        afterCreate()
-
-        // display a success message in toast
-        toast('User created!')
-
-        // refresh the cache
+        afterCreate() // close the modal window
+        toast('User created!') // display a success message in toast
       },
       onError: (error) => {
-        // display an error message in toast
-        toast.error(error.message)
+        toast.error(error.message) // display an error message in toast
       },
     }
   )

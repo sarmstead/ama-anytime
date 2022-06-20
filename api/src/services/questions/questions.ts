@@ -89,6 +89,22 @@ export const Question: QuestionResolvers = {
     db.question.findUnique({ where: { id: root.id } }).bookmarks(),
   likes: (_obj, { root }) =>
     db.question.findUnique({ where: { id: root.id } }).likes(),
+  countLikes: async (_obj, { root }) => {
+    const Likes = await db.question
+      .findUnique({ where: { id: root.id } })
+      .likes()
+    return Likes.length
+  },
+  currentUserLikes: async (_obj, { root }) => {
+    const Likes = await db.question
+      .findUnique({ where: { id: root.id } })
+      .likes({
+        where: {
+          userId: context?.currentUser?.id ? context.currentUser.id : undefined,
+        },
+      })
+    return Likes.length > 0
+  },
   askAgains: (_obj, { root }) =>
     db.question.findUnique({ where: { id: root.id } }).askAgains(),
   votes: (_obj, { root }) =>

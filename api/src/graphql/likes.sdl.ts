@@ -23,8 +23,9 @@ export const schema = gql`
   }
 
   type Mutation {
-    createLike(input: CreateLikeInput!): Like! @requireAuth
+    createLike(input: CreateLikeInput!): Like! @skipAuth
     updateLike(id: Int!, input: UpdateLikeInput!): Like! @requireAuth
     deleteLike(id: Int!): Like! @requireAuth
+    deleteQuestionLike(questionId: Int!, userId: Int!): Like! @skipAuth
   }
 `

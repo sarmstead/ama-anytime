@@ -1,4 +1,4 @@
-import { Form, HiddenField, Submit } from '@redwoodjs/forms'
+import { Form, Submit } from '@redwoodjs/forms'
 import { Avatar } from 'src/components/Avatar'
 import { AvatarColor } from 'src/components/Avatar/Avatar'
 import { Button } from 'src/components/Button'
@@ -11,7 +11,7 @@ interface IAnswerForm {
     fullName: string
   }
   className: string
-  onSave: () => void
+  onSave: (data) => void
 }
 
 const AnswerForm = ({

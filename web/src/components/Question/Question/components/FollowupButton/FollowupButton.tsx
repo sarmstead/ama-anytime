@@ -15,7 +15,7 @@ const FollowupButton = ({ followUp, onFollowUpClick }) => {
         disabled={!currentUser}
       >
         {followUp ? (
-          <span className="selected-action">
+          <span className="selected-action action">
             <Icon name="commentFilled" />
             {followUp}
           </span>

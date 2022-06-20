@@ -15,7 +15,7 @@ const AskAgainButton = ({ askAgain, onAskAgainClick }) => {
         disabled={!currentUser}
       >
         {askAgain ? (
-          <span className="selected-action">
+          <span className="selected-action action">
             <Icon name="reuse" /> {askAgain}
           </span>
         ) : (

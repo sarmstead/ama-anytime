@@ -19,6 +19,8 @@ export const schema = gql`
     askAgains: [AskAgain]!
     votes: [Vote]!
     currentUserBookmarks: [Bookmark]!
+    countLikes: Int
+    currentUserLikes: Boolean
   }
 
   type Query {

@@ -153,8 +153,12 @@
     @apply text-lg leading-7 pt-0 mt-0;
   }
 
+  .action {
+    @apply font-slab text-xl flex gap-1 items-center
+  }
+
   .selected-action {
-    @apply text-punch font-slab text-xl flex gap-1 items-center
+    @apply text-punch
   }
 
   footer nav a {
