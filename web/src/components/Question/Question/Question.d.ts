@@ -14,9 +14,9 @@ export interface IQuestion {
   askAgain?: number
   askedBy: IUser
   askedOn: string
-  bookmark?: boolean
   className?: string
   countLikes?: number
+  currentUserBookmarked?: boolean
   currentUserLikes?: boolean
   favorite?: number
   followUp?: number

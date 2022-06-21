@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client'
 
 const selfteachmeUser = {
   username: 'selfteachme',
-  email: 'ama@selfteach.me',
+  email: 'selfteachme@example.com',
   fullName: 'SelfTeach.me',
   hashedPassword: 'String',
   salt: 'String',
@@ -10,7 +10,7 @@ const selfteachmeUser = {
 
 const ahhacreativeUser = {
   username: 'ahhacreative',
-  email: 'ama@ahhacreative.com',
+  email: 'ahhacreative@example.com',
   fullName: 'Ah Ha Creative',
   hashedPassword: 'String',
   salt: 'String',
@@ -18,7 +18,7 @@ const ahhacreativeUser = {
 
 const amyduttonUser = {
   username: 'amydutton',
-  email: 'ama@amydutton.me',
+  email: 'amydutton@example.com',
   fullName: 'Amy Dutton',
   hashedPassword: 'String',
   salt: 'String',
@@ -26,7 +26,7 @@ const amyduttonUser = {
 
 const compressedfmUser = {
   username: 'compressedfm',
-  email: 'ama@compressed.fm',
+  email: 'compressed@example.com',
   fullName: 'Compressed.fm',
   hashedPassword: 'String',
   salt: 'String',

@@ -20,9 +20,7 @@ export const QUERY = gql`
       pinned
       countLikes
       currentUserLikes
-      currentUserBookmarks {
-        id
-      }
+      currentUserBookmarked
       askedBy {
         id
         avatar
@@ -40,9 +38,6 @@ export const QUERY = gql`
       askedOn
       updatedOn
       parentQuestionId
-      currentUserBookmarks {
-        id
-      }
     }
   }
 `

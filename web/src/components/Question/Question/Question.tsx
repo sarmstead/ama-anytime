@@ -25,9 +25,9 @@ const Question = ({
   askAgain,
   askedBy,
   askedOn,
-  bookmark,
   className = '',
   countLikes = 0,
+  currentUserBookmarked = false,
   currentUserLikes,
   favorite,
   followUp,
@@ -40,9 +40,6 @@ const Question = ({
 }: IQuestion): JSX.Element => {
   const { currentUser } = useAuth()
   const [isQuestionOptionsShowing, setIsQuestionOptionsShow] = useState(false)
-
-  // FIXME: Temporary Value
-  const numberOfFavorites = 0
 
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
@@ -218,7 +215,7 @@ const Question = ({
             )}
 
             {/* Like / Favorite */}
-            {(currentUser || numberOfFavorites > 0) && (
+            {(currentUser || countLikes > 0) && (
               <LikeButton
                 favorite={currentUserLikes}
                 numberOfFavorites={countLikes}
@@ -236,7 +233,10 @@ const Question = ({
 
             {/* Bookmarked */}
             {currentUser && (
-              <BookmarkButton bookmarked={bookmark} questionId={questionId} />
+              <BookmarkButton
+                bookmarked={currentUserBookmarked}
+                questionId={questionId}
+              />
             )}
 
             {/* Share */}

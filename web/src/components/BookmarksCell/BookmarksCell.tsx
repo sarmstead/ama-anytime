@@ -25,6 +25,9 @@ export const QUERY = gql`
           username
           fullName
         }
+        countLikes
+        currentUserLikes
+        currentUserBookmarked
       }
     }
   }
@@ -42,10 +45,7 @@ export const Success = ({ bookmarks }: CellSuccessProps<FindBookmarks>) =>
   bookmarks.map((bookmark) => (
     <Question
       key={bookmark.id}
-      answeredBy={bookmark.question.answeredBy}
-      askedBy={bookmark.question.askedBy}
-      askedOn={bookmark.question.askedOn}
-      question={bookmark.question.question}
       questionId={bookmark.question.id}
+      {...bookmark.question}
     />
   ))

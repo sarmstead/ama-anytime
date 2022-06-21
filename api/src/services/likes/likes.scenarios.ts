@@ -1,5 +1,21 @@
 import type { Prisma } from '@prisma/client'
 
+const selfTeachMeUser = {
+  username: 'selfteachme',
+  email: 'selfteachme@example.com',
+  fullName: 'SelfTeach.me',
+  hashedPassword: 'String',
+  salt: 'String',
+}
+
+const ahHaCreativeUser = {
+  username: 'ahhacreative',
+  email: 'ahhacreative@example.com',
+  fullName: 'Ah Ha Creative',
+  hashedPassword: 'String',
+  salt: 'String',
+}
+
 export const standard = defineScenario<Prisma.LikeCreateArgs>({
   like: {
     one: {
@@ -74,6 +90,32 @@ export const standard = defineScenario<Prisma.LikeCreateArgs>({
         },
       },
     },
+  },
+})
+
+export const createALike = defineScenario({
+  user: {
+    one: {
+      data: {
+        create: { ...selfTeachMeUser },
+      },
+    },
+    second: {
+      data: {
+        create: { ...ahHaCreativeUser },
+      },
+    },
+  },
+  question: {
+    one: (scenario) => ({
+      data: {
+        create: {
+          question: 'String',
+          askedById: scenario.user.one.id,
+          answeredById: scenario.user.second.id,
+        },
+      },
+    }),
   },
 })
 

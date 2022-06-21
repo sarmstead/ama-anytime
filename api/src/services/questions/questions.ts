@@ -87,6 +87,22 @@ export const Question: QuestionResolvers = {
     db.question.findUnique({ where: { id: root.id } }).questions(),
   bookmarks: (_obj, { root }) =>
     db.question.findUnique({ where: { id: root.id } }).bookmarks(),
+  countBookmarks: async (_obj, { root }) => {
+    const numBookmarks = await db.question
+      .findUnique({ where: { id: root.id } })
+      .bookmarks()
+    return numBookmarks.length
+  },
+  currentUserBookmarked: async (_obj, { root }) => {
+    const curBookmarks = await db.question
+      .findUnique({ where: { id: root.id } })
+      .bookmarks({
+        where: {
+          userId: context?.currentUser?.id ? context.currentUser.id : undefined,
+        },
+      })
+    return curBookmarks.length > 0
+  },
   likes: (_obj, { root }) =>
     db.question.findUnique({ where: { id: root.id } }).likes(),
   countLikes: async (_obj, { root }) => {
@@ -109,10 +125,4 @@ export const Question: QuestionResolvers = {
     db.question.findUnique({ where: { id: root.id } }).askAgains(),
   votes: (_obj, { root }) =>
     db.question.findUnique({ where: { id: root.id } }).votes(),
-  currentUserBookmarks: (_obj, { root, context }) =>
-    db.question.findUnique({ where: { id: root.id } }).bookmarks({
-      where: {
-        userId: context?.currentUser?.id ? context.currentUser.id : undefined,
-      },
-    }),
 }

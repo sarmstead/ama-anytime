@@ -28,5 +28,6 @@ export const schema = gql`
     updateBookmark(id: Int!, input: UpdateBookmarkInput!): Bookmark!
       @requireAuth
     deleteBookmark(id: Int!): Bookmark! @requireAuth
+    deleteQuestionBookmark(questionId: Int!, userId: Int!): Bookmark! @skipAuth
   }
 `

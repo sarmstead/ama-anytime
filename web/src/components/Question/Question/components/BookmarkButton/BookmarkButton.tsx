@@ -9,70 +9,94 @@ interface IBookmarkButton {
   questionId: number
 }
 
-// const REMOVE_BOOKMARK_QUESTION_MUTATION = gql`
-//   mutation DeleteQuestionMutation($id: Int!) {
-//     deleteQuestion(id: $id) {
-//       id
-//     }
-//   }
-// `
+const DELETE_BOOKMARK_QUESTION_MUTATION = gql`
+  mutation deleteBookmarkQuestionMutation($questionId: Int!, $userId: Int!) {
+    deleteQuestionBookmark(questionId: $questionId, userId: $userId) {
+      id
+    }
+  }
+`
 
-// const BOOKMARK_QUESTION_MUTATION = gql`
-//   mutation BOOKMARK_QUESTION_MUTATION {
-//     createBookmark(input: { userId: $userId, questionId: $questionId }) {
-//       question {
-//         question
-//       }
-//       user {
-//         id
-//         fullName
-//       }
-//     }
-//   }
-// `
+const BOOKMARK_QUESTION_MUTATION = gql`
+  mutation bookmarkQuestionMutation($questionId: Int!, $userId: Int!) {
+    createBookmark(input: { userId: $userId, questionId: $questionId }) {
+      id
+    }
+  }
+`
 
 const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
   const [isBookmarked, setIsBookmarked] = useState(bookmarked)
   const { currentUser } = useAuth()
 
-  // const [createBookmark, { loading, error }] = useMutation(
-  //   BOOKMARK_QUESTION_MUTATION,
-  //   {
-  //     onCompleted: () => {
-  //       setIsBookmarked(true)
-  //     },
-  //     onError: (error) => {
-  //       toast.error(error.message)
-  //     },
-  //   }
-  // )
+  // TODO: Add loading animation
+  const [createBookmark] = useMutation(BOOKMARK_QUESTION_MUTATION, {
+    onCompleted: () => {
+      setIsBookmarked(true)
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
 
-  const handleClick = () => {
-    // createBookmark({
-    //   variables: { userId: currentUserId, questionId: questionId },
-    // })
+  const [removeBookmark] = useMutation(DELETE_BOOKMARK_QUESTION_MUTATION, {
+    onCompleted: () => {
+      setIsBookmarked(false)
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
+  const handleAddBookmark = () => {
+    createBookmark({
+      variables: {
+        userId: Number(currentUser.id),
+        questionId: Number(questionId),
+      },
+    })
   }
 
-  if (currentUser)
+  const handleRemoveBookmark = () => {
+    removeBookmark({
+      variables: {
+        userId: Number(currentUser.id),
+        questionId: Number(questionId),
+      },
+    })
+  }
+
+  // if no one is logged in, don't display the button
+  if (!currentUser) {
+    return <span />
+  }
+
+  // if the user bookmarked this question
+  if (isBookmarked)
     return (
       <button
         className="col-start-4 col-span-1 hover:text-punch"
         data-testid="bookmarkButton"
-        onClick={handleClick}
+        onClick={handleRemoveBookmark}
       >
-        {isBookmarked ? (
-          <span data-testid="bookmarkFilled">
-            <Icon className="selected-action action" name="bookmarkFilled" />
-          </span>
-        ) : (
-          <span data-testid="bookmarkEmpty">
-            <Icon name="bookmark" />
-          </span>
-        )}
+        <span data-testid="bookmarkFilled">
+          <Icon className="selected-action action" name="bookmarkFilled" />
+        </span>
       </button>
     )
 
-  return <span />
+  // otherwise...
+  return (
+    <button
+      className="col-start-4 col-span-1 hover:text-punch"
+      data-testid="bookmarkButton"
+      onClick={handleAddBookmark}
+    >
+      <span data-testid="bookmarkEmpty">
+        <Icon name="bookmark" />
+      </span>
+    </button>
+  )
 }
 
 export { BookmarkButton }

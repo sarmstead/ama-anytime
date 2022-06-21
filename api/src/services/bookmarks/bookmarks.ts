@@ -12,7 +12,7 @@ export const bookmarks: QueryResolvers['bookmarks'] = ({ userId }) => {
         id: userId, // can find all the bookmarks for a given user
       },
     },
-    orderBy: [{ createdOn: 'asc' }],
+    orderBy: [{ createdOn: 'desc' }],
   })
 }
 
@@ -50,11 +50,25 @@ export const updateBookmark: MutationResolvers['updateBookmark'] = ({
   })
 }
 
+// deletes a question based on the database id
 export const deleteBookmark: MutationResolvers['deleteBookmark'] = ({ id }) => {
   return db.bookmark.delete({
     where: { id },
   })
 }
+
+// deletes a question based on the question and user id
+export const deleteQuestionBookmark: MutationResolvers['deleteQuestionBookmark'] =
+  ({ questionId, userId }) => {
+    return db.bookmark.delete({
+      where: {
+        userId_questionId: {
+          questionId,
+          userId,
+        },
+      },
+    })
+  }
 
 export const Bookmark: BookmarkResolvers = {
   user: (_obj, { root }) =>

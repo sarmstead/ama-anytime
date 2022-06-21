@@ -15,10 +15,11 @@ export const schema = gql`
     parentQuestion: Question
     questions: [Question]!
     bookmarks: [Bookmark]!
+    countBookmarks: Int
+    currentUserBookmarked: Boolean
     likes: [Like]!
     askAgains: [AskAgain]!
     votes: [Vote]!
-    currentUserBookmarks: [Bookmark]!
     countLikes: Int
     currentUserLikes: Boolean
   }
