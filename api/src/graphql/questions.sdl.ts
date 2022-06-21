@@ -16,6 +16,7 @@ export const schema = gql`
     questions: [Question]!
     bookmarks: [Bookmark]!
     countBookmarks: Int
+    notGoingToAnswer: Boolean
     currentUserBookmarked: Boolean
     likes: [Like]!
     askAgains: [AskAgain]!

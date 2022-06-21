@@ -28,7 +28,7 @@ const AnswerForm = ({
       <div className="w-[68px] text-center">
         <Avatar
           avatarColor={answeredBy.avatarColor}
-          className="mx-auto top-4 relative"
+          className="mx-auto top-0 relative"
           src={answeredBy.avatar}
           alt={answeredBy.fullName}
           height={48}

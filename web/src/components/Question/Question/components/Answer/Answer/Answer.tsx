@@ -1,5 +1,5 @@
 import { Avatar } from 'src/components/Avatar'
-import type { IUser } from '../../../Question'
+import type { IUser } from '../../../Question.d'
 import { Byline } from '../../Byline'
 
 export interface IAnswer {

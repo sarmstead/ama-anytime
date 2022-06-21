@@ -40,6 +40,7 @@ const Question = ({
 }: IQuestion): JSX.Element => {
   const { currentUser } = useAuth()
   const [isQuestionOptionsShowing, setIsQuestionOptionsShow] = useState(false)
+  const [answerToQuestion, setAnswerToQuestion] = useState<string>(answer)
 
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
     onCompleted: () => {
@@ -50,17 +51,14 @@ const Question = ({
     },
   })
 
-  const [answerQuestion, { loading, error }] = useMutation(
-    ANSWER_QUESTION_MUTATION,
-    {
-      onCompleted: () => {
-        toast.success('Question Answered')
-      },
-      onError: (error) => {
-        toast.error(error.message)
-      },
-    }
-  )
+  const [answerQuestion] = useMutation(ANSWER_QUESTION_MUTATION, {
+    onCompleted: () => {
+      toast.success('Question Answered')
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
 
   const onDeleteClick = (id) => {
     if (confirm('Are you sure you want to delete question ' + id + '?')) {
@@ -75,10 +73,14 @@ const Question = ({
   const handleAnswerQuestion = (data) => {
     answerQuestion({
       variables: {
-        id: questionId,
+        questionId: Number(questionId),
         input: { answer: data.answer },
       },
     })
+
+    // Update the display - hide the form and show the answer
+    // Don't move the answer to the other tab as soon as the user submits
+    setAnswerToQuestion(data.answer)
   }
 
   const DisplayQuestionOptions = (): IDropdownMenuOptions[] => {
@@ -174,30 +176,30 @@ const Question = ({
           className="font-condensed text-[2.5rem] leading-none pt-o pb-8 relative"
           data-testid="question"
         >
-          {/* connect question and answer */}
-          {answer && (
+          {/* connect question and answer / answer form */}
+          {(answer || (!answer && answeredBy.id === currentUser.id)) && (
             <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-avatarConnector" />
           )}
           <Link
-            to={routes.question({ id: questionId })}
+            to={routes.question({ id: String(questionId) })}
             className="hover:text-punch"
           >
             {question}
           </Link>
         </div>
 
-        {!answer && answeredBy.id === currentUser.id && (
+        {!answerToQuestion && answeredBy.id === currentUser.id && (
           <AnswerForm
             answeredBy={currentUser}
-            className="-ml-[5.25rem]"
+            className="-ml-[5.5rem]"
             onSave={handleAnswerQuestion}
           />
         )}
 
         {/* display the answer */}
-        {answer && (
+        {answerToQuestion && (
           <Answer
-            answer={answer}
+            answer={answerToQuestion}
             answeredBy={answeredBy}
             updatedOn={updatedOn}
           />
