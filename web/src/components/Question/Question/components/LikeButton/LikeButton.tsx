@@ -98,7 +98,7 @@ const LikeButton = ({
           onMouseLeave={toggleTooltip}
         >
           <Icon name="heartFilled" /> {countFavorites > 0 && countFavorites}
-          <div className="absolute top-8 left-1/2 -translate-x-1/2">
+          <div className="absolute top-6 left-1/2 -translate-x-1/2">
             <Tooltip text="Like" isShowing={showTooltip} />
           </div>
         </button>
@@ -117,7 +117,7 @@ const LikeButton = ({
         onMouseLeave={toggleTooltip}
       >
         <Icon name="heart" /> {countFavorites > 0 && countFavorites}
-        <div className="absolute top-8 left-1/2 -translate-x-1/2">
+        <div className="absolute top-6 left-1/2 -translate-x-1/2">
           <Tooltip text="Like" isShowing={showTooltip} />
         </div>
       </button>

@@ -7,7 +7,7 @@ const AskAgainButton = ({ askAgain, onAskAgainClick }) => {
   if (currentUser || askAgain > 0)
     return (
       <button
-        className={`col-start-3 col-span-1 ${
+        className={`col-start-3 col-span-1 flex justify-center ${
           currentUser && `hover:text-punch`
         }`}
         data-testid="askAgain"

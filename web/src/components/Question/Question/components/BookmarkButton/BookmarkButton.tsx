@@ -81,7 +81,7 @@ const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
   if (isBookmarked)
     return (
       <button
-        className="col-start-4 col-span-1 relative flex justify-center hover:text-punch"
+        className="col-start-4 col-span-1 relative items-center flex justify-center hover:text-punch"
         data-testid="bookmarkButton"
         onClick={handleRemoveBookmark}
         onMouseEnter={toggleTooltip}
@@ -90,7 +90,7 @@ const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
         <span data-testid="bookmarkFilled">
           <Icon className="selected-action action" name="bookmarkFilled" />
         </span>
-        <div className="absolute top-8 left-1/2 -translate-x-1/2">
+        <div className="absolute top-7 left-1/2 -translate-x-1/2">
           <Tooltip text="Bookmark" isShowing={showTooltip} />
         </div>
       </button>
@@ -99,16 +99,16 @@ const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
   // otherwise...
   return (
     <button
-      className="col-start-4 col-span-1 relative flex justify-center hover:text-punch"
+      className="col-start-4 col-span-1 relative flex items-center justify-center hover:text-punch"
       data-testid="bookmarkButton"
       onClick={handleAddBookmark}
       onMouseEnter={toggleTooltip}
       onMouseLeave={toggleTooltip}
     >
       <span data-testid="bookmarkEmpty">
-        <Icon name="bookmark" />
+        <Icon className="action" name="bookmark" />
       </span>
-      <div className="absolute top-8 left-1/2 -translate-x-1/2">
+      <div className="absolute top-7 left-1/2 -translate-x-1/2">
         <Tooltip text="Bookmark" isShowing={showTooltip} />
       </div>
     </button>

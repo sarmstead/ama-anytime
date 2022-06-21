@@ -14,18 +14,14 @@ const ShareButton = () => {
 
   return (
     <button
-      className="col-start-5 col-span-1 hover:text-punch relative"
+      className="col-start-5 col-span-1 hover:text-punch relative flex justify-center items-center"
       onClick={handleClick}
       onMouseEnter={toggleTooltip}
       onMouseLeave={toggleTooltip}
     >
-      <div className="inline-block">
-        <Icon name="share" />
-        <Tooltip
-          text="Share"
-          isShowing={showTooltip}
-          className="absolute mt-1 left-1/2 -translate-x-1/2"
-        />
+      <Icon name="share" />
+      <div className="absolute top-6 left-1/2 -translate-x-1/2">
+        <Tooltip text="Share" isShowing={showTooltip} />
       </div>
     </button>
   )
