@@ -3,6 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 import { useState } from 'react'
 import { Icon } from 'src/components/Icon'
+import { Tooltip } from 'src/components/Tooltip'
 
 interface IBookmarkButton {
   bookmarked: boolean
@@ -27,6 +28,7 @@ const BOOKMARK_QUESTION_MUTATION = gql`
 
 const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
   const [isBookmarked, setIsBookmarked] = useState(bookmarked)
+  const [showTooltip, setShowTooltip] = useState<boolean>(false)
   const { currentUser } = useAuth()
 
   // TODO: Add loading animation
@@ -66,6 +68,10 @@ const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
     })
   }
 
+  const toggleTooltip = () => {
+    setShowTooltip((prevValue) => !prevValue)
+  }
+
   // if no one is logged in, don't display the button
   if (!currentUser) {
     return <span />
@@ -75,26 +81,36 @@ const BookmarkButton = ({ bookmarked, questionId }: IBookmarkButton) => {
   if (isBookmarked)
     return (
       <button
-        className="col-start-4 col-span-1 hover:text-punch"
+        className="col-start-4 col-span-1 relative flex justify-center hover:text-punch"
         data-testid="bookmarkButton"
         onClick={handleRemoveBookmark}
+        onMouseEnter={toggleTooltip}
+        onMouseLeave={toggleTooltip}
       >
         <span data-testid="bookmarkFilled">
           <Icon className="selected-action action" name="bookmarkFilled" />
         </span>
+        <div className="absolute top-8 left-1/2 -translate-x-1/2">
+          <Tooltip text="Bookmark" isShowing={showTooltip} />
+        </div>
       </button>
     )
 
   // otherwise...
   return (
     <button
-      className="col-start-4 col-span-1 hover:text-punch"
+      className="col-start-4 col-span-1 relative flex justify-center hover:text-punch"
       data-testid="bookmarkButton"
       onClick={handleAddBookmark}
+      onMouseEnter={toggleTooltip}
+      onMouseLeave={toggleTooltip}
     >
       <span data-testid="bookmarkEmpty">
         <Icon name="bookmark" />
       </span>
+      <div className="absolute top-8 left-1/2 -translate-x-1/2">
+        <Tooltip text="Bookmark" isShowing={showTooltip} />
+      </div>
     </button>
   )
 }
