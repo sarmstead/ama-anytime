@@ -12,7 +12,7 @@ export const formatRelativeDate = (date: string): string => {
 
   // minutes ago
   if (Math.abs(differenceInMinutes(past, now)) < 60) {
-    return `${differenceInMinutes(past, now)}m`
+    return `${Math.abs(differenceInMinutes(past, now))}m`
   }
 
   // hours ago
