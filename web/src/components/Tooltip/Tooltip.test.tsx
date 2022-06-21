@@ -1,6 +1,6 @@
 import { render, screen } from '@redwoodjs/testing/web'
 
-import Tooltip from './Tooltip'
+import { Tooltip } from './Tooltip'
 
 describe('Tooltip', () => {
   it('renders successfully', () => {

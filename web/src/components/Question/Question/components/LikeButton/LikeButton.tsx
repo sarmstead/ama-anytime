@@ -3,7 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 import { useState } from 'react'
 import { Icon } from 'src/components/Icon'
-import Tooltip from 'src/components/Tooltip/Tooltip'
+import { Tooltip } from 'src/components/Tooltip'
 
 // mutations
 export const LIKE_QUESTION_MUTATION = gql`
@@ -116,8 +116,7 @@ const LikeButton = ({
         onMouseEnter={toggleTooltip}
         onMouseLeave={toggleTooltip}
       >
-        <Icon name="heart" className="mx-auto" />{' '}
-        {countFavorites > 0 && countFavorites}
+        <Icon name="heart" /> {countFavorites > 0 && countFavorites}
         <div className="absolute top-8 left-1/2 -translate-x-1/2">
           <Tooltip text="Like" isShowing={showTooltip} />
         </div>

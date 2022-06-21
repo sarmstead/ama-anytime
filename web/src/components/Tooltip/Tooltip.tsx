@@ -20,4 +20,4 @@ const Tooltip = ({ className = '', isShowing = false, text }: ITooltip) => {
   }
 }
 
-export default Tooltip
+export { Tooltip }
