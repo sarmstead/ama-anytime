@@ -3,6 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 import { useState } from 'react'
 import { Icon } from 'src/components/Icon'
+import Tooltip from 'src/components/Tooltip/Tooltip'
 
 // mutations
 export const LIKE_QUESTION_MUTATION = gql`
@@ -35,6 +36,7 @@ const LikeButton = ({
 }: ILikeButton): JSX.Element => {
   const { currentUser } = useAuth()
   const [isFavorite, setIsFavorite] = useState<boolean>(favorite)
+  const [showTooltip, setShowTooltip] = useState<boolean>(false)
   const [countFavorites, setCountFavorites] =
     useState<number>(numberOfFavorites)
 
@@ -77,33 +79,52 @@ const LikeButton = ({
     })
   }
 
+  const toggleTooltip = () => {
+    setShowTooltip((prevValue) => !prevValue)
+  }
+
   if (currentUser || numberOfFavorites > 0) {
     // if this is a favorite
     if (isFavorite)
       return (
         <button
-          className={`col-start-2 col-span-1 action selected-action ${
+          className={`col-start-2 col-span-1 action relative inline-block selected-action ${
             currentUser && `hover:text-punch`
           }`}
           data-testid="removeFavoritedQuestion"
           onClick={onRemoveFavoriteClick}
           disabled={!currentUser}
+          onMouseEnter={toggleTooltip}
+          onMouseLeave={toggleTooltip}
         >
           <Icon name="heartFilled" /> {countFavorites > 0 && countFavorites}
+          <Tooltip
+            text="Like"
+            isShowing={showTooltip}
+            className="absolute mt-1 left-1/2 -translate-x-1/2"
+          />
         </button>
       )
 
     // otherwise, it's not a favorite
     return (
       <button
-        className={`col-start-2 col-span-1 action ${
+        className={`col-start-2 col-span-1 relative action inline-block ${
           currentUser && `hover:text-punch`
         }`}
         data-testid="favoritedQuestion"
         onClick={onFavoriteClick}
         disabled={!currentUser}
+        onMouseEnter={toggleTooltip}
+        onMouseLeave={toggleTooltip}
       >
-        <Icon name="heart" /> {countFavorites > 0 && countFavorites}
+        <Icon name="heart" className="mx-auto" />{' '}
+        {countFavorites > 0 && countFavorites}
+        <Tooltip
+          text="Like"
+          isShowing={showTooltip}
+          className="absolute mt-1 left-1/2 -translate-x-1/2"
+        />
       </button>
     )
   }
