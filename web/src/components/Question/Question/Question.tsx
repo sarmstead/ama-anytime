@@ -84,13 +84,9 @@ const Question = ({
 
   const DisplayQuestionOptions = (): IDropdownMenuOptions[] => {
     // if this is a question I asked...
-    if (currentUser.id === askedBy.id)
-      return [
-        {
-          label: 'Edit the Question',
-          icon: { name: 'edit' },
-          action: () => {},
-        },
+    if (currentUser.id === askedBy.id) {
+      let options: IDropdownMenuOptions[]
+      options = [
         {
           label: 'Delete',
           icon: { name: 'delete' },
@@ -98,9 +94,22 @@ const Question = ({
         },
       ]
 
+      // if the question hasn't been answered yet, you can edit it
+      if (!answerToQuestion) {
+        options.unshift({
+          label: 'Edit the Question',
+          icon: { name: 'edit' },
+          action: () => {},
+        })
+      }
+
+      return [...options]
+    }
+
     // if I was asked this question...
     if (currentUser.id === answeredBy.id) {
-      const options = [
+      let options: IDropdownMenuOptions[]
+      options = [
         {
           label: 'Hide',
           icon: { name: 'hide' },
@@ -113,7 +122,7 @@ const Question = ({
         },
       ]
 
-      if (answer) {
+      if (answerToQuestion) {
         options.push({
           label: 'Edit the Answer',
           icon: { name: 'edit' },
@@ -121,9 +130,7 @@ const Question = ({
         })
       }
 
-      console.log({ options })
-
-      // return [...options]
+      return [...options]
     }
 
     // if I'm a nobody...
