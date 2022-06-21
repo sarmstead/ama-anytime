@@ -1,7 +1,7 @@
 import type { FindQuestionById } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
-// import Question from 'src/components/Question/Question'
+import { Question } from 'src/components/Question/Question'
 
 // TODO: Write Tests
 
@@ -11,12 +11,27 @@ export const QUERY = gql`
       id
       question
       answer
-      order
       pinned
-      askedById
-      answeredById
+      countLikes
+      currentUserLikes
+      currentUserBookmarked
+      askedBy {
+        id
+        avatar
+        avatarColor
+        fullName
+        username
+      }
+      answeredBy {
+        id
+        avatar
+        avatarColor
+        fullName
+        username
+      }
       askedOn
       updatedOn
+      parentQuestionId
     }
   }
 `
@@ -30,5 +45,5 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ question }: CellSuccessProps<FindQuestionById>) => {
-  return <div>Question</div> //<Question question={question} />
+  return <Question questionId={question.id} {...question} />
 }

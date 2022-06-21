@@ -29,7 +29,6 @@ const Question = ({
   countLikes = 0,
   currentUserBookmarked = false,
   currentUserLikes,
-  favorite,
   followUp,
   pinned = false,
   question,
@@ -160,7 +159,7 @@ const Question = ({
         </button>
       </div>
       <Avatar
-        avatarColor={askedBy.avatarColor}
+        avatarColor={askedBy?.avatarColor}
         className="z-avatar relative"
         src={askedBy.avatar}
         alt={askedBy.username}

@@ -1,3 +1,5 @@
+import { MetaTags } from '@redwoodjs/web'
+import { PageHeading } from 'src/components/PageHeading'
 import QuestionCell from 'src/components/Question/QuestionCell'
 
 type QuestionPageProps = {
@@ -5,7 +7,16 @@ type QuestionPageProps = {
 }
 
 const QuestionPage = ({ id }: QuestionPageProps) => {
-  return <QuestionCell id={id} />
+  return (
+    <>
+      {/* TODO: Add Meta Data */}
+      <MetaTags title="Question" description="Question page" />
+
+      <PageHeading title="Question" isActionsShowing={false} />
+
+      <QuestionCell id={Number(id)} />
+    </>
+  )
 }
 
 export default QuestionPage

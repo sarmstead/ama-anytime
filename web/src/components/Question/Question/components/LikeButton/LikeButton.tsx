@@ -88,7 +88,7 @@ const LikeButton = ({
     if (isFavorite)
       return (
         <button
-          className={`col-start-2 col-span-1 action relative inline-block selected-action ${
+          className={`col-start-2 col-span-1 action relative flex justify-center selected-action ${
             currentUser && `hover:text-punch`
           }`}
           data-testid="removeFavoritedQuestion"
@@ -98,18 +98,16 @@ const LikeButton = ({
           onMouseLeave={toggleTooltip}
         >
           <Icon name="heartFilled" /> {countFavorites > 0 && countFavorites}
-          <Tooltip
-            text="Like"
-            isShowing={showTooltip}
-            className="absolute mt-1 left-1/2 -translate-x-1/2"
-          />
+          <div className="absolute top-8 left-1/2 -translate-x-1/2">
+            <Tooltip text="Like" isShowing={showTooltip} />
+          </div>
         </button>
       )
 
     // otherwise, it's not a favorite
     return (
       <button
-        className={`col-start-2 col-span-1 relative action inline-block ${
+        className={`col-start-2 col-span-1 relative action flex justify-center ${
           currentUser && `hover:text-punch`
         }`}
         data-testid="favoritedQuestion"
@@ -120,11 +118,9 @@ const LikeButton = ({
       >
         <Icon name="heart" className="mx-auto" />{' '}
         {countFavorites > 0 && countFavorites}
-        <Tooltip
-          text="Like"
-          isShowing={showTooltip}
-          className="absolute mt-1 left-1/2 -translate-x-1/2"
-        />
+        <div className="absolute top-8 left-1/2 -translate-x-1/2">
+          <Tooltip text="Like" isShowing={showTooltip} />
+        </div>
       </button>
     )
   }
