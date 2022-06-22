@@ -1,6 +1,7 @@
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import { Question } from '../Question/Question'
+import type { IQuestion } from '../Question/Question.d'
 import { FindQuestions } from 'types/graphql'
 
 export const QUERY = gql`
@@ -56,7 +57,7 @@ export const Success = ({ questions }: CellSuccessProps<FindQuestions>) => {
   return questions.map((question, index) => (
     <Question
       data-testid="questionWrapper"
-      questionId={question.id.toString()}
+      questionId={question.id}
       key={index}
       {...question}
     />

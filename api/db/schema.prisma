@@ -39,6 +39,8 @@ model User {
   following           User[]            @relation("UserFollows", references: [id])
   privateUser         AllowedToFollow[] @relation("privateUser")
   approvedFollowers   AllowedToFollow[] @relation("approvedFollowers")
+  userNotifications   Notification[]    @relation("userNotifications")
+  notificationsFor    Notification[]    @relation("notificationsFor")
 }
 
 enum ColorPalette {
@@ -139,4 +141,14 @@ model Vote {
 enum VoteDirection {
   UP
   DOWN
+}
+
+model Notification {
+  id                 Int  @id @default(autoincrement())
+  user               User @relation("userNotifications", fields: [userId], references: [id])
+  userId             Int
+  notificationsFor   User @relation("notificationsFor", fields: [notificationsForId], references: [id])
+  notificationsForId Int
+
+  @@unique([userId, notificationsForId])
 }

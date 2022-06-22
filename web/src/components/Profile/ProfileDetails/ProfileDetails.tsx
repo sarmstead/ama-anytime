@@ -9,6 +9,7 @@ import { IconButton } from '../../IconButton'
 import { Modal } from 'src/components/Modal'
 import { NewQuestion } from 'src/components/Question/NewQuestion/NewQuestion'
 import { useState } from 'react'
+import { NotificationsButton } from './components/NotificationsButton'
 
 export interface IProfileDetails {
   avatarColor: AvatarColor
@@ -63,6 +64,8 @@ const ProfileDetails = ({
     setIsModalShowing(false)
   }
 
+  const turnOnNotifications = () => {}
+
   return (
     <>
       <div>
@@ -94,7 +97,7 @@ const ProfileDetails = ({
         {/* content */}
         <div className="pl-12 pr-8 relative">
           {/* avatar */}
-          <div className="-mt-20 mb-5 relative z-avatar">
+          <div className="-mt-20 mb-5 relative z-avatar pointer-events-none">
             <Avatar
               avatarColor={avatarColor}
               src={avatar && avatar}
@@ -105,7 +108,7 @@ const ProfileDetails = ({
           </div>
 
           {/* action buttons */}
-          <div className="absolute top-24 right-8 flex gap-3 z-actionButtons">
+          <div className="absolute top-24 right-8 flex gap-3">
             {isMe ? (
               <div data-testid="editProfile">
                 <Button
@@ -117,7 +120,15 @@ const ProfileDetails = ({
               </div>
             ) : (
               <>
-                <Button label="ask a question" handleClick={askUserQuestion} />
+                <IconButton icon={{ name: 'dots' }} />
+                <IconButton
+                  handleClick={askUserQuestion}
+                  icon={{ name: 'comment' }}
+                  toolTip="Ask a Question"
+                  showToolTip={true}
+                />
+                <NotificationsButton notificationsOn={false} profileId={id} />
+                <Button label="Follow" />
               </>
             )}
           </div>
