@@ -85,8 +85,7 @@ const Question = ({
   const DisplayQuestionOptions = (): IDropdownMenuOptions[] => {
     // if this is a question I asked...
     if (currentUser.id === askedBy.id) {
-      let options: IDropdownMenuOptions[]
-      options = [
+      const options: IDropdownMenuOptions[] = [
         {
           label: 'Delete',
           icon: { name: 'delete' },
@@ -108,8 +107,7 @@ const Question = ({
 
     // if I was asked this question...
     if (currentUser.id === answeredBy.id) {
-      let options: IDropdownMenuOptions[]
-      options = [
+      const options: IDropdownMenuOptions[] = [
         {
           label: 'Hide',
           icon: { name: 'hide' },
