@@ -1,7 +1,6 @@
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import { Question } from '../Question/Question'
-import type { IQuestion } from '../Question/Question.d'
 import { FindQuestions } from 'types/graphql'
 
 export const QUERY = gql`
