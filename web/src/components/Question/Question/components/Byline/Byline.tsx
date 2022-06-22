@@ -1,6 +1,6 @@
 import { Link, routes } from '@redwoodjs/router'
 import { formatRelativeDate } from 'src/utils/DateHelpers'
-import type { IUser } from '../../Question'
+import type { IUser } from '../../Question.d'
 
 interface IByline {
   person: IUser
