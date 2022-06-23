@@ -11,7 +11,10 @@ export interface INotificationsButton {
 
 // mutations
 const CREATE_NOTIFICATION_MUTATION = gql`
-  mutation CreateNotificationMutation($notificationsForId: Int, $userId: Int) {
+  mutation CreateNotificationMutation(
+    $notificationsForId: Int!
+    $userId: Int!
+  ) {
     createNotification(
       input: { notificationsForId: $notificationsForId, userId: $userId }
     ) {
@@ -42,8 +45,6 @@ const NotificationsButton = ({
   })
 
   const turnOnNotifications = () => {
-    console.log('turn on notifications')
-    console.log({ currentUser: currentUser.id, profileId })
     createNotification({
       variables: {
         userId: Number(currentUser.id),
