@@ -30,6 +30,8 @@ export const schema = gql`
     following: [User]!
     privateUser: AllowedToFollow
     approvedFollowers: [AllowedToFollow]!
+    notificationsFor: [Notification]!
+    currentUserNotificationsFor: Boolean
   }
 
   enum ColorPalette {

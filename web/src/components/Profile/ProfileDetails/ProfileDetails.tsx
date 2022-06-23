@@ -15,6 +15,7 @@ export interface IProfileDetails {
   avatarColor: AvatarColor
   cover?: string
   coverDescription?: string
+  currentUserNotificationsFor?: boolean
   avatar?: string
   fullName: string
   id: number
@@ -37,6 +38,7 @@ const ProfileDetails = ({
   avatarColor,
   cover = '',
   coverDescription = '',
+  currentUserNotificationsFor = false,
   avatar,
   fullName,
   username,
@@ -127,7 +129,10 @@ const ProfileDetails = ({
                   toolTip="Ask a Question"
                   showToolTip={true}
                 />
-                <NotificationsButton notificationsOn={false} profileId={id} />
+                <NotificationsButton
+                  notificationsOn={currentUserNotificationsFor}
+                  profileId={id}
+                />
                 <Button label="Follow" />
               </>
             )}

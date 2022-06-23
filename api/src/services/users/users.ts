@@ -53,4 +53,18 @@ export const User: UserResolvers = {
     db.user.findUnique({ where: { id: root.id } }).followedBy(),
   following: (_obj, { root }) =>
     db.user.findUnique({ where: { id: root.id } }).following(),
+  approvedFollowers: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).approvedFollowers(),
+  notificationsFor: (_obj, { root }) =>
+    db.user.findUnique({ where: { id: root.id } }).notificationsFor(),
+  currentUserNotificationsFor: async (_obj, { root }) => {
+    const Notifications = await db.user
+      .findUnique({ where: { id: root.id } })
+      .notificationsFor({
+        where: {
+          userId: context?.currentUser?.id ? context.currentUser.id : undefined,
+        },
+      })
+    return Notifications.length > 0
+  },
 }

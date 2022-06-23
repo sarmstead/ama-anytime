@@ -10,6 +10,7 @@ export const QUERY = gql`
       bio
       cover
       fullName
+      currentUserNotificationsFor
       location
       username
       website
