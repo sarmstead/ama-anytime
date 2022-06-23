@@ -18,7 +18,7 @@ export const questions: QueryResolvers['questions'] = ({
       askedBy: { username: askedByUsername },
       answeredById,
       answeredBy: { username: answeredByUsername },
-      answer: answerIsEmpty ? '' : undefined,
+      answer: { contains: '' },
     },
     orderBy: [
       { pinned: 'asc' },

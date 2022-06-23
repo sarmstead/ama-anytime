@@ -141,7 +141,6 @@ const Question = ({
     ]
   }
 
-  const onAskAgainClick = () => {}
   const onFollowUpClick = () => {}
 
   return (
@@ -231,10 +230,7 @@ const Question = ({
 
             {/* Ask Again? */}
             {(currentUser || askAgain > 0) && (
-              <AskAgainButton
-                askAgain={askAgain}
-                onAskAgainClick={onAskAgainClick}
-              />
+              <AskAgainButton userAskedAgain={false} askAgainCount={askAgain} />
             )}
 
             {/* Bookmarked */}
