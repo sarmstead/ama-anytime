@@ -23,6 +23,17 @@ const CREATE_NOTIFICATION_MUTATION = gql`
   }
 `
 
+const DELETE_NOTIFICATION_MUTATION = gql`
+  mutation MyMutation($notificationsForId: Int!, $userId: Int!) {
+    deleteNotificationByUser(
+      notificationsForId: $notificationsForId
+      userId: $userId
+    ) {
+      id
+    }
+  }
+`
+
 const NotificationsButton = ({
   notificationsOn = false,
   profileId,
@@ -44,6 +55,15 @@ const NotificationsButton = ({
     },
   })
 
+  const [deleteNotification] = useMutation(DELETE_NOTIFICATION_MUTATION, {
+    onCompleted: () => {
+      setIsNotificationsOn(false)
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
   const turnOnNotifications = () => {
     createNotification({
       variables: {
@@ -55,7 +75,12 @@ const NotificationsButton = ({
 
   const turnOffNotifications = () => {
     console.log('turn off notifications')
-    setIsNotificationsOn(false)
+    deleteNotification({
+      variables: {
+        userId: Number(currentUser.id),
+        notificationsForId: profileId,
+      },
+    })
   }
 
   if (isNotificationsOn)

@@ -30,5 +30,9 @@ export const schema = gql`
       input: UpdateNotificationInput!
     ): Notification! @requireAuth
     deleteNotification(id: Int!): Notification! @requireAuth
+    deleteNotificationByUser(
+      userId: Int!
+      notificationsForId: Int!
+    ): Notification! @requireAuth
   }
 `

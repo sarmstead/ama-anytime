@@ -41,6 +41,18 @@ export const deleteNotification: MutationResolvers['deleteNotification'] = ({
   })
 }
 
+export const deleteNotificationByUser: MutationResolvers['deleteNotificationByUser'] =
+  ({ userId, notificationsForId }) => {
+    return db.notification.delete({
+      where: {
+        userId_notificationsForId: {
+          userId,
+          notificationsForId,
+        },
+      },
+    })
+  }
+
 export const Notification: NotificationResolvers = {
   user: (_obj, { root }) =>
     db.notification.findUnique({ where: { id: root.id } }).user(),
