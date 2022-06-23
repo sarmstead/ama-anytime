@@ -66,8 +66,6 @@ const ProfileDetails = ({
     setIsModalShowing(false)
   }
 
-  const turnOnNotifications = () => {}
-
   return (
     <>
       <div>
