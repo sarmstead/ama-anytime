@@ -3,6 +3,8 @@ import { MetaTags } from '@redwoodjs/web'
 import { useEffect, useState } from 'react'
 import ProfileCell from 'src/components/Profile/ProfileCell/ProfileCell'
 import QuestionsCell from 'src/components/Question/QuestionsCell/QuestionsCell'
+import QuestionsWithoutAnswersCell from 'src/components/Question/QuestionsWithoutAnswersCell/QuestionsWithoutAnswersCell'
+import QuestionsWithAnswersCell from 'src/components/Question/QuestionsWithAnswersCell/QuestionsWithAnswersCell'
 import { Tabs } from 'src/components/Tabs'
 import { useAuth } from '@redwoodjs/auth'
 
@@ -67,18 +69,12 @@ const ProfilePage = ({ username = '' }: IProfilePage) => {
 
       {/* questions answered */}
       {view === 'answered' && (
-        <QuestionsCell
-          answeredByUsername={currentUsername}
-          answerIsEmpty={false}
-        />
+        <QuestionsWithAnswersCell answeredByUsername={currentUsername} />
       )}
 
       {/* unanswered questions */}
       {view === 'unanswered' && (
-        <QuestionsCell
-          answeredByUsername={currentUsername}
-          answerIsEmpty={true}
-        />
+        <QuestionsWithoutAnswersCell answeredByUsername={currentUsername} />
       )}
 
       {/* questions asked */}

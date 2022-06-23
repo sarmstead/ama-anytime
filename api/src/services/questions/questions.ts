@@ -8,7 +8,6 @@ import type {
 export const questions: QueryResolvers['questions'] = ({
   answeredById,
   answeredByUsername,
-  answerIsEmpty,
   askedById,
   askedByUsername,
 }) => {
@@ -18,7 +17,54 @@ export const questions: QueryResolvers['questions'] = ({
       askedBy: { username: askedByUsername },
       answeredById,
       answeredBy: { username: answeredByUsername },
-      answer: { contains: '' },
+    },
+    orderBy: [
+      { pinned: 'asc' },
+      { order: 'asc' },
+      { updatedOn: 'asc' },
+      { askedOn: 'asc' },
+    ],
+  })
+}
+
+export const questionsWithAnswers: QueryResolvers['questions'] = ({
+  answeredById,
+  answeredByUsername,
+  askedById,
+  askedByUsername,
+}) => {
+  return db.question.findMany({
+    where: {
+      askedById,
+      askedBy: { username: askedByUsername },
+      answeredById,
+      answeredBy: { username: answeredByUsername },
+      NOT: {
+        answer: null,
+      },
+    },
+    orderBy: [
+      { pinned: 'asc' },
+      { order: 'asc' },
+      { updatedOn: 'asc' },
+      { askedOn: 'asc' },
+    ],
+  })
+}
+
+export const questionsWithoutAnswers: QueryResolvers['questions'] = ({
+  answeredById,
+  answeredByUsername,
+  askedById,
+  askedByUsername,
+}) => {
+  return db.question.findMany({
+    where: {
+      askedById,
+      askedBy: { username: askedByUsername },
+      answeredById,
+      answeredBy: { username: answeredByUsername },
+      answer: null,
     },
     orderBy: [
       { pinned: 'asc' },

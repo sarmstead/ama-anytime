@@ -30,7 +30,18 @@ export const schema = gql`
       answeredById: Int
       askedByUsername: String
       askedById: Int
-      answerIsEmpty: Boolean
+      answeredByUsername: String
+    ): [Question!]! @skipAuth
+    questionsWithAnswers(
+      answeredById: Int
+      askedByUsername: String
+      askedById: Int
+      answeredByUsername: String
+    ): [Question!]! @skipAuth
+    questionsWithoutAnswers(
+      answeredById: Int
+      askedByUsername: String
+      askedById: Int
       answeredByUsername: String
     ): [Question!]! @skipAuth
     question(id: Int!): Question @skipAuth

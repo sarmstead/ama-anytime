@@ -4,8 +4,11 @@ import { Question } from '../Question/Question'
 import { FindQuestions } from 'types/graphql'
 
 export const QUERY = gql`
-  query FindQuestions($answeredByUsername: String, $askedByUsername: String) {
-    questions(
+  query FindQuestionsWithoutAnswers(
+    $answeredByUsername: String
+    $askedByUsername: String
+  ) {
+    questionsWithoutAnswers(
       answeredByUsername: $answeredByUsername
       askedByUsername: $askedByUsername
     ) {
@@ -47,8 +50,10 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error.message}</div>
 )
 
-export const Success = ({ questions }: CellSuccessProps<FindQuestions>) => {
-  return questions.map((question, index) => (
+export const Success = ({
+  questionsWithoutAnswers,
+}: CellSuccessProps<FindQuestionsWithoutAnswers>) => {
+  return questionsWithoutAnswers.map((question, index) => (
     <Question
       data-testid="questionWrapper"
       questionId={question.id}

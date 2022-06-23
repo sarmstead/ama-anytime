@@ -14,7 +14,6 @@ describe('questions', () => {
       answeredById: undefined,
       askedByUsername: undefined,
       askedById: undefined,
-      answerIsEmpty: undefined,
       answeredByUsername: undefined,
     })
     expect(result.length).toEqual(Object.keys(scenario.question).length)
@@ -49,7 +48,6 @@ describe('questions', () => {
   //       answeredById: undefined,
   //       askedByUsername: undefined,
   //       askedById: undefined,
-  //       answerIsEmpty: undefined,
   //       answeredByUsername: undefined,
   //     })
   // console.log(result)

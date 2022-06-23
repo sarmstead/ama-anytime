@@ -1,6 +1,6 @@
 import { render, screen } from '@redwoodjs/testing/web'
-import { Loading, Empty, Failure, Success } from './QuestionsCell'
-import { standard } from './QuestionsCell.mock'
+import { Loading, Empty, Failure, Success } from './QuestionsCellWithAnswers'
+import { standard } from './QuestionsCellWithAnswers.mock'
 
 describe('Questions Cell', () => {
   it('renders Loading successfully', () => {
