@@ -40,7 +40,14 @@ export const questionsWithAnswers: QueryResolvers['questions'] = ({
       answeredById,
       answeredBy: { username: answeredByUsername },
       NOT: {
-        answer: null,
+        OR: [
+          {
+            answer: null,
+          },
+          {
+            answer: '',
+          },
+        ],
       },
     },
     orderBy: [
@@ -64,7 +71,14 @@ export const questionsWithoutAnswers: QueryResolvers['questions'] = ({
       askedBy: { username: askedByUsername },
       answeredById,
       answeredBy: { username: answeredByUsername },
-      answer: null,
+      OR: [
+        {
+          answer: null,
+        },
+        {
+          answer: '',
+        },
+      ],
     },
     orderBy: [
       { pinned: 'asc' },
