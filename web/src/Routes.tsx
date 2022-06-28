@@ -26,8 +26,8 @@ const Routes = () => {
 
       <Set wrap={[ContentLayout]}>
         <Route path="/waiting-list" page={WaitingListPage} name="waitingList" />
-        {/* <Route path="/about" page={AboutPage} name="about" /> */}
-        {/* <Route path="/contact" page={ContactPage} name="contact" /> */}
+        <Route path="/about" page={AboutPage} name="about" />
+        <Route path="/contact" page={ContactPage} name="contact" />
       </Set>
 
       <Set wrap={[LegalLayout]}>

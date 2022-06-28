@@ -1,4 +1,5 @@
 import { Link, routes } from '@redwoodjs/router'
+import { motion } from 'framer-motion'
 import { Avatar } from '../../Avatar'
 import type { IQuestion } from './Question.d'
 import { Icon } from '../../Icon'
@@ -39,6 +40,7 @@ const Question = ({
 }: IQuestion): JSX.Element => {
   const { currentUser } = useAuth()
   const [isQuestionOptionsShowing, setIsQuestionOptionsShow] = useState(false)
+  const [isShowing, setIsShowing] = useState(true)
   const [answerToQuestion, setAnswerToQuestion] = useState<string>(answer)
 
   const [deleteQuestion] = useMutation(DELETE_QUESTION_MUTATION, {
@@ -80,6 +82,20 @@ const Question = ({
     // Update the display - hide the form and show the answer
     // Don't move the answer to the other tab as soon as the user submits
     setAnswerToQuestion(data.answer)
+  }
+
+  const fadeOutVariants = {
+    showing: { opacity: 1, height: 'auto' },
+    hidden: {
+      opacity: [0.5, 0],
+      // y: '-200px',
+      height: ['auto', 0],
+      transitionEnd: { display: 'none' },
+    },
+  }
+
+  const afterDismissQuestion = () => {
+    setIsShowing(false) // fade out question
   }
 
   const DisplayQuestionOptions = (): IDropdownMenuOptions[] => {
@@ -144,109 +160,122 @@ const Question = ({
   const onFollowUpClick = () => {}
 
   return (
-    <div
-      className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black z-question ${className}`}
+    <motion.div
+      animate={isShowing ? 'showing' : 'hidden'}
+      variants={fadeOutVariants}
     >
-      <div className="absolute right-10 top-7 z-optionsMenu">
-        {isQuestionOptionsShowing && (
-          <DropdownMenu
-            isShowing={true}
-            onClickOutside={() => toggleQuestionOptions()}
-            options={DisplayQuestionOptions()}
-            className="absolute -right-2 top-8 z-question"
-            direction="top right"
-            // triggerRef={triggerRef}
-          />
-        )}
-        <button onClick={() => toggleQuestionOptions()}>
-          <Icon name="dots" />
-        </button>
-      </div>
-      <Avatar
-        avatarColor={askedBy?.avatarColor}
-        className="z-avatar relative"
-        src={askedBy.avatar}
-        alt={askedBy.username}
-        height={68}
-        width={68}
-      />
-      <div className="flex-1 relative">
-        {pinned && <PinnedQuestion />}
-        <div data-testid="askedBy" className="z-byline">
-          <Byline person={askedBy} displayDate={askedOn} />
-        </div>
-        <div
-          className="font-condensed text-[2.5rem] leading-none pt-o pb-8 relative"
-          data-testid="question"
-        >
-          {/* connect question and answer / answer form */}
-          {(answer || (!answer && answeredBy.id === currentUser.id)) && (
-            <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-avatarConnector" />
+      <div
+        className={`flex gap-5 pt-9 pl-14 pr-10 pb-9 relative border-b-2 border-black z-question ${className}`}
+      >
+        <div className="absolute right-10 top-7 z-optionsMenu">
+          {isQuestionOptionsShowing && (
+            <DropdownMenu
+              isShowing={true}
+              onClickOutside={() => toggleQuestionOptions()}
+              options={DisplayQuestionOptions()}
+              className="absolute -right-2 top-8 z-question"
+              direction="top right"
+              // triggerRef={triggerRef}
+            />
           )}
-          <Link
-            to={routes.question({ id: String(questionId) })}
-            className="hover:text-punch"
-          >
-            {question}
-          </Link>
+          <button onClick={() => toggleQuestionOptions()}>
+            <Icon name="dots" />
+          </button>
         </div>
-
-        {!answerToQuestion && answeredBy.id === currentUser.id && (
-          <AnswerForm
-            answeredBy={currentUser}
-            className="-ml-[5.5rem]"
-            onSave={handleAnswerQuestion}
-          />
-        )}
-
-        {/* display the answer */}
-        {answerToQuestion && (
-          <Answer
-            answer={answerToQuestion}
-            answeredBy={answeredBy}
-            updatedOn={updatedOn}
-          />
-        )}
-
-        {/* action buttons */}
-        {showActions && (
-          <div className="grid grid-cols-5 w-full" data-testid="actionButtons">
-            {/* Follow-Up */}
-            {(currentUser || followUp > 0) && (
-              <FollowupButton
-                followUp={followUp}
-                onFollowUpClick={onFollowUpClick}
-              />
-            )}
-
-            {/* Like / Favorite */}
-            {(currentUser || countLikes > 0) && (
-              <LikeButton
-                favorite={currentUserLikes}
-                numberOfFavorites={countLikes}
-                questionId={questionId}
-              />
-            )}
-
-            {/* Ask Again? */}
-            {(currentUser || askAgain > 0) && (
-              <AskAgainButton userAskedAgain={false} askAgainCount={askAgain} />
-            )}
-
-            {/* Bookmarked */}
-            {currentUser && (
-              <BookmarkButton
-                bookmarked={currentUserBookmarked}
-                questionId={questionId}
-              />
-            )}
-
-            {/* Share */}
-            <ShareButton />
+        <Avatar
+          avatarColor={askedBy?.avatarColor}
+          className="z-avatar relative"
+          src={askedBy.avatar}
+          alt={askedBy.username}
+          height={68}
+          width={68}
+        />
+        <div className="flex-1 relative">
+          {pinned && <PinnedQuestion />}
+          <div data-testid="askedBy" className="z-byline">
+            <Byline person={askedBy} displayDate={askedOn} />
           </div>
-        )}
+          <div
+            className="font-condensed text-[2.5rem] leading-none pt-o pb-8 relative"
+            data-testid="question"
+          >
+            {/* connect question and answer / answer form */}
+            {(answer || (!answer && answeredBy.id === currentUser.id)) && (
+              <div className="h-full w-0 border-l-2 border-black block absolute -left-14 z-avatarConnector" />
+            )}
+            <Link
+              to={routes.question({ id: String(questionId) })}
+              className="hover:text-punch"
+            >
+              {question}
+            </Link>
+          </div>
+
+          {!answerToQuestion && answeredBy.id === currentUser.id && (
+            <AnswerForm
+              afterDismissQuestion={afterDismissQuestion}
+              answeredBy={currentUser}
+              className="-ml-[5.5rem]"
+              onSave={handleAnswerQuestion}
+              questionId={questionId}
+            />
+          )}
+
+          {/* display the answer */}
+          {answerToQuestion && (
+            <Answer
+              answer={answerToQuestion}
+              answeredBy={answeredBy}
+              updatedOn={updatedOn}
+            />
+          )}
+
+          {/* action buttons */}
+          {showActions && (
+            <div
+              className="grid grid-cols-5 w-full"
+              data-testid="actionButtons"
+            >
+              {/* Follow-Up */}
+              {(currentUser || followUp > 0) && (
+                <FollowupButton
+                  followUp={followUp}
+                  onFollowUpClick={onFollowUpClick}
+                />
+              )}
+
+              {/* Like / Favorite */}
+              {(currentUser || countLikes > 0) && (
+                <LikeButton
+                  favorite={currentUserLikes}
+                  numberOfFavorites={countLikes}
+                  questionId={questionId}
+                />
+              )}
+
+              {/* Ask Again? */}
+              {(currentUser || askAgain > 0) && (
+                <AskAgainButton
+                  userAskedAgain={false}
+                  askAgainCount={askAgain}
+                />
+              )}
+
+              {/* Bookmarked */}
+              {currentUser && (
+                <BookmarkButton
+                  bookmarked={currentUserBookmarked}
+                  questionId={questionId}
+                />
+              )}
+
+              {/* Share */}
+              <ShareButton />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

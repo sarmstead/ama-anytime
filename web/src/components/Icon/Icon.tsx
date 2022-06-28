@@ -3,6 +3,7 @@ import { Bell } from './Bell'
 import { Block } from './Block'
 import { Bookmark } from './Bookmark'
 import { BookmarkFilled } from './BookmarkFilled'
+import { Check } from './Check'
 import { Close } from './Close'
 import { ChevronDown } from './ChevronDown'
 import { ChevronLeft } from './ChevronLeft'
@@ -39,6 +40,7 @@ export interface IIcon {
     | 'block'
     | 'bookmark'
     | 'bookmarkFilled'
+    | 'check'
     | 'chevronDown'
     | 'chevronLeft'
     | 'chevronRight'
@@ -86,6 +88,8 @@ const Icon = ({ name, className = '', width, height }: IIcon): JSX.Element => {
       return (
         <BookmarkFilled className={className} width={width} height={height} />
       )
+    case 'check':
+      return <Check className={className} width={width} height={height} />
     case 'chevrondown':
       return <ChevronDown className={className} width={width} height={height} />
     case 'chevronleft':

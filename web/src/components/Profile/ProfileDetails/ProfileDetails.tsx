@@ -10,6 +10,7 @@ import { Modal } from 'src/components/Modal'
 import { NewQuestion } from 'src/components/Question/NewQuestion/NewQuestion'
 import { useState } from 'react'
 import { NotificationsButton } from './components/NotificationsButton'
+import { FollowButton } from './components/FollowButton'
 
 export interface IProfileDetails {
   avatarColor: AvatarColor
@@ -65,6 +66,8 @@ const ProfileDetails = ({
   const closeQuestionModal = () => {
     setIsModalShowing(false)
   }
+
+  //
 
   return (
     <>
@@ -131,7 +134,7 @@ const ProfileDetails = ({
                   notificationsOn={currentUserNotificationsFor}
                   profileId={id}
                 />
-                <Button label="Follow" />
+                <FollowButton followOn={false} profileId={id} />
               </>
             )}
           </div>

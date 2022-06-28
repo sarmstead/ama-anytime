@@ -27,6 +27,11 @@ BookmarkFilled.args = {
   name: 'BookmarkFilled',
 }
 
+export const Check = Template.bind({})
+Check.args = {
+  name: 'Check',
+}
+
 export const ChevronDown = Template.bind({})
 ChevronDown.args = {
   name: 'ChevronDown',
@@ -173,6 +178,7 @@ const iconOptions = [
   'block',
   'bookmark',
   'bookmarkFilled',
+  'check',
   'chevronDown',
   'chevronLeft',
   'chevronRight',

@@ -71,6 +71,7 @@ export const schema = gql`
     askedOn: DateTime
     updatedOn: DateTime
     parentQuestionId: Int
+    notGoingToAnswer: Boolean
   }
 
   type Mutation {

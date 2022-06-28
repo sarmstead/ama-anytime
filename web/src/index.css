@@ -178,9 +178,18 @@
     @apply text-xs py-1 px-4 font-extrabold
   }
 
+  .confirmation.small {
+    @apply text-xs font-extrabold gap-3
+  }
+
   button.large {
     @apply text-base px-6 py-1 font-bold
   }
+
+  .confirmation.large {
+    @apply text-base gap-8
+  }
+
 
   .text-button {
     @apply text-sm underline font-bold hover:text-punch hover:no-underline
